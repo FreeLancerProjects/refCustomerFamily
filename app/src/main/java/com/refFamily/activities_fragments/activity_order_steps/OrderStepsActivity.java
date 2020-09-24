@@ -39,5 +39,13 @@ public class OrderStepsActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
 
+        binding.back.setOnClickListener(view -> {
+
+            back();
+        });
+    }
+
+    private void back() {
+        finish();
     }
 }

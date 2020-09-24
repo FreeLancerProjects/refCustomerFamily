@@ -160,5 +160,7 @@
     <string name="quantity_not_available">الكمية غير متوفرة</string>
     <string name="another_reason">سبب اخر</string>
     <string name="refuse_confirm">تأكيد الرفض</string>
+    <string name="update_confirm">تأكيد التعديل</string>
+    <string name="update_profile">تعديل البروفايل</string>
 
 </resources>

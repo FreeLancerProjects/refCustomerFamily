@@ -160,5 +160,7 @@
     <string name="quantity_not_available">Quantity not available</string>
     <string name="another_reason">Another reason</string>
     <string name="refuse_confirm">Refuse Confirm</string>
+    <string name="update_confirm">Update Confirm</string>
+    <string name="update_profile">Update Profile</string>
 
 </resources>

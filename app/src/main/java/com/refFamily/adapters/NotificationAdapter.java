@@ -10,11 +10,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refFamily.R;
-import com.refFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refFamily.databinding.ItemNotificationBinding;
-import com.refFamily.databinding.ItemOrderBinding;
 import com.refFamily.models.NotificationModel;
-import com.refFamily.models.OrderModel;
 import com.refFamily.models.UserModel;
 import com.refFamily.preferences.Preferences;
 

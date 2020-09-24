@@ -44,5 +44,13 @@ public class NotificationActivity extends AppCompatActivity {
         binding.recViewNotifications.setLayoutManager(new LinearLayoutManager(this));
 
 
+        binding.back.setOnClickListener(view -> {
+
+            back();
+        });
+    }
+
+    private void back() {
+        finish();
     }
 }

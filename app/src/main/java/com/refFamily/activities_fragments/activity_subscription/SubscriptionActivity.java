@@ -44,5 +44,13 @@ public class SubscriptionActivity extends AppCompatActivity {
         binding.recViewSub.setLayoutManager(new LinearLayoutManager(this));
         binding.recViewSub.setAdapter(adapter);
 
+        binding.back.setOnClickListener(view -> {
+
+            back();
+        });
+    }
+
+    private void back() {
+        finish();
     }
 }

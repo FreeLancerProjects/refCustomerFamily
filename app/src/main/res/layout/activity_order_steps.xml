@@ -97,7 +97,8 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_not_bg"
+                            android:background="@drawable/circle_bg"
+                            android:tint="@color/white"
                             android:padding="13dp"
                             android:src="@drawable/ic_check" />
 

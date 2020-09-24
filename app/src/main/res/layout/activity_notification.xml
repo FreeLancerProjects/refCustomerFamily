@@ -92,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:id="@+id/progBarNotification"
+                    android:visibility="gone"
                     />
             </FrameLayout>
 

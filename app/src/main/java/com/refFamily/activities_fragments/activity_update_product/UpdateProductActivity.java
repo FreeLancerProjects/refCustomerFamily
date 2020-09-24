@@ -56,10 +56,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         binding.setLang(lang);
         sliderModelList = new ArrayList<>();
 
-        binding.back.setOnClickListener(view -> {
 
-            back();
-        });
 
         binding.updateBtn.setOnClickListener(view -> {
 
@@ -70,7 +67,10 @@ public class UpdateProductActivity extends AppCompatActivity {
 
         });
 
+        binding.back.setOnClickListener(view -> {
 
+            back();
+        });
     }
 
     private void back() {
