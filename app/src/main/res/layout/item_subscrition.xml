@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.refFamily.models.SubscriptionModel" />
+            type="com.refCustomerFamily.models.SubscriptionModel" />
 
         <variable
             name="lang"

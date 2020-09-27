@@ -13,10 +13,10 @@
 
         />
     <item
-        android:id="@+id/offers"
-        android:icon="@drawable/ic_offers"
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_user"
         android:iconTint="@color/color1"
-        android:title="@string/offers"
+        android:title="@string/profile_1"
 
         />
     <item

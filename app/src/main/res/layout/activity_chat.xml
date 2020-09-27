@@ -9,7 +9,7 @@
 
         <variable
             name="backListener"
-            type="com.refFamily.interfaces.Listeners.BackListener" />
+            type="com.refCustomerFamily.interfaces.Listeners.BackListener" />
 
         <variable
             name="lang"

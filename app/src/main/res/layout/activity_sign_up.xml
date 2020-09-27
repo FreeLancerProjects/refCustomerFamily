@@ -7,11 +7,11 @@
 
         <variable
             name="listener"
-            type="com.refFamily.interfaces.Listeners.SignUpListener" />
+            type="com.refCustomerFamily.interfaces.Listeners.SignUpListener" />
 
         <variable
             name="model"
-            type="com.refFamily.models.SignUpModel" />
+            type="com.refCustomerFamily.models.SignUpModel" />
     </data>
 
     <FrameLayout
@@ -151,7 +151,7 @@
 
                         <fragment
                             android:id="@+id/map"
-                            android:name="com.refFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener"
+                            android:name="com.refCustomerFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener"
                             android:layout_width="match_parent"
                             android:layout_height="240dp"
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.refFamily">
+    package="com.refCustomerFamily">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,46 +12,46 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".share.App"
+        android:name="com.refCustomerFamily.share.App"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities_fragments.activity_subscription.SubscriptionActivity"></activity>
-        <activity android:name=".activities_fragments.activity_order_steps.OrderStepsActivity" />
-        <activity android:name=".activities_fragments.activity_payment.PaymentActivity" />
-        <activity android:name=".activities_fragments.activity_profile.UpdateProfileActivity" />
-        <activity android:name=".activities_fragments.activity_profile.ProfileActivity" />
-        <activity android:name=".activities_fragments.activity_update_product.UpdateProductActivity" />
-        <activity android:name=".activities_fragments.activity_notification.NotificationActivity" />
-        <activity android:name=".activities_fragments.activity_orderdetail.OrderDetailActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_subscription.SubscriptionActivity"></activity>
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_payment.PaymentActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_profile.UpdateProfileActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_profile.ProfileActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_update_product.UpdateProductActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_notification.NotificationActivity" />
+        <activity android:name="com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity" />
         <activity
-            android:name=".activities_fragments.activity_add_Product.AddProductActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_add_Product.AddProductActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_language.LanguageActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_language.LanguageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_login.LoginActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_sign_up.SignUpActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_sign_up.SignUpActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_home.HomeActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_home.HomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_verification_code.VerificationCodeActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_verification_code.VerificationCodeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_splash.SplashActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_splash.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
@@ -61,15 +61,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities_fragments.activity_setting.SettingsActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_setting.SettingsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_about_app.AboutAppActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_about_app.AboutAppActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activities_fragments.activity_chat.ChatActivity"
+            android:name="com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 

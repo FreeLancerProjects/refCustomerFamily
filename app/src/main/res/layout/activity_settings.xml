@@ -9,7 +9,7 @@
             type="String" />
         <variable
             name="actions"
-            type="com.refFamily.interfaces.Listeners.SettingAction" />
+            type="com.refCustomerFamily.interfaces.Listeners.SettingAction" />
 
     </data>
     <ScrollView

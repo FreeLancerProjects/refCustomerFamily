@@ -5,7 +5,7 @@
     
         <variable
             name="sliderData"
-            type="com.refFamily.models.SliderModel.Data" />
+            type="com.refCustomerFamily.models.SliderModel.Data" />
         
     </data>
 

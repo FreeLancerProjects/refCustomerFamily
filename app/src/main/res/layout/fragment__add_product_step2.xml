@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.refFamily.models.AddProductModel" />
+            type="com.refCustomerFamily.models.AddProductModel" />
     </data>
 
     <FrameLayout

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="model"
-            type="com.refFamily.models.NearbyModel" />
+            type="com.refCustomerFamily.models.NearbyModel" />
 
     </data>
 

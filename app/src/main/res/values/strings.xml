@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ref Family</string>
+    <string name="app_name">Ref Customer Family</string>
     <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="field_req">Field required</string>
@@ -136,7 +136,7 @@
     <string name="delete">Delete</string>
     <string name="update">Update</string>
     <string name="product_update">Product update</string>
-    <string name="download_customer_app">Download customer app</string>
+    <string name="download_family_app">Download Family app</string>
     <string name="download_delegate_app">Download Delegate app</string>
     <string name="time">Time</string>
     <string name="cash">Cash</string>
@@ -162,6 +162,7 @@
     <string name="refuse_confirm">Refuse Confirm</string>
     <string name="update_confirm">Update Confirm</string>
     <string name="update_profile">Update Profile</string>
+    <string name="profile_1">Profile</string>
 
 
 </resources>

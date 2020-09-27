@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">رف أسر منتجة</string>
+    <string name="app_name">رف العميل</string>
     <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
 
@@ -136,7 +136,7 @@
     <string name="delete">حذف</string>
     <string name="update">تعديل</string>
     <string name="product_update">تعديل المنتج</string>
-    <string name="download_customer_app">حمل تطبيق العميل</string>
+    <string name="download_family_app">حمل تطبيق الاسرة</string>
     <string name="download_delegate_app">حمل تطبيق المندوب</string>
     <string name="time">الوقت</string>
     <string name="cash">كاش</string>
@@ -162,6 +162,7 @@
     <string name="refuse_confirm">تأكيد الرفض</string>
     <string name="update_confirm">تأكيد التعديل</string>
     <string name="update_profile">تعديل البروفايل</string>
+    <string name="profile_1">الروفايل</string>
 
 
 </resources>

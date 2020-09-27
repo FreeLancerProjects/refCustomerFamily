@@ -45,26 +45,6 @@
                 app:layout_constraintStart_toEndOf="@id/user_image"
                 app:layout_constraintTop_toTopOf="@id/user_image" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:text="@string/details"
-                app:layout_constraintBottom_toBottomOf="@id/user_image"
-                app:layout_constraintEnd_toStartOf="@id/arrow"
-                app:layout_constraintTop_toTopOf="@id/user_image" />
-
-            <ImageView
-                android:id="@+id/arrow"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginEnd="5dp"
-                android:src='@{lang.equals("ar")?@drawable/ic_left_arrow:@drawable/ic_right_arrow}'
-                android:tint="@color/gray6"
-                app:layout_constraintBottom_toBottomOf="@id/user_image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/user_image" />
-
 
             <FrameLayout
                 android:layout_width="match_parent"

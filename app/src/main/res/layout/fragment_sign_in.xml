@@ -11,15 +11,15 @@
             type="String" />
         <variable
             name="listener"
-            type="com.refFamily.interfaces.Listeners.LoginListener" />
+            type="com.refCustomerFamily.interfaces.Listeners.LoginListener" />
         <variable
             name="loginModel"
-            type="com.refFamily.models.LoginModel" />
+            type="com.refCustomerFamily.models.LoginModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.refFamily.activities_fragments.activity_login.LoginActivity"
+        tools:context="com.refCustomerFamily.activities_fragments.activity_login.LoginActivity"
         android:fillViewport="true"
         android:fitsSystemWindows="true"
         android:background="@color/white"
@@ -203,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/download_customer_app"
+                android:text="@string/download_delegate_app"
                 />
             </LinearLayout>
 
@@ -227,7 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/download_delegate_app"
+                    android:text="@string/download_family_app"
                     />
             </LinearLayout>
             
