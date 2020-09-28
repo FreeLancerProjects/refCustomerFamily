@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="lang"
+            type="String" />
+
     </data>
 
     <TextView

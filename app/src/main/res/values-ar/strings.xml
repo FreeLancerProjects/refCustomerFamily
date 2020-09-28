@@ -129,7 +129,7 @@
     <string name="details">التفاصيل</string>
     <string name="user_name_test">احمد المصيلحى</string>
     <string name="order_details">تفاصيل الطلب</string>
-    <string name="there_is_new_notification">لديك اشعار جديد</string>
+    <string name="there_is_new_notification">تم توصيل طلبك بنجاح</string>
     <string name="expire_date">تاريخ الانتهاء:</string>
     <string name="before_discount">قبل الخصم</string>
     <string name="after_discount">بعد الخصم</string>
@@ -163,6 +163,13 @@
     <string name="update_confirm">تأكيد التعديل</string>
     <string name="update_profile">تعديل البروفايل</string>
     <string name="profile_1">الروفايل</string>
+    <string name="productive_families">أسر منتجة</string>
+    <string name="markets">متاجر</string>
+    <string name="send_package">ارسال طرد</string>
+    <string name="order_number">عدد الطلبات</string>
+    <string name="method_of_payment">طريقة السداد</string>
+    <string name="call_us_via_telegram">اتصل بنا علي تيليجرام</string>
+    <string name="rate_us">قم بتقييم التجربه</string>
 
 
 </resources>

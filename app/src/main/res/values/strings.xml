@@ -163,6 +163,13 @@
     <string name="update_confirm">Update Confirm</string>
     <string name="update_profile">Update Profile</string>
     <string name="profile_1">Profile</string>
+    <string name="productive_families">Productive families</string>
+    <string name="markets">Markets</string>
+    <string name="send_package">Send Package</string>
+    <string name="order_number">Order number</string>
+    <string name="method_of_payment">Method of payment</string>
+    <string name="call_us_via_telegram">Call us via telegram</string>
+    <string name="rate_us">Rate us</string>
 
 
 </resources>

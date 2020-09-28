@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.databinding.ItemCategoryBinding;
-import com.refCustomerFamily.databinding.StatusRowBinding;
 import com.refCustomerFamily.models.MarketCatogryModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -56,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapterVH holder, int position) {
 
-
+        holder.binding.setLang(lang);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

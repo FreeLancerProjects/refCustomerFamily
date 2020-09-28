@@ -40,6 +40,7 @@
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:onClick="@{()->actions.onProfile()}"
 
@@ -79,6 +80,7 @@
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
+                    android:visibility="gone"
                     android:gravity="center_vertical"
                     android:onClick="@{()->actions.onSubscriptions()}"
 
@@ -169,6 +171,7 @@
                     android:layout_height="45dp"
                     android:orientation="horizontal"
                     android:paddingStart="15dp"
+                    android:visibility="gone"
                     android:paddingEnd="15dp"
                     android:gravity="center_vertical"
                     android:onClick="@{()->actions.onEditProfile()}"

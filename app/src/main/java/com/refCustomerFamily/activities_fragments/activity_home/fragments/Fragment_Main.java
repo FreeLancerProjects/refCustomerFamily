@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_add_Product.AddProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_product_family.ProductFamilyActivity;
 import com.refCustomerFamily.adapters.CategoryAdapter;
 import com.refCustomerFamily.adapters.ProductAdapter;
 import com.refCustomerFamily.databinding.FragmentMainBinding;
@@ -27,6 +28,7 @@ import java.util.Locale;
 import io.paperdb.Paper;
 
 public class Fragment_Main extends Fragment {
+
     private HomeActivity activity;
     private FragmentMainBinding binding;
     private LinearLayoutManager manager, manager2;
@@ -38,13 +40,14 @@ public class Fragment_Main extends Fragment {
         return new Fragment_Main();
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false);
         initView();
 
-
         return binding.getRoot();
+
     }
 
 
@@ -53,22 +56,18 @@ public class Fragment_Main extends Fragment {
         preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.recViewCategory.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.HORIZONTAL, false));
-        binding.recViewCategory.setAdapter(new CategoryAdapter(this.getContext()));
-        binding.recViewOffers.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        binding.recViewOffers.setAdapter(new ProductAdapter(this.getContext()));
 
+        binding.layout1.setOnClickListener(view -> {
 
-        binding.addBtn.setOnClickListener(View -> {
+            Intent intent = new Intent(this.getContext(), ProductFamilyActivity.class);
+            startActivity(intent);
 
-            NavigateToAddOfferACtivity();
         });
 
     }
 
 
-
-    private void NavigateToAddOfferACtivity(){
+    private void NavigateToAddOfferACtivity() {
 
         Intent intent = new Intent(this.getContext(), AddProductActivity.class);
         startActivity(intent);

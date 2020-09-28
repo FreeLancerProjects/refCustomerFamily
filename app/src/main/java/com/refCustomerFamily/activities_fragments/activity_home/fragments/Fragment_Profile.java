@@ -61,24 +61,13 @@ public class Fragment_Profile extends Fragment  {
 
     private void initView() {
 
-        dataList = new ArrayList<>();
 
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        binding.setLang(lang);
 
-
-        binding.imgSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(activity, SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-        if(lang.equals("ar")){
-            imclose.setRotation(180);
-        }
 
     }
 
