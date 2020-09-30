@@ -17,6 +17,7 @@ import com.refCustomerFamily.activities_fragments.activity_home.fragments.Fragme
 import com.refCustomerFamily.activities_fragments.activity_home.fragments.Fragment_Orders;
 import com.refCustomerFamily.activities_fragments.activity_home.fragments.Fragment_Setting;
 import com.refCustomerFamily.activities_fragments.activity_home.fragments.Fragment_Profile;
+import com.refCustomerFamily.activities_fragments.activity_login.LoginActivity;
 import com.refCustomerFamily.activities_fragments.activity_notification.NotificationActivity;
 import com.refCustomerFamily.databinding.ActivityHomeBinding;
 import com.refCustomerFamily.language.Language_Helper;
@@ -40,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     private UserModel userModel;
     private String lang;
     private String token;
+    public double user_lat=0.0,user_lng=0.0;
 
 
     @Override
@@ -52,10 +54,18 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        getDataFromIntent();
         initView();
         if (savedInstanceState == null) {
             displayFragmentMain();
         }
+
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        user_lat = intent.getDoubleExtra("lat",0.0);
+        user_lng = intent.getDoubleExtra("lng",0.0);
 
     }
 
@@ -304,6 +314,11 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    private void navigateToSignInActivity() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
     @Override
     public void onBackPressed() {
 
@@ -312,10 +327,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private void back() {
         if (fragment_main != null && fragment_main.isAdded() && fragment_main.isVisible()) {
-            finish();
+            if (userModel!=null){
+                finish();
+            }else {
+                navigateToSignInActivity();
+            }
+
         } else {
             displayFragmentMain();
         }
     }
+
+
 
 }

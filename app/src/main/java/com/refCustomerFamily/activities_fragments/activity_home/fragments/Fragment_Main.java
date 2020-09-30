@@ -11,15 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_add_Product.AddProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.activities_fragments.activity_product_family.ProductFamilyActivity;
-import com.refCustomerFamily.adapters.CategoryAdapter;
-import com.refCustomerFamily.adapters.ProductAdapter;
+import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_google_stores.GoogleStoresActivity;
 import com.refCustomerFamily.databinding.FragmentMainBinding;
 import com.refCustomerFamily.preferences.Preferences;
 
@@ -59,7 +57,17 @@ public class Fragment_Main extends Fragment {
 
         binding.layout1.setOnClickListener(view -> {
 
-            Intent intent = new Intent(this.getContext(), ProductFamilyActivity.class);
+            Intent intent = new Intent(activity, ProductFamilyActivity.class);
+            startActivity(intent);
+
+        });
+
+        binding.layout2.setOnClickListener(view -> {
+
+            Intent intent = new Intent(activity, GoogleStoresActivity.class);
+            intent.putExtra("lat",activity.user_lat);
+            intent.putExtra("lng",activity.user_lng);
+
             startActivity(intent);
 
         });
@@ -67,7 +75,7 @@ public class Fragment_Main extends Fragment {
     }
 
 
-    private void NavigateToAddOfferACtivity() {
+    private void NavigateToAddOfferActivity() {
 
         Intent intent = new Intent(this.getContext(), AddProductActivity.class);
         startActivity(intent);

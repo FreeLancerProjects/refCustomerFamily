@@ -17,7 +17,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities_fragments.activity_cart.CartActivity"></activity>
+
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_shop_query.ShopsQueryActivity" />
+
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_map_search.MapSearchActivity" />
+
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_filter.FilterActivity" />
+
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_shops.ShopsActivity" />
+
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_shop_map.ShopMapActivity" />
+
+        <activity android:name=".activities_fragments.activity_splash_loading.SplashLoadingActivity" />
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_google_stores.GoogleStoresActivity" />
+        <activity android:name=".activities_fragments.activity_cart.CartActivity" />
         <activity android:name=".activities_fragments.activity_family.FamilyActivity" />
         <activity android:name=".activities_fragments.activity_product_family.ProductFamilyActivity" />
         <activity android:name=".activities_fragments.activity_subscription.SubscriptionActivity" />

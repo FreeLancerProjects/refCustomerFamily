@@ -16,12 +16,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refCustomerFamily.adapters.CountriesAdapter;
-import com.refCustomerFamily.databinding.DialogAlertBinding;
 import com.refCustomerFamily.databinding.DialogCountriesBinding;
 import com.refCustomerFamily.databinding.FragmentSignInBinding;
-import com.refCustomerFamily.interfaces.Listeners;
 import com.refCustomerFamily.models.CountryModel;
 import com.refCustomerFamily.models.LoginModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -33,7 +31,7 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class Fragment_Sign_In extends Fragment implements Listeners.SkipListener {
+public class Fragment_Sign_In extends Fragment {
     private FragmentSignInBinding binding;
     private LoginActivity activity;
     private String lang;
@@ -59,13 +57,11 @@ public class Fragment_Sign_In extends Fragment implements Listeners.SkipListener
     private void initView() {
         preferences = Preferences.newInstance();
         loginModel = new LoginModel();
+        binding.setLoginModel(loginModel);
         activity = (LoginActivity) getActivity();
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
-        binding.setLoginModel(loginModel);
-        loginModel = new LoginModel();
-        binding.setLoginModel(loginModel);
         binding.edtPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -86,7 +82,7 @@ public class Fragment_Sign_In extends Fragment implements Listeners.SkipListener
             }
         });
         binding.tvSkip.setOnClickListener(v -> {
-            navigateToHomeActivity();
+            navigateToSplashLoadingActivity();
         });
         createCountriesDialog();
         getPhoneCodes();
@@ -127,18 +123,13 @@ public class Fragment_Sign_In extends Fragment implements Listeners.SkipListener
 
     }
 
-    @Override
-    public void skip() {
+    private void navigateToSplashLoadingActivity() {
+
         binding.tvSkip.setEnabled(false);
-        Intent intent = new Intent(activity, HomeActivity.class);
+        Intent intent = new Intent(activity, SplashLoadingActivity.class);
         startActivity(intent);
         activity.finish();
 
-
-    }
-    private void navigateToHomeActivity() {
-        Intent intent = new Intent(activity, HomeActivity.class);
-        startActivity(intent);
     }
     public void setItemData(CountryModel countryModel) {
         dialog.dismiss();

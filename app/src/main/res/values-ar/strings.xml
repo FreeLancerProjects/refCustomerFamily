@@ -170,6 +170,45 @@
     <string name="method_of_payment">طريقة السداد</string>
     <string name="call_us_via_telegram">اتصل بنا علي تيليجرام</string>
     <string name="rate_us">قم بتقييم التجربه</string>
-
+    <string name="getting_location">تحديد موقعك...</string>
+    <string name="i_want_restaurant">ابحث عن مطعم كوفي أو اي مكان...</string>
+    <string name="sar">ر.س</string>
+    <string name="popular_around_you">اشهر المواقع حولك</string>
+    <string name="most_wanted_service">الخدمات الاكثر طلبا</string>
+    <string name="something">تحقق من الاتصال بالانترنت</string>
+    <string name="km">كم</string>
+    <string name="show">عرض</string>
+    <string name="home3">موقعي</string>
+    <string name="work_hour_not_aval">ساعات العمل غير متاحة</string>
+    <string name="open_now">مفتوح</string>
+    <string name="closed">مغلق</string>
+    <string name="shop_list">قائمة المتاجر</string>
+    <string name="your_location_near_you">موقعك الحالي</string>
+    <string name="results_for">نتيجة</string>
+    <string name="filter">إعدادات البحث</string>
+    <string name="recent_search">بحث سابق</string>
+    <string name="clear_all">مسح الكل</string>
+    <string name="can_t_find_any_shop_or_service_try_different_criteria">لا يمكن العثور على أي متجر ابحث عنة فى الخريطة</string>
+    <string name="category">خدمات</string>
+    <string name="distance">المسافة</string>
+    <string name="rating">التقييم</string>
+    <string name="apply">إستمرار</string>
+    <string name="restaurants">مطاعم</string>
+    <string name="supermarket">سوبرماركت</string>
+    <string name="bakery">مخبز</string>
+    <string name="cafe">كافيهات</string>
+    <string name="florist">هدايا</string>
+    <string name="library">مكتبات</string>
+    <string name="stores">متاجر</string>
+    <string name="pharmacy">صيدليات</string>
+    <string name="paste_google_coordination">ضع رابط جوجل أو الاحداثيات</string>
+    <string name="map">خريطة</string>
+    <string name="hybrid">هجين</string>
+    <string name="saved_location">حفظ الموقع</string>
+    <string name="location_name">الاسم</string>
+    <string name="home2">المنزل</string>
+    <string name="work">العمل</string>
+    <string name="save">حفظ</string>
+    <string name="invalid_url">رابط غير صحيح</string>
 
 </resources>

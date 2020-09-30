@@ -170,6 +170,44 @@
     <string name="method_of_payment">Method of payment</string>
     <string name="call_us_via_telegram">Call us via telegram</string>
     <string name="rate_us">Rate us</string>
-
-
+    <string name="getting_location">Getting Location...</string>
+    <string name="i_want_restaurant">I want restaurant,location,coffee...</string>
+    <string name="sar">SAR</string>
+    <string name="popular_around_you">Popular around you</string>
+    <string name="most_wanted_service">Most wanted service</string>
+    <string name="something">Check internet connection</string>
+    <string name="km">Km</string>
+    <string name="show">Show</string>
+    <string name="home3">Home</string>
+    <string name="work_hour_not_aval">Work Hour Not Available</string>
+    <string name="open_now">Open</string>
+    <string name="closed">Closed</string>
+    <string name="shop_list">Shop List</string>
+    <string name="your_location_near_you">Your location (near you)</string>
+    <string name="results_for">Results for</string>
+    <string name="filter">Filter</string>
+    <string name="recent_search">Recent Search</string>
+    <string name="clear_all">Clear All</string>
+    <string name="can_t_find_any_shop_or_service_try_different_criteria">Can\'t find any shop or service, try different criteria</string>
+    <string name="category">Category</string>
+    <string name="distance">Distance</string>
+    <string name="rating">Rating</string>
+    <string name="apply">Apply</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="supermarket">Supermarket</string>
+    <string name="bakery">Bakery</string>
+    <string name="cafe">Cafe</string>
+    <string name="florist">Florist</string>
+    <string name="library">Library</string>
+    <string name="stores">Stores</string>
+    <string name="pharmacy">Pharmacy</string>
+    <string name="paste_google_coordination">Paste google map URL or coordination</string>
+    <string name="map">Map</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="saved_location">Save Location</string>
+    <string name="location_name">Location name</string>
+    <string name="home2">Home</string>
+    <string name="work">Work</string>
+    <string name="save">Save</string>
+    <string name="invalid_url">Invalid URL</string>
 </resources>

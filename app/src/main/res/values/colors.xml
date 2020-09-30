@@ -9,9 +9,13 @@
     <color name="color3">#E3E3E3</color>
     <color name="color4">#F6F6F6</color>
     <color name="color5">#bca8a6</color>
+
     <color name="color_primary_trans">#661db198</color>
+    <color name="color_primary_trans2">#88D6DD33</color>
+
     <color name="green">#017B00</color>
 
+    <color name="color_rose">#ef676b</color>
 
     <color name="white">#fff</color>
     <color name="black">#000000</color>
@@ -40,6 +44,7 @@
     <color name="gray1_trans">#ddf5f5f5</color>
     <color name="rate_color">#FFD800</color>
     <color name="primary_trans">#111db198</color>
+    <color name="yellow">#FBC02D</color>
 
     <array name="dots">
         <item>@color/colorPrimary</item>

@@ -57,7 +57,8 @@ public class Fragment_Code_Verification extends Fragment {
         preferences = Preferences.newInstance();
         mAuth = FirebaseAuth.getInstance();
         Paper.init(activity);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        lang = Paper.book().read("lang", "ar");
+
 
 
     }
