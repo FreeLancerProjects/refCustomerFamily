@@ -7,6 +7,9 @@
 
     <data>
 
+        <variable
+            name="model"
+            type="com.refCustomerFamily.models.FamilyModel" />
 
         <variable
             name="lang"
@@ -53,7 +56,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/user_name_test"
+                        android:text="@{model.name}"
                         android:textColor="@color/gray12" />
 
                 </LinearLayout>
@@ -85,13 +88,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="6dp"
+                    android:layout_margin="16dp"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.smarteist.autoimageslider.SliderView
                         android:id="@+id/imageSliderTop"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_margin="16dp"
+                        android:layout_height="120dp"
                         android:background="@drawable/img2"
                         app:sliderAnimationDuration="600"
                         app:sliderAutoCycleDirection="back_and_forth"
@@ -111,23 +114,26 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="116dp"
+                    android:layout_marginTop="90dp"
                     android:elevation="5dp"
                     android:src="@drawable/chef"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    image="@{model.logo}"
+                    />
 
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/user_name_test"
+                    android:text="@{model.name}"
                     android:textColor="@color/gray12"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/user_image"
                     app:layout_constraintStart_toEndOf="@id/user_image"
                     app:layout_constraintTop_toBottomOf="@id/cardSlider" />
 
@@ -185,7 +191,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout_cart"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/small_stroke_primary"
                     app:layout_constraintBottom_toBottomOf="parent">
 
@@ -196,7 +202,7 @@
                         android:layout_marginStart="16dp"
                         android:text="@string/total"
                         android:textColor="@color/gray12"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -208,7 +214,7 @@
                         android:layout_marginStart="16dp"
                         android:text="@string/_200"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="15sp"
+                        android:textSize="11sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/total"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -229,11 +235,11 @@
                         android:id="@+id/add_to_cart"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
                         android:text="@string/add_to_cart"
                         android:textColor="@color/gray12"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:gravity="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/cart_img"
@@ -242,7 +248,6 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="0dp"
-                        android:layout_marginEnd="16dp"
                         android:background="@color/colorPrimary"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/add_to_cart"

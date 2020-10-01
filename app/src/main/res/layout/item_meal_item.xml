@@ -43,7 +43,7 @@
                     android:layout_marginRight="10dp"
                     android:text="@string/meal_title"
                     android:textColor="@color/gray12"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/offer_image"
                     app:layout_constraintTop_toTopOf="@+id/offer_image" />
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/_200"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="13sp"
+                    android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="@id/title"
                     app:layout_constraintBottom_toBottomOf="@id/offer_image"
 

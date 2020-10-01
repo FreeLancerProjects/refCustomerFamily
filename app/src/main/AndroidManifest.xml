@@ -14,8 +14,11 @@
     <application
         android:name=".share.App"
         android:allowBackup="true"
+        android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
 
         <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_shop_query.ShopsQueryActivity" />

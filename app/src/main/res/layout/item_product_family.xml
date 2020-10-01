@@ -7,6 +7,14 @@
         <variable
             name="lang"
             type="String" />
+        
+        <variable
+            name="model"
+            type="com.refCustomerFamily.models.FamilyModel" />
+
+        <variable
+            name="categoryTitle"
+            type="String" />
 
     </data>
 
@@ -20,17 +28,17 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="5dp"
             android:background="@color/white"
             android:layout_margin="5dp">
 
 
             <ImageView
                 android:id="@+id/offer_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:padding="5dp"
-                android:src="@drawable/chef"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:padding="10dp"
+                android:src="@{model.logo}"
                 android:background="@drawable/small_stroke"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -43,9 +51,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="الشيف خالد محمد"
+                android:text="@{model.name}"
                 android:textColor="@color/gray12"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/offer_image"
                 app:layout_constraintTop_toTopOf="@+id/offer_image" />
@@ -55,9 +63,9 @@
                 android:id="@+id/category_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="المأكولات البحريه"
+                android:text="@{categoryTitle}"
                 android:textColor="@color/gray6"
-                android:textSize="11sp"
+                android:textSize="10sp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="@id/title"
                 app:layout_constraintTop_toBottomOf="@id/title"
@@ -70,7 +78,7 @@
                 style="@style/Widget.AppCompat.RatingBar.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:rating="4"
+                android:rating='@{(float)model.rating}'
                 app:layout_constraintStart_toStartOf="@id/title"
                 app:layout_constraintBottom_toBottomOf="@id/offer_image"
                  />
