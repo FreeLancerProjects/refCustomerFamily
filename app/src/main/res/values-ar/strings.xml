@@ -210,5 +210,19 @@
     <string name="work">العمل</string>
     <string name="save">حفظ</string>
     <string name="invalid_url">رابط غير صحيح</string>
+    <string name="new_order">طلب جديد</string>
+    <string name="order_instruction">Order instructions</string>
+    <string name="order_here">اكتب طلبك هنا</string>
+    <string name="payment_type">طريقة الدفع</string>
+    <string name="coupons">كوبون</string>
+    <string name="add_coupon">أضف كوبون</string>
+    <string name="attach_photo_from">إرفاق صورة</string>
+    <string name="enter_coupon_code">ادخل كود الخصم هنا</string>
+    <string name="want_to_get_the_latest_coupons">تابعنا على مواقع التواصل الاجتماعى؟</string>
+    <string name="follow_us_on">لمعرفة آخر العروض وكوبونات الخصم</string>
+    <string name="and1">و</string>
+    <string name="twitter">تويتر</string>
+    <string name="instagram">انستجرام</string>
+    <string name="facebook">فيس بوك</string>
 
 </resources>

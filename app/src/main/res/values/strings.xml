@@ -210,4 +210,18 @@
     <string name="work">Work</string>
     <string name="save">Save</string>
     <string name="invalid_url">Invalid URL</string>
+    <string name="new_order">New Order</string>
+    <string name="order_instruction">Order instructions</string>
+    <string name="order_here">Order here</string>
+    <string name="payment_type">Payment Type</string>
+    <string name="coupons">Coupons</string>
+    <string name="add_coupon">Add Coupon</string>
+    <string name="attach_photo_from">Attach photo from</string>
+    <string name="enter_coupon_code">Enter coupon code</string>
+    <string name="want_to_get_the_latest_coupons">Want to get the latest coupons?</string>
+    <string name="follow_us_on">follow us on</string>
+    <string name="and1">and</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
 </resources>

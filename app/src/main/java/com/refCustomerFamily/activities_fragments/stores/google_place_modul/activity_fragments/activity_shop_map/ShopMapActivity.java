@@ -48,6 +48,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_login.LoginActivity;
+import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.add_order_activity.AddOrderTextActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.adapters.HoursAdapter;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.HourModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.NearbyModel;
@@ -140,7 +142,11 @@ public class ShopMapActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         binding.btnNext.setOnClickListener(v -> {
-            /*if (userModel!=null){
+
+            Intent intent = new Intent(this, AddOrderTextActivity.class);
+            intent.putExtra("data",placeModel);
+            startActivityForResult(intent,100);
+           /* if (userModel!=null){
                 Intent intent = new Intent(this, AddOrderTextActivity.class);
                 intent.putExtra("data",placeModel);
                 startActivityForResult(intent,100);
