@@ -16,26 +16,22 @@ public class SignUpModel extends BaseObservable {
     private Uri logo;
     private String name;
     private String email;
-    private String address;
     private String phone_code;
     private String phone;
 
     
     public ObservableField<String> error_name = new ObservableField<>();
     public ObservableField<String> error_email = new ObservableField<>();
-    public ObservableField<String> error_address = new ObservableField<>();
 
 
     public boolean isDataValid(Context context)
     {
         if (!name.trim().isEmpty()&&
                 !email.trim().isEmpty()&&
-                !address.trim().isEmpty()&&
                 Patterns.EMAIL_ADDRESS.matcher(email.trim()).matches()
         ){
             error_name.set(null);
             error_email.set(null);
-            error_address.set(null);
 
             return true;
         }else
@@ -58,15 +54,7 @@ public class SignUpModel extends BaseObservable {
                     error_email.set(null);
 
                 }
-                if (address.trim().isEmpty())
-                {
-                    error_address.set(context.getString(R.string.field_required));
 
-                }else
-                {
-                    error_address.set(null);
-
-                }
                 return false;
             }
     }
@@ -102,15 +90,6 @@ public class SignUpModel extends BaseObservable {
     }
 
 
-    @Bindable
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-        notifyPropertyChanged(BR.address);
-    }
 
 
     public Uri getLogo() {

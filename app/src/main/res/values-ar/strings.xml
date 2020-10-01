@@ -225,5 +225,6 @@
     <string name="instagram">انستجرام</string>
     <string name="facebook">فيس بوك</string>
     <string name="add_more">اضافة مزيد</string>
+    <string name="user_found">المستخدم موجود مسبقا</string>
 
 </resources>

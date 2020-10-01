@@ -5,14 +5,14 @@ import java.util.List;
 
 public class UserModel implements Serializable {
 
-    private User data;
+    private User user;
 
-    public User getData() {
-        return data;
+    public User getUser() {
+        return user;
     }
 
-    public void setData(User data) {
-        this.data = data;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public static class User implements Serializable {
@@ -28,7 +28,19 @@ public class UserModel implements Serializable {
         private String latitude;
         private String longitude;
         private String address;
+        private String card_image;
         private String user_type;
+        private String rating;
+        private String notification_status;
+        private String is_confirmed;
+        private String phone_is_shown;
+        private String logout_time;
+        private String forget_password_code;
+        private String software_type;
+        private String email_verified_at;
+        private String deleted_at;
+        private String created_at;
+        private String updated_at;
         private String details;
         private List<Stage> stage_fk;
         private List<Stage_CLASS> class_fk;
@@ -99,6 +111,59 @@ public class UserModel implements Serializable {
             return user_type;
         }
 
+
+        public String getCard_image() {
+            return card_image;
+        }
+
+        public String getUser_type() {
+            return user_type;
+        }
+
+        public String getRating() {
+            return rating;
+        }
+
+        public String getNotification_status() {
+            return notification_status;
+        }
+
+        public String getIs_confirmed() {
+            return is_confirmed;
+        }
+
+        public String getPhone_is_shown() {
+            return phone_is_shown;
+        }
+
+        public String getLogout_time() {
+            return logout_time;
+        }
+
+        public String getForget_password_code() {
+            return forget_password_code;
+        }
+
+        public String getSoftware_type() {
+            return software_type;
+        }
+
+        public String getEmail_verified_at() {
+            return email_verified_at;
+        }
+
+        public String getDeleted_at() {
+            return deleted_at;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
         public String getFireBaseToken() {
             return fireBaseToken;
         }
@@ -106,6 +171,7 @@ public class UserModel implements Serializable {
         public void setFireBaseToken(String fireBaseToken) {
             this.fireBaseToken = fireBaseToken;
         }
+
 
         public List<SkillModel> getSkills_fk() {
             return skills_fk;

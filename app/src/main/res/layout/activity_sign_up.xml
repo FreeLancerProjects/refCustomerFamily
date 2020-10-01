@@ -38,7 +38,7 @@
                 <LinearLayout
                     android:id="@+id/ll"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -112,7 +112,7 @@
                         android:singleLine="true"
                         android:text="@={model.name}"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/color4"
+                        android:textColorHint="@color/gray12"
                         android:textSize="15sp" />
 
 
@@ -131,77 +131,9 @@
                         android:singleLine="true"
                         android:text="@={model.email}"
                         android:textColor="@color/black"
-                        android:textColorHint="@color/color4"
+                        android:textColorHint="@color/gray12"
                         android:textSize="15sp" />
 
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/select_location_on_map"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="350dp"
-                        android:layout_marginTop="10dp">
-
-                        <fragment
-                            android:id="@+id/map"
-                            android:name="com.refCustomerFamily.activities_fragments.activity_sign_up.FragmentMapTouchListener"
-                            android:layout_width="match_parent"
-                            android:layout_height="240dp"
-
-                            />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:orientation="horizontal"
-                            android:weightSum="1"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/small_rounded_primary"
-                            android:paddingLeft="8dp"
-                            android:paddingRight="8dp"
-                            android:gravity="center_vertical"
-                            >
-
-                            <EditText
-                                android:id="@+id/edtAddress"
-                                android:layout_width="0dp"
-                                android:layout_weight=".9"
-                                android:layout_height="35dp"
-                                android:background="@color/white"
-                                android:gravity="center_vertical"
-                                android:hint="@string/address"
-                                android:paddingLeft="15dp"
-                                android:paddingRight="15dp"
-                                android:singleLine="true"
-                                android:textColor="@color/black"
-                                android:textColorHint="@color/gray4"
-                                android:textSize="13sp"
-                                android:text="@={model.address}"
-                                error="@{model.error_address}"
-
-                                />
-
-                            <ImageView
-                                android:id="@+id/imageSearch"
-                                android:layout_width="0dp"
-                                android:layout_weight=".1"
-                                android:layout_height="35dp"
-                                android:src="@drawable/ic_search"
-                                android:padding="3dp"
-                                />
-
-                        </LinearLayout>
-
-
-                    </FrameLayout>
 
 
                     <Button

@@ -8,12 +8,65 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:727524468139:android:dd40385e0502a769869eee",
+        "mobilesdk_app_id": "1:727524468139:android:c7b33cfb17569186869eee",
+        "android_client_info": {
+          "package_name": "com.refCustomerFamily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727524468139-d67sindoimo7glevckfuf2g4t5893vv6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.refCustomerFamily",
+            "certificate_hash": "ceb833c1886658788a9dd924d4b147da31b9f9b2"
+          }
+        },
+        {
+          "client_id": "727524468139-6jqke1rav944epubn7atop64edvqmc2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNUq5RIxv-A2IgyBeJuCjFmRh5vY2TUHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727524468139-6jqke1rav944epubn7atop64edvqmc2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727524468139:android:208756d205786178869eee",
         "android_client_info": {
           "package_name": "com.refFamily"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "727524468139-bvn3isoa0jm30978ekusg73hstek43n5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.refFamily",
+            "certificate_hash": "e6a73e70c3fc31d4b07d77141e133d0dd6e6939e"
+          }
+        },
+        {
+          "client_id": "727524468139-sc4jvkjme6e8mmq7o470ld0p4spklu2q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.refFamily",
+            "certificate_hash": "ceb833c1886658788a9dd924d4b147da31b9f9b2"
+          }
+        },
         {
           "client_id": "727524468139-6jqke1rav944epubn7atop64edvqmc2g.apps.googleusercontent.com",
           "client_type": 3
