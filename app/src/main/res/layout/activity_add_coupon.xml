@@ -132,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@id/ll"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias=".7"
-            android:textColor="@color/color4"
+            android:textColor="@color/gray11"
             android:textSize="12sp"
             android:linksClickable="true"
             android:textColorLink="@color/colorPrimary"

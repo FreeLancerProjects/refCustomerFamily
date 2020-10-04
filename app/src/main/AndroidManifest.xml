@@ -21,6 +21,10 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity" />
+
+        <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.add_order_activity.AddOrderTextActivity" />
+
         <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_shop_query.ShopsQueryActivity" />
 
         <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_map_search.MapSearchActivity" />

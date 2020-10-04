@@ -10,7 +10,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_update_product.UpdateProductActivity;
 import com.refCustomerFamily.databinding.ItemMainOffersBinding;
 import com.refCustomerFamily.models.MarketCatogryModel;
 import com.refCustomerFamily.models.UserModel;
@@ -56,9 +55,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.OfferAda
 
 
         holder.itemView.setOnClickListener(view -> {
-
+/*
             Intent intent = new Intent(context, UpdateProductActivity.class);
-            context.startActivity(intent);
+            context.startActivity(intent);*/
 
         });
 

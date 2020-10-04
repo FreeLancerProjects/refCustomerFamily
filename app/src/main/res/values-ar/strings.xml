@@ -211,7 +211,7 @@
     <string name="save">حفظ</string>
     <string name="invalid_url">رابط غير صحيح</string>
     <string name="new_order">طلب جديد</string>
-    <string name="order_instruction">Order instructions</string>
+    <string name="order_instruction">تفاصيل الطلب</string>
     <string name="order_here">اكتب طلبك هنا</string>
     <string name="payment_type">طريقة الدفع</string>
     <string name="coupons">كوبون</string>

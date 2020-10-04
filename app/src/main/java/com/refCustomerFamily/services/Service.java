@@ -6,6 +6,8 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceDetailsModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceGeocodeData;
 import com.refCustomerFamily.models.FamilyModel;
+import com.refCustomerFamily.models.SingleOrderDataModel;
+import com.refCustomerFamily.models.SliderModel;
 import com.refCustomerFamily.models.SubCategoryFamilyModel;
 import com.refCustomerFamily.models.UserModel;
 
@@ -120,6 +122,54 @@ public interface Service {
 
     @GET
     Call<ResponseBody> getFullUrl(@Url String url);
+
+
+    @GET("api/slider")
+    Call<SliderModel> getSliders();
+
+    @FormUrlEncoded
+    @POST("api/create-order")
+    Call<SingleOrderDataModel> sendTextOrder(@Header("Authorization") String user_token,
+                                             @Field("user_id") int user_id,
+                                             @Field("order_type") String order_type,
+                                             @Field("google_place_id") String google_place_id,
+                                             @Field("bill_cost") String bill_cost,
+                                             @Field("to_address") String to_address,
+                                             @Field("to_latitude") double to_latitude,
+                                             @Field("to_longitude") double to_longitude,
+                                             @Field("from_name") String from_name,
+                                             @Field("from_address") String from_address,
+                                             @Field("from_latitude") double from_latitude,
+                                             @Field("from_longitude") double from_longitude,
+                                             @Field("coupon_id") String coupon_id,
+                                             @Field("order_description") String order_description,
+                                             @Field("payment_method") String payment_method
+
+
+    );
+
+    @Multipart
+    @POST("api/create-order")
+    Call<SingleOrderDataModel> sendTextOrderWithImage(@Header("Authorization") String user_token,
+                                             @Part("user_id") RequestBody user_id,
+                                             @Part("order_type") RequestBody order_type,
+                                             @Part("google_place_id") RequestBody google_place_id,
+                                             @Part("bill_cost") RequestBody bill_cost,
+                                             @Part("to_address") RequestBody to_address,
+                                             @Part("to_latitude") RequestBody to_latitude,
+                                             @Part("to_longitude") RequestBody to_longitude,
+                                             @Part("from_name") RequestBody from_name,
+                                             @Part("from_address") RequestBody from_address,
+                                             @Part("from_latitude") RequestBody from_latitude,
+                                             @Part("from_longitude") RequestBody from_longitude,
+                                             @Part("coupon_id") RequestBody coupon_id,
+                                             @Part("order_description") RequestBody order_description,
+                                             @Part("payment_method") RequestBody payment_method,
+                                             @Part List<MultipartBody.Part> images
+
+
+
+    );
 
 
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ref Customer Family</string>
+    <string name="app_name">Ref Customer </string>
     <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
     <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="field_req">Field required</string>
