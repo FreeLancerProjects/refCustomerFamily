@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.activities_fragments.activity_sign_up.SignUpActivity;
+import com.refCustomerFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refCustomerFamily.databinding.ActivityVerificationCodeBinding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.UserModel;
@@ -189,8 +190,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
     private void login() {
 
 
-//        navigateToSignUpActivity();
-//      /*  Log.e("3","3");
+
         ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
@@ -201,9 +201,8 @@ public class VerificationCodeActivity extends AppCompatActivity {
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
-                            Log.e("eeeeee", response.body().getUser().getName());
                             preferences.create_update_userData(VerificationCodeActivity.this, response.body());
-                            navigateToHomeActivity();
+                            navigateToSplashLoadingActivity();
                         } else {
 
 
@@ -239,8 +238,8 @@ public class VerificationCodeActivity extends AppCompatActivity {
     }
 
 
-    private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void navigateToSplashLoadingActivity() {
+        Intent intent = new Intent(this, SplashLoadingActivity.class);
         startActivity(intent);
         finish();
     }

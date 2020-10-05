@@ -21,7 +21,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refCustomerFamily.databinding.ActivitySignUpBinding;
 import com.refCustomerFamily.interfaces.Listeners;
 import com.refCustomerFamily.language.Language_Helper;
@@ -36,8 +36,6 @@ import com.squareup.picasso.Picasso;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -258,7 +256,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             preferences.create_update_userData(SignUpActivity.this, response.body());
-                            navigateToHomeActivity();
+                            navigateToSplashLoadingActivity();
                         } else {
                             Log.e("nnnnnnnnnnnn", response.code() + "");
                             Log.e("555555", response.message());
@@ -336,7 +334,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             preferences.create_update_userData(SignUpActivity.this, response.body());
-                            navigateToHomeActivity();
+                            navigateToSplashLoadingActivity();
                         } else {
                             if (response.code() == 500) {
                                 Log.e("eeeee",response.message());
@@ -373,8 +371,8 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
     }
 
 
-    private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void navigateToSplashLoadingActivity() {
+        Intent intent = new Intent(this, SplashLoadingActivity.class);
         startActivity(intent);
         finish();
     }

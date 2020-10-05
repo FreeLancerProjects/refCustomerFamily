@@ -19,6 +19,7 @@ import android.view.animation.AnimationUtils;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refCustomerFamily.activities_fragments.activity_verification_code.VerificationCodeActivity;
 import com.refCustomerFamily.adapters.CountriesAdapter;
 import com.refCustomerFamily.databinding.ActivityLoginBinding;
@@ -93,12 +94,17 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
             }
         });
         binding.tvSkip.setOnClickListener(v -> {
-            navigateToHomeActivity();
+            navigateToSplashLoading();
         });
         createCountriesDialog();
         getPhoneCodes();
     }
 
+    private void navigateToSplashLoading() {
+        Intent intent = new Intent(this, SplashLoadingActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 
     private void getPhoneCodes() {
