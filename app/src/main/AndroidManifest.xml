@@ -45,7 +45,6 @@
         <activity android:name=".activities_fragments.activity_payment.PaymentActivity" />
         <activity android:name=".activities_fragments.activity_profile.UpdateProfileActivity" />
         <activity android:name=".activities_fragments.activity_profile.ProfileActivity" />
-        <activity android:name=".activities_fragments.activity_update_product.UpdateProductActivity" />
         <activity android:name=".activities_fragments.activity_notification.NotificationActivity" />
         <activity android:name=".activities_fragments.activity_orderdetail.OrderDetailActivity" />
         <activity

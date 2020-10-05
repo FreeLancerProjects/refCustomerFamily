@@ -261,6 +261,7 @@ public class ShopsActivity extends AppCompatActivity implements Listeners.BackLi
         }
 
         String loc = user_lat + "," + user_lng;
+        Log.e("loc",loc);
         nearbyCall = Api.getService("https://maps.googleapis.com/maps/api/").nearbyPlaceRankBy(loc, query, "distance", lang, "", getString(R.string.map_api_key));
         nearbyCall.enqueue(new Callback<NearbyModel>() {
             @Override
@@ -339,6 +340,7 @@ public class ShopsActivity extends AppCompatActivity implements Listeners.BackLi
 
 
         String loc = user_lat + "," + user_lng;
+
         nearbyLoadMoreCall = Api.getService("https://maps.googleapis.com/maps/api/").nearbyPlaceRankBy(loc, query, "distance", lang, next_page, getString(R.string.map_api_key));
         nearbyLoadMoreCall.enqueue(new Callback<NearbyModel>() {
             @Override
