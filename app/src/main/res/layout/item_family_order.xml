@@ -8,7 +8,10 @@
         <variable
             name="lang"
             type="String" />
-
+        <variable
+            name="model"
+            type="com.refCustomerFamily.models.ProductModel" />
+        <import type="android.view.View"/>
 
     </data>
 
@@ -38,7 +41,9 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/gift"></ImageView>
+                    android:background="@drawable/gift"
+                    image="@{model.main_image}"
+                    />
 
             </androidx.cardview.widget.CardView>
 
@@ -49,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/meal_title"
+                android:text="@{model.title}"
                 android:textColor="@color/gray12"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -65,27 +70,40 @@
                 android:layout_marginEnd="5dp"
                 android:gravity="start"
                 android:maxLines="2"
-                android:text="@string/meal_description"
-                android:textSize="11sp"
-                app:layout_constraintEnd_toStartOf="@id/tv_price"
+                android:text="@{model.desc}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@id/tvOldPrice"
                 app:layout_constraintStart_toStartOf="@+id/title"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
-            <!--            android:text=""-->
 
             <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="40dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="20dp"
-
+                android:id="@+id/tvNewPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/custom_bg_1"
                 android:gravity="center"
-                android:text="200 SAR"
+                android:text='@{model.price+@string/sar}'
+                android:textSize="15sp"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@id/linear_plus_minus"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility='@{model.have_offer.equals("without_offer")?View.GONE:View.VISIBLE}'
+                />
 
+
+
+            <TextView
+                android:id="@+id/tvOldPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="@color/gray6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNewPrice"
+                android:layout_marginTop="5dp"
+
+                />
 
             <LinearLayout
                 android:id="@+id/linear_discount"
@@ -100,7 +118,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/cardImage"
                 app:layout_constraintStart_toStartOf="@id/cardImage"
-                app:layout_constraintTop_toBottomOf="@id/cardImage">
+                app:layout_constraintTop_toBottomOf="@id/cardImage"
+                android:visibility='@{model.have_offer.equals("without_offer")?View.INVISIBLE:View.VISIBLE,default=invisible}'
+                >
 
 
                 <ImageView
@@ -114,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text=" % 20 "
+                    android:text='@{model.offer_type.equals("per")?model.offer_value+"%":model.offer_value+@string/sar}'
                     android:textColor="@color/white" />
             </LinearLayout>
 

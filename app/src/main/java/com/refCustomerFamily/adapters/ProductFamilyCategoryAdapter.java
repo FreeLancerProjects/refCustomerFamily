@@ -30,15 +30,7 @@ public class ProductFamilyCategoryAdapter extends RecyclerView.Adapter<ProductFa
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    Preferences preferences;
-    UserModel userModel;
-
-
-    int i = -1;
-
-    public ProductFamilyCategoryAdapter(Context context) {
-        this.context = context;
-    }
+    private int i = 0;
 
 
     public ProductFamilyCategoryAdapter(List<SubCategoryFamilyModel.Data.Category> categoryList, Context context) {
@@ -53,7 +45,7 @@ public class ProductFamilyCategoryAdapter extends RecyclerView.Adapter<ProductFa
     @NonNull
     @Override
     public ProductFamilyCategoryAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemProductFamilyCategoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_product_family_category, parent, false);
+        ItemProductFamilyCategoryBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_product_family_category, parent, false);
         return new ProductFamilyCategoryAdapterVH(binding);
     }
 
@@ -62,13 +54,10 @@ public class ProductFamilyCategoryAdapter extends RecyclerView.Adapter<ProductFa
 
         holder.binding.setLang(lang);
         holder.binding.setModel(categoryList.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i = position;
-                notifyDataSetChanged();
+        holder.itemView.setOnClickListener(view -> {
+            i = position;
+            notifyDataSetChanged();
 
-            }
         });
 
         if (position == 0) {
@@ -78,8 +67,9 @@ public class ProductFamilyCategoryAdapter extends RecyclerView.Adapter<ProductFa
         if (i == position) {
             holder.binding.name.setTextColor(context.getResources().getColor(R.color.colorPrimary));
             if (context instanceof ProductFamilyActivity) {
+                SubCategoryFamilyModel.Data.Category category = categoryList.get(holder.getAdapterPosition());
                 ProductFamilyActivity productFamilyActivity = (ProductFamilyActivity) context;
-                ((ProductFamilyActivity) context).showFamilies(position);
+                productFamilyActivity.showFamilies(category);
 
 
 
@@ -98,7 +88,7 @@ public class ProductFamilyCategoryAdapter extends RecyclerView.Adapter<ProductFa
         return categoryList.size();
     }
 
-    public class ProductFamilyCategoryAdapterVH extends RecyclerView.ViewHolder {
+    public static class ProductFamilyCategoryAdapterVH extends RecyclerView.ViewHolder {
         public ItemProductFamilyCategoryBinding binding;
 
         public ProductFamilyCategoryAdapterVH(@NonNull ItemProductFamilyCategoryBinding binding) {

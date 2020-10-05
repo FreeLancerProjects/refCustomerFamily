@@ -5,6 +5,7 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.NearbyModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceDetailsModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceGeocodeData;
+import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
 import com.refCustomerFamily.models.SliderModel;
@@ -171,5 +172,7 @@ public interface Service {
 
     );
 
+    @GET("api/categories-with-families-by-family-id")
+    Call<FamilyCategoryProductDataModel> getFamilyCategory_Products(@Query("family_id") int family_id);
 
 }

@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_family.FamilyActivity;
 import com.refCustomerFamily.databinding.ItemCategoryBinding;
+import com.refCustomerFamily.models.FamilyCategory;
 import com.refCustomerFamily.models.MarketCatogryModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -23,53 +25,41 @@ import io.paperdb.Paper;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryAdapterVH> {
 
-    private List<MarketCatogryModel.Data> orderlist;
+    private List<FamilyCategory> list;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    Preferences preferences;
-    UserModel userModel;
+    private FamilyActivity activity;
+    int i = 0;
 
-    int i = -1;
-
-    public CategoryAdapter(Context context) {
-        this.context = context;
-    }
-
-    public CategoryAdapter(List<MarketCatogryModel.Data> orderlist, Context context) {
-        this.orderlist = orderlist;
+    public CategoryAdapter(List<FamilyCategory> list, Context context) {
+        this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
+        activity = (FamilyActivity) context;
     }
 
     @NonNull
     @Override
     public CategoryAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemCategoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_category, parent, false);
+        ItemCategoryBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_category, parent, false);
         return new CategoryAdapterVH(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapterVH holder, int position) {
-
+        holder.binding.setModel(list.get(position));
         holder.binding.setLang(lang);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i = position;
-                notifyDataSetChanged();
+        holder.itemView.setOnClickListener(view -> {
+            i = position;
+            FamilyCategory familyCategory = list.get(holder.getAdapterPosition());
+            activity.showFamilyProducts(familyCategory);
+            notifyDataSetChanged();
 
-            }
         });
 
-        if (position == 0) {
-            holder.binding.name.setBackground(context.getResources().getDrawable(R.drawable.main_category_bg_1));
-            holder.binding.name.setTextColor(context.getResources().getColor(R.color.white));
-
-        }
         if (i == position) {
             holder.binding.name.setBackground(context.getResources().getDrawable(R.drawable.main_category_bg_1));
             holder.binding.name.setTextColor(context.getResources().getColor(R.color.white));
@@ -83,10 +73,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public int getItemCount() {
-        return 15;
+        return list.size();
     }
 
-    public class CategoryAdapterVH extends RecyclerView.ViewHolder {
+    public static class CategoryAdapterVH extends RecyclerView.ViewHolder {
         public ItemCategoryBinding binding;
 
         public CategoryAdapterVH(@NonNull ItemCategoryBinding binding) {

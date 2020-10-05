@@ -1,6 +1,8 @@
 package com.refCustomerFamily.models;
 
-public class FamilyModel {
+import java.io.Serializable;
+
+public class FamilyModel implements Serializable {
 
     private int id;
     private double rating;

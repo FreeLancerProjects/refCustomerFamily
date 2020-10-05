@@ -7,6 +7,9 @@
         <variable
             name="lang"
             type="String" />
+        <variable
+            name="model"
+            type="com.refCustomerFamily.models.FamilyCategory" />
 
     </data>
 
@@ -19,10 +22,10 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="5dp"
-        android:textSize="10sp"
+        android:textSize="13sp"
         android:paddingBottom="5dp"
         android:textColor="@color/gray12"
-        android:text="@string/meal_title"
+        android:text="@{model.title}"
         >
 
 

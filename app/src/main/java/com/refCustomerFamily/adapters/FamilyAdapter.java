@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_family.FamilyActivity;
+import com.refCustomerFamily.activities_fragments.activity_product_family.ProductFamilyActivity;
 import com.refCustomerFamily.databinding.ItemProductFamilyBinding;
 import com.refCustomerFamily.models.FamilyModel;
 import com.refCustomerFamily.models.UserModel;
@@ -28,25 +29,18 @@ public class FamilyAdapter extends RecyclerView.Adapter<FamilyAdapter.ProductFam
     private Context context;
     private LayoutInflater inflater;
     private String lang;
-    Preferences preferences;
-    UserModel userModel;
-
+    private ProductFamilyActivity activity;
     private String categoryTitle;
 
     public void setCategoryTitle(String categoryTitle) {
         this.categoryTitle = categoryTitle;
     }
 
-    int i = -1;
-
-    public FamilyAdapter(Context context) {
-        this.context = context;
-    }
-
     public FamilyAdapter(List<FamilyModel> familyList, Context context) {
         this.familyList = familyList;
         this.context = context;
         inflater = LayoutInflater.from(context);
+        activity = (ProductFamilyActivity) context;
         Paper.init(context);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 
@@ -55,7 +49,7 @@ public class FamilyAdapter extends RecyclerView.Adapter<FamilyAdapter.ProductFam
     @NonNull
     @Override
     public ProductFamilyAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemProductFamilyBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_product_family, parent, false);
+        ItemProductFamilyBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_product_family, parent, false);
         return new ProductFamilyAdapterVH(binding);
     }
 
@@ -65,15 +59,11 @@ public class FamilyAdapter extends RecyclerView.Adapter<FamilyAdapter.ProductFam
         holder.binding.setModel(familyList.get(position));
         holder.binding.setCategoryTitle(categoryTitle);
         holder.binding.setLang(lang);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.itemView.setOnClickListener(view -> {
+            FamilyModel familyModel = familyList.get(holder.getAdapterPosition());
+            activity.navigateToFamilyActivity(familyModel);
 
-                Intent intent = new Intent(context, FamilyActivity.class);
-                intent.putExtra("familyId",familyList.get(position).getId());
-                context.startActivity(intent);
 
-            }
         });
 
 
