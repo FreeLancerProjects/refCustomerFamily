@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_add_Product.AddProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_package.PackageActivity;
 import com.refCustomerFamily.activities_fragments.activity_product_family.ProductFamilyActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_google_stores.GoogleStoresActivity;
 import com.refCustomerFamily.adapters.CategoryAdapter;
@@ -97,6 +98,13 @@ public class Fragment_Main extends Fragment {
             Intent intent = new Intent(activity, GoogleStoresActivity.class);
             intent.putExtra("lat",activity.user_lat);
             intent.putExtra("lng",activity.user_lng);
+
+            startActivity(intent);
+
+        });
+        binding.layout3.setOnClickListener(view -> {
+
+            Intent intent = new Intent(activity, PackageActivity.class);
 
             startActivity(intent);
 

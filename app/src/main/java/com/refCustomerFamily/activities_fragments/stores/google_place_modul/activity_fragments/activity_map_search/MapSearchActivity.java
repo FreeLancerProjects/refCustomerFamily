@@ -422,10 +422,6 @@ public class MapSearchActivity extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
-
-
-
-
     private void getGeoData(final double lat, double lng) {
         binding.progBar.setVisibility(View.VISIBLE);
         binding.imagePin.setVisibility(View.GONE);

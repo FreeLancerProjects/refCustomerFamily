@@ -32,6 +32,8 @@ public interface Listeners {
     interface LoginListener{
         void validate();
         void showCountryDialog();
+        void familyApp();
+        void delegateApp();
     }
 
 

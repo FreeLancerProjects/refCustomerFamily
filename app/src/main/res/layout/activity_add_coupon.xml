@@ -66,11 +66,6 @@
                     />
             </LinearLayout>
 
-
-
-
-
-
         </androidx.appcompat.widget.Toolbar>
         <View
             android:id="@+id/view"

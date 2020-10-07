@@ -227,5 +227,18 @@
     <string name="add_more">اضافة مزيد</string>
     <string name="user_found">المستخدم موجود مسبقا</string>
     <string name="no_data_to_show">لا يوجد عناصر لعرضها</string>
+    <string name="write_package_details">أكتب تفاصيل الطرد</string>
+    <string name="place_of_delivery">مكان الاستلام</string>
+    <string name="delivery_place">مكان التسليم</string>
+    <string name="choose_time">اختر الوقت</string>
+    <string name="display_times">اظهر الوقت</string>
+    <string name="select_time">اختر الوقت</string>
+    <string name="select">اختر</string>
+    <string name="hour1">1 ساعه</string>
+    <string name="hour2">2 ساعه</string>
+    <string name="hour3">3 ساعه</string>
+    <string name="day1">1 يوم</string>
+    <string name="day2">2 يوم</string>
+    <string name="day3">3 يوم</string>
 
 </resources>

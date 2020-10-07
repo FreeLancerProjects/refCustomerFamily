@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -154,6 +155,24 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
     @Override
     public void showCountryDialog() {
         dialog.show();
+    }
+
+    @Override
+    public void familyApp() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.refFamily")));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.refFamily")));
+        }
+    }
+
+    @Override
+    public void delegateApp() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.refDelegateFamily")));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.refDelegateFamily")));
+        }
     }
 
     private void navigateToVerificationCodeActivity() {

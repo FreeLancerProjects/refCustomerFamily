@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
@@ -20,6 +23,8 @@
         android:supportsRtl="true"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".activities_fragments.activity_package.PackageActivity" />
 
         <activity android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity" />
 
@@ -94,6 +99,9 @@
             android:name=".activities_fragments.activity_chat.ChatActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

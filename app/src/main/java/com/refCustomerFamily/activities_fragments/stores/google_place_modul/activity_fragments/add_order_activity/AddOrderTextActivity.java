@@ -173,8 +173,8 @@ public class AddOrderTextActivity extends AppCompatActivity {
         dialog.show();
 
 
-      /*  Api.getService(Tags.base_url)
-                .sendTextOrder(userModel.getData().getToken(),userModel.getData().getId(),addOrderTextModel.getOrder_type(),addOrderTextModel.get(),addOrderTextModel.getPlace_id(),addOrderTextModel.getTo_address(),addOrderTextModel.getTo_lat(),addOrderTextModel.getTo_lng(),addOrderTextModel.getPlace_name(),addOrderTextModel.getPlace_address(),addOrderTextModel.getPlace_lat(),addOrderTextModel.getPlace_lng(),String.valueOf(addOrderTextModel.getTime()),addOrderTextModel.getCoupon_id(),addOrderTextModel.getOrder_text(),)
+        Api.getService(Tags.base_url)
+                .sendTextOrder(userModel.getUser().getToken(),userModel.getUser().getId(),0,addOrderTextModel.getOrder_type(),addOrderTextModel.getPlace_id(),"0",addOrderTextModel.getTo_address(),addOrderTextModel.getTo_lat(),addOrderTextModel.getTo_lng(),addOrderTextModel.getPlace_name(),addOrderTextModel.getPlace_address(),addOrderTextModel.getPlace_lat(),addOrderTextModel.getPlace_lng(),String.valueOf(addOrderTextModel.getTime()),addOrderTextModel.getCoupon_id(),addOrderTextModel.getOrder_text(),"cash")
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
@@ -192,7 +192,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
                                 Toast.makeText(AddOrderTextActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             } else
                             {
-                                Toast.makeText(AddOrderProductActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddOrderTextActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
 
                             try {
@@ -211,9 +211,9 @@ public class AddOrderTextActivity extends AppCompatActivity {
                                 Log.e("msg_category_error", t.getMessage() + "__");
 
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                    Toast.makeText(AddOrderProductActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddOrderTextActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(AddOrderProductActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddOrderTextActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }catch (Exception e)
@@ -221,7 +221,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
                             Log.e("Error",e.getMessage()+"__");
                         }
                     }
-                });*/
+                });
     }
     private void sendOrderTextWithImage()
     {
@@ -229,12 +229,13 @@ public class AddOrderTextActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-    /*    RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(userModel.getData().getId()));
+        RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(userModel.getUser().getId()));
         RequestBody order_type_part = Common.getRequestBodyText(addOrderTextModel.getOrder_type());
 
         RequestBody market_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getMarket_id()));
         RequestBody google_place_id_part = Common.getRequestBodyText(addOrderTextModel.getPlace_id());
-        RequestBody bill_cost_part = Common.getRequestBodyText(String.valueOf(addOrderProductsModel.getTotal_cost()));
+        RequestBody bill_cost_part = Common.getRequestBodyText("0");
+        RequestBody family_id_part = Common.getRequestBodyText("0");
         RequestBody client_address_part = Common.getRequestBodyText(addOrderTextModel.getTo_address());
         RequestBody client_lat_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getTo_lat()));
         RequestBody client_lng_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getTo_lng()));
@@ -249,14 +250,14 @@ public class AddOrderTextActivity extends AppCompatActivity {
 
 
         Api.getService(Tags.base_url)
-                .sendTextOrderWithImage(userModel.getUser().getToken(),user_id_part,order_type_part,market_id_part,google_place_id_part,bill_cost_part,client_address_part,client_lat_part,client_lng_part,market_name_part,market_address_part,market_lat_part,market_lng_part,arrival_time_part,coupon_id_part,details_part,notes_part,getMultiPartImages())
+                .sendTextOrderWithImage(userModel.getUser().getToken(),user_id_part,family_id_part,order_type_part,market_id_part,google_place_id_part,bill_cost_part,client_address_part,client_lat_part,client_lng_part,market_name_part,market_address_part,market_lat_part,market_lng_part,arrival_time_part,coupon_id_part,details_part,notes_part,getMultiPartImages())
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
                         dialog.dismiss();
                         if (response.isSuccessful()&&response.body()!=null)
                         {
-                            Intent intent =new Intent(AddOrderProductActivity.this, ChatActivity.class);
+                            Intent intent =new Intent(AddOrderTextActivity.this, ChatActivity.class);
                             intent.putExtra("order_id",response.body().getOrder().getId());
                             startActivity(intent);
                             finish();
@@ -264,10 +265,10 @@ public class AddOrderTextActivity extends AppCompatActivity {
                         {
                             if (response.code()==500)
                             {
-                                Toast.makeText(AddOrderProductActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddOrderTextActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             } else
                             {
-                                Toast.makeText(AddOrderProductActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddOrderTextActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
 
                             try {
@@ -286,9 +287,9 @@ public class AddOrderTextActivity extends AppCompatActivity {
                                 Log.e("msg_category_error", t.getMessage() + "__");
 
                                 if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
-                                    Toast.makeText(AddOrderProductActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddOrderTextActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(AddOrderProductActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddOrderTextActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }catch (Exception e)
@@ -296,7 +297,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
                             Log.e("Error",e.getMessage()+"__");
                         }
                     }
-                });*/
+                });
 
     }
     private List<MultipartBody.Part> getMultiPartImages()

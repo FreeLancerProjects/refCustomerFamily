@@ -132,6 +132,7 @@ public interface Service {
     @POST("api/create-order")
     Call<SingleOrderDataModel> sendTextOrder(@Header("Authorization") String user_token,
                                              @Field("user_id") int user_id,
+                                             @Field("family_id") int family_id,
                                              @Field("order_type") String order_type,
                                              @Field("google_place_id") String google_place_id,
                                              @Field("bill_cost") String bill_cost,
@@ -142,6 +143,7 @@ public interface Service {
                                              @Field("from_address") String from_address,
                                              @Field("from_latitude") double from_latitude,
                                              @Field("from_longitude") double from_longitude,
+                                             @Field("end_shipping_time")String end_shipping_time,
                                              @Field("coupon_id") String coupon_id,
                                              @Field("order_description") String order_description,
                                              @Field("payment_method") String payment_method
@@ -153,6 +155,7 @@ public interface Service {
     @POST("api/create-order")
     Call<SingleOrderDataModel> sendTextOrderWithImage(@Header("Authorization") String user_token,
                                              @Part("user_id") RequestBody user_id,
+                                             @Part("family_id") RequestBody family_id,
                                              @Part("order_type") RequestBody order_type,
                                              @Part("google_place_id") RequestBody google_place_id,
                                              @Part("bill_cost") RequestBody bill_cost,
@@ -163,12 +166,12 @@ public interface Service {
                                              @Part("from_address") RequestBody from_address,
                                              @Part("from_latitude") RequestBody from_latitude,
                                              @Part("from_longitude") RequestBody from_longitude,
+                                             @Part("end_shipping_time")RequestBody end_shipping_time,
                                              @Part("coupon_id") RequestBody coupon_id,
                                              @Part("order_description") RequestBody order_description,
                                              @Part("payment_method") RequestBody payment_method,
+                                             @Part("order_nots") RequestBody order_nots,
                                              @Part List<MultipartBody.Part> images
-
-
 
     );
 

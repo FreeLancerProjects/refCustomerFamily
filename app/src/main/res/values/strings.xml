@@ -227,4 +227,17 @@
     <string name="add_more">Add More</string>
     <string name="user_found">User Found</string>
     <string name="no_data_to_show">No data to show</string>
+    <string name="write_package_details">Write Package Details</string>
+    <string name="place_of_delivery">place of delivery</string>
+    <string name="delivery_place">delivery place</string>
+    <string name="choose_time">Choose Time</string>
+    <string name="display_times">Display Time</string>
+    <string name="select_time">Select Time</string>
+    <string name="select">Select</string>
+    <string name="hour1">1 Hour</string>
+    <string name="hour2">2 Hour</string>
+    <string name="hour3">3 Hour</string>
+    <string name="day1">1 Day</string>
+    <string name="day2">2 Day</string>
+    <string name="day3">3 Day</string>
 </resources>

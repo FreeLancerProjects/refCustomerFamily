@@ -8,6 +8,7 @@ public class AddOrderTextModel implements Serializable {
     private int user_id;
     private String place_id;
     private int market_id;
+    private int family_id;
     private String place_name;
     private String place_address;
     private double place_lat;
@@ -25,6 +26,14 @@ public class AddOrderTextModel implements Serializable {
 
     public int getUser_id() {
         return user_id;
+    }
+
+    public int getFamily_id() {
+        return family_id;
+    }
+
+    public void setFamily_id(int family_id) {
+        this.family_id = family_id;
     }
 
     public String getPlace_id() {
