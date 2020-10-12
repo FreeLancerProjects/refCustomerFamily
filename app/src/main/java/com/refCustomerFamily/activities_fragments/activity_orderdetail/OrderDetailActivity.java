@@ -106,7 +106,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.acceptBtn.setOnClickListener(view -> {
 
 
-            Api.getService(Tags.base_url).familyAcceptOrder("Bearer "+userModel.getUser().getToken(),orderModel.getClient_id(),
+            Api.getService(Tags.base_url).familyAcceptOrder("Bearer "+userModel.getData().getToken(),orderModel.getClient_id(),
                     orderModel.getId(),orderModel.getFamily_id()).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
