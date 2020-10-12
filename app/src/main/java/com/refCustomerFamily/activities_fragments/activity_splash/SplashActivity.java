@@ -13,8 +13,10 @@ import androidx.databinding.DataBindingUtil;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.activities_fragments.activity_login.LoginActivity;
+import com.refCustomerFamily.activities_fragments.activity_splash_loading.SplashLoadingActivity;
 import com.refCustomerFamily.databinding.ActivitySplashBinding;
 import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.tags.Tags;
 
@@ -28,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     private Animation animation;
     private Preferences preferences;
     private int ad_id;
+    private UserModel userModel;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -42,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         getDataFromIntent();
         preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this);
 
         animation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.lanuch);
         binding.cons.startAnimation(animation);
@@ -57,12 +61,10 @@ public class SplashActivity extends AppCompatActivity {
 
 
                 new Handler().postDelayed(()->{
+                    if (userModel!=null) {
 
-                    String session = preferences.getSession(SplashActivity.this);
-                    if (session.equals(Tags.session_login)) {
-                        Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, SplashLoadingActivity.class);
                         startActivity(intent);
-
                         finish();
                     } else {
                         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

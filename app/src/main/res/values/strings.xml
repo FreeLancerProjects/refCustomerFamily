@@ -240,4 +240,12 @@
     <string name="day1">1 Day</string>
     <string name="day2">2 Day</string>
     <string name="day3">3 Day</string>
+    <string name="no_image">No Image</string>
+    <string name="order_menu">Order Menu</string>
+    <string name="item_total">Item Total</string>
+    <string name="vat">VAT</string>
+    <string name="total_with_vat_included">Total With VAT Included</string>
+    <string name="drop_off_location">Drop off location</string>
+    <string name="deliver_within">Deliver within</string>
+    <string name="pick_up_location">Pick up location</string>
 </resources>

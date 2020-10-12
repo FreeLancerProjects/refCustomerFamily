@@ -1,5 +1,6 @@
 package com.refCustomerFamily.activities_fragments.activity_family;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_add_order_product.AddOrderProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_cart.CartActivity;
+import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refCustomerFamily.adapters.CategoryAdapter;
 import com.refCustomerFamily.adapters.FamilyProductAdapter;
 import com.refCustomerFamily.databinding.ActivityFamilyBinding;
@@ -24,9 +28,12 @@ import com.refCustomerFamily.models.FamilyModel;
 import com.refCustomerFamily.models.ProductModel;
 import com.refCustomerFamily.remote.Api;
 import com.refCustomerFamily.tags.Tags;
+import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import io.paperdb.Paper;
 import retrofit2.Call;
@@ -43,6 +50,10 @@ public class FamilyActivity extends AppCompatActivity {
     private FamilyModel familyModel;
     private List<FamilyCategory> familyCategoryList;
     private List<ProductModel> productModelList;
+    private List<ProductModel> selectedProductList;
+    private int parent_pos = -1;
+    private double total = 0.0;
+
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -67,6 +78,7 @@ public class FamilyActivity extends AppCompatActivity {
 
 
     private void initView() {
+        selectedProductList = new ArrayList<>();
         productModelList = new ArrayList<>();
         familyCategoryList = new ArrayList<>();
         Paper.init(this);
@@ -80,11 +92,34 @@ public class FamilyActivity extends AppCompatActivity {
         binding.recViewFamily.setAdapter(familyAdapter);
         binding.recViewFamily.setLayoutManager(new LinearLayoutManager(this));
 
+        if (familyModel.getBanner()!=null&&!familyModel.getBanner().isEmpty()&&!familyModel.getBanner().equals("0")){
+            Picasso.get().load(Uri.parse(Tags.IMAGE_URL+ familyModel.getBanner())).fit().into(binding.imageSliderTop, new com.squareup.picasso.Callback() {
+                @Override
+                public void onSuccess() {
+                    binding.flNoImage.setVisibility(View.GONE);
+
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    binding.flNoImage.setVisibility(View.VISIBLE);
+                }
+            });
+
+        }else {
+            binding.flNoImage.setVisibility(View.VISIBLE);
+
+        }
+
 
         binding.addToCart.setOnClickListener(view -> {
-
-            Intent intent = new Intent(this, CartActivity.class);
-            startActivity(intent);
+            if (selectedProductList.size()>0){
+                Intent intent = new Intent(this, AddOrderProductActivity.class);
+                intent.putExtra("data",familyModel);
+                intent.putExtra("cost",total);
+                intent.putExtra("products", (Serializable) selectedProductList);
+                startActivityForResult(intent,100);
+            }
 
         });
 
@@ -106,6 +141,7 @@ public class FamilyActivity extends AppCompatActivity {
                     familyCategoryList.addAll(response.body().getData().getCategories());
                     if (familyCategoryList.size() > 0) {
                         categoryAdapter.notifyDataSetChanged();
+                        showFamilyProducts(familyCategoryList.get(0), 0);
                         binding.tvNoData.setVisibility(View.GONE);
                     } else {
                         binding.tvNoData.setVisibility(View.VISIBLE);
@@ -155,7 +191,8 @@ public class FamilyActivity extends AppCompatActivity {
     }
 
 
-    public void showFamilyProducts(FamilyCategory familyCategory) {
+    public void showFamilyProducts(FamilyCategory familyCategory, int adapterPosition) {
+        parent_pos = adapterPosition;
         productModelList.clear();
         productModelList.addAll(familyCategory.getProducts());
         if (familyCategoryList.size()>0){
@@ -164,6 +201,61 @@ public class FamilyActivity extends AppCompatActivity {
         }else {
             binding.tvNoData.setVisibility(View.VISIBLE);
 
+        }
+    }
+
+    public void updateProduct(ProductModel model, int adapterPosition) {
+        familyCategoryList.get(parent_pos).getProducts().set(adapterPosition,model);
+        familyAdapter.notifyItemChanged(adapterPosition);
+    }
+
+    public void addToCart(ProductModel model, int adapterPosition) {
+        int itemPos = isItemInCart(model);
+        if (itemPos==-1){
+            selectedProductList.add(model);
+
+        }else {
+            selectedProductList.set(itemPos,model);
+
+        }
+        total = calculateTotal();
+        binding.tvTotal.setText(String.format(Locale.ENGLISH,"%s %s",total,getString(R.string.sar)));
+        familyAdapter.notifyItemChanged(adapterPosition);
+
+    }
+
+    private int isItemInCart(ProductModel productModel){
+        int pos =-1;
+        for (int index = 0;index<selectedProductList.size();index++){
+            ProductModel model = selectedProductList.get(index);
+            if (model.getId()==productModel.getId()){
+                pos = index;
+                return pos;
+            }
+        }
+        return pos;
+    }
+
+    private double calculateTotal(){
+        double total = 0.0;
+        for (ProductModel model : selectedProductList){
+            total += model.getPrice()*model.getCount();
+        }
+        return total;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==100&&resultCode==RESULT_OK&&data!=null){
+            selectedProductList.clear();
+            total = 0.0;
+            binding.tvTotal.setText(String.format(Locale.ENGLISH,"%s %s",total,getString(R.string.sar)));
+            int order_id = data.getIntExtra("order_id",0);
+            Intent intent =new Intent(this, ChatActivity.class);
+            intent.putExtra("order_id",order_id);
+            startActivity(intent);
+            finish();
         }
     }
 }

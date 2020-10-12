@@ -55,7 +55,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.itemView.setOnClickListener(view -> {
             i = position;
             FamilyCategory familyCategory = list.get(holder.getAdapterPosition());
-            activity.showFamilyProducts(familyCategory);
+            activity.showFamilyProducts(familyCategory,holder.getAdapterPosition());
             notifyDataSetChanged();
 
         });

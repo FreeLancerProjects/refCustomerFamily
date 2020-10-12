@@ -5,14 +5,14 @@ import java.util.List;
 
 public class UserModel implements Serializable {
 
-    private User user;
+    private User data;
 
-    public User getUser() {
-        return user;
+    public User getData() {
+        return data;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setData(User data) {
+        this.data = data;
     }
 
     public static class User implements Serializable {

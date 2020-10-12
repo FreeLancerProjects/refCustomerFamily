@@ -77,24 +77,26 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img1"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/img11"
-                    android:elevation="5dp"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     />
 
                 <TextView
                     android:id="@+id/text1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/img1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="16dp"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:text="@string/productive_families"
                     />
 
@@ -124,28 +126,33 @@
                 android:background="@drawable/gradiant_primary_bg"
                 >
 
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img2"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/img2"
-                    android:elevation="5dp"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     />
 
                 <TextView
                     android:id="@+id/text2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/img2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="16dp"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:text="@string/markets"
                     />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -173,26 +180,29 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/img3"
-                    android:layout_width="150dp"
+                    android:layout_width="120dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/img3"
-                    android:elevation="5dp"
-                    android:layout_margin="16dp"
+                    android:layout_margin="8dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     />
 
                 <TextView
                     android:id="@+id/text3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/img3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginStart="16dp"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
+                    android:textSize="20sp"
                     android:text="@string/send_package"
                     />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

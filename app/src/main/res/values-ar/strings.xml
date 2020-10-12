@@ -240,5 +240,13 @@
     <string name="day1">1 يوم</string>
     <string name="day2">2 يوم</string>
     <string name="day3">3 يوم</string>
+    <string name="no_image">صورة غير متاحة</string>
+    <string name="order_menu">قائمة الطلبات</string>
+    <string name="item_total">المجموع</string>
+    <string name="vat">الضريبة</string>
+    <string name="total_with_vat_included">المجموع يشمل (الضريبة)</string>
+    <string name="drop_off_location">مكان تسليم الشحنة</string>
+    <string name="deliver_within">التوصيل في خلال</string>
+    <string name="pick_up_location">موقع استلام الشحنة</string>
 
 </resources>

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_add_order_product.AddOrderProductActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.add_order_activity.AddOrderTextActivity;
 import com.refCustomerFamily.databinding.AddOrderImagesMoreRowBinding;
 import com.refCustomerFamily.databinding.AddOrderImagesRowBinding;
@@ -73,6 +74,9 @@ public class AddOrderImagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     AddOrderTextActivity addOrderTextActivity = (AddOrderTextActivity) activity;
                     addOrderTextActivity.createDialogAlert();
 
+                }else if (activity instanceof AddOrderProductActivity){
+                    AddOrderProductActivity addOrderProductActivity = (AddOrderProductActivity) activity;
+                    addOrderProductActivity.delete(holder.getAdapterPosition());
                 }
 
             });

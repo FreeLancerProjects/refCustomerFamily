@@ -21,6 +21,7 @@ public class FamilyModel implements Serializable {
     private String ipad_number;
     private String address_registered_for_bank_account;
     private String notification_status;
+    private Tracker_Fk tracker_fk;
 
 
     public int getId() {
@@ -157,5 +158,37 @@ public class FamilyModel implements Serializable {
 
     public void setNotification_status(String notification_status) {
         this.notification_status = notification_status;
+    }
+
+    public Tracker_Fk getTracker_fk() {
+        return tracker_fk;
+    }
+
+    public static class Tracker_Fk implements Serializable{
+        private  int id;
+        private int user_id;
+        private double latitude;
+        private double longitude;
+        private String address;
+
+        public int getId() {
+            return id;
+        }
+
+        public int getUser_id() {
+            return user_id;
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+
+        public String getAddress() {
+            return address;
+        }
     }
 }

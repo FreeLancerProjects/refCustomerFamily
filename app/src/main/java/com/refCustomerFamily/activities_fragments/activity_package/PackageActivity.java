@@ -3,6 +3,7 @@ package com.refCustomerFamily.activities_fragments.activity_package;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,47 +24,46 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_family.FamilyActivity;
+import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_map_search.MapSearchActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.adapters.AddOrderImagesAdapter;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.AddOrderTextModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.FavoriteLocationModel;
-import com.refCustomerFamily.adapters.FamilyAdapter;
-import com.refCustomerFamily.adapters.ProductFamilyCategoryAdapter;
 import com.refCustomerFamily.databinding.ActivityPackageBinding;
-import com.refCustomerFamily.databinding.ActivityProductFamilyBinding;
 import com.refCustomerFamily.databinding.DialogSelectImage2Binding;
 import com.refCustomerFamily.language.Language_Helper;
-import com.refCustomerFamily.models.FamilyModel;
-import com.refCustomerFamily.models.SubCategoryFamilyModel;
+import com.refCustomerFamily.models.SingleOrderDataModel;
+import com.refCustomerFamily.models.UserModel;
+import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.remote.Api;
+import com.refCustomerFamily.share.Common;
 import com.refCustomerFamily.tags.Tags;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PackageActivity extends AppCompatActivity {
-
-
     private ActivityPackageBinding binding;
     private String lang;
-    private long selected_time = 0;
     private String[] timesList;
-    private FavoriteLocationModel model;
     private final String READ_PERM = Manifest.permission.READ_EXTERNAL_STORAGE;
     private final String write_permission = Manifest.permission.WRITE_EXTERNAL_STORAGE;
     private final String camera_permission = Manifest.permission.CAMERA;
@@ -72,6 +72,8 @@ public class PackageActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private AddOrderImagesAdapter addOrderImagesAdapter;
     private AddOrderTextModel addOrderTextModel;
+    private UserModel userModel;
+    private Preferences preferences;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -83,27 +85,14 @@ public class PackageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_package);
-
         initView();
-        getDataFromIntent();
 
-    }
-
-    private void getDataFromIntent() {
-        Intent intent = getIntent();
-
-        if (getIntent().getSerializableExtra("data") != null) {
-            model = (FavoriteLocationModel) intent.getSerializableExtra("data");
-            Log.e("mmmmmmm",model.getAddress()+"--  "+model.getLat()+"  ---"+model.getName());
-            binding.tvAddress1.setText(model.getAddress());
-            binding.tvAddress2.setText(model.getAddress());
-
-        }
     }
 
 
     private void initView() {
-
+        preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -122,43 +111,237 @@ public class PackageActivity extends AppCompatActivity {
                 getString(R.string.day3)
 
         };
+
+        binding.tvTime.setText(timesList[0]);
         binding.imageCamera.setOnClickListener(v -> createDialogAlert());
 
-        binding.liPlaceOfDelivery.setOnClickListener(v -> {
+        binding.llPickUp.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapSearchActivity.class);
             intent.putExtra("type", 1);
             startActivityForResult(intent, 200);
         });
-        binding.liDeliveryPlace.setOnClickListener(v -> {
+        binding.llDropOff.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapSearchActivity.class);
             intent.putExtra("type", 1);
-            startActivityForResult(intent, 200);
+            startActivityForResult(intent, 300);
         });
         binding.liDeliveryTime.setOnClickListener(v -> {
             CreateTimeDialog();
 
         });
-        binding.tvAddCoupon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PackageActivity.this, AddCouponActivity.class);
-                startActivity(intent);
-            }
+        binding.tvAddCoupon.setOnClickListener(view -> {
+            Intent intent = new Intent(PackageActivity.this, AddCouponActivity.class);
+            startActivity(intent);
         });
         binding.close.setOnClickListener(v -> {super.onBackPressed();});
-        addOrderTextModel.setOrder_type("package");
-        addOrderTextModel.setMarket_id(0);
 
-        //addOrderTextModel.setUser_id(userModel.getUser().getId());
-//        addOrderTextModel.setPlace_id(placeModel.getPlace_id());
-//        addOrderTextModel.setPlace_name(placeModel.getName());
-//        addOrderTextModel.setPlace_address(placeModel.getVicinity());
-//        addOrderTextModel.setPlace_lat(placeModel.getGeometry().getLocation().getLat());
-//        addOrderTextModel.setPlace_lng(placeModel.getGeometry().getLocation().getLng());
-        addOrderTextModel.setPayment("cash");
+
+
+        addOrderTextModel.setUser_id(userModel.getData().getId());
+        addOrderTextModel.setFamily_id(0);
+        addOrderTextModel.setOrder_type("package");
+        addOrderTextModel.setGoogle_place_id("");
+        addOrderTextModel.setBill_cost(0);
         addOrderTextModel.setCoupon_id("0");
-        addOrderTextModel.setComments("");
+        addOrderTextModel.setPayment_method("cash");
+        addOrderTextModel.setHour_arrival_time("1");
+        addOrderTextModel.setOrder_notes("");
+        Calendar calendar = Calendar.getInstance(new Locale(lang));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.ENGLISH);
+        String timeArrival =dateFormat.format(new Date(calendar.getTimeInMillis()));
+        addOrderTextModel.setEnd_shipping_time(timeArrival);
+
+
+        binding.btnSend.setOnClickListener(view -> {
+
+            String order_text = binding.edtOrder.getText().toString();
+            if (!order_text.isEmpty()&&!addOrderTextModel.getFrom_address().isEmpty()&&!addOrderTextModel.getTo_address().isEmpty()){
+                Common.CloseKeyBoard(this,binding.edtOrder);
+                binding.edtOrder.setError(null);
+                binding.tvAddress1.setError(null);
+                binding.tvAddress2.setError(null);
+                addOrderTextModel.setOrder_description(order_text);
+                if (imagesList.size()>0){
+                    sendOrderTextWithImage();
+                }else {
+                    sendOrderTextWithoutImage();
+                }
+            }else {
+                if (order_text.isEmpty()){
+                    binding.edtOrder.setError(getString(R.string.field_req));
+
+                }else {
+                    binding.edtOrder.setError(null);
+
+                }
+
+                if (addOrderTextModel.getFrom_address().isEmpty()){
+                    binding.tvAddress1.setError(getString(R.string.field_req));
+
+                }else {
+                    binding.tvAddress1.setError(null);
+
+                }
+
+                if (addOrderTextModel.getTo_address().isEmpty()){
+                    binding.tvAddress2.setError(getString(R.string.field_req));
+
+                }else {
+                    binding.tvAddress2.setError(null);
+
+                }
+
+            }
+        });
+
+
     }
+
+    private void sendOrderTextWithoutImage()
+    {
+
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .sendTextOrder("Bearer "+userModel.getData().getToken(),addOrderTextModel.getUser_id(),addOrderTextModel.getFamily_id(),addOrderTextModel.getOrder_type(),addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()),addOrderTextModel.getTo_address(),addOrderTextModel.getTo_latitude(),addOrderTextModel.getTo_longitude(),addOrderTextModel.getFrom_name(),addOrderTextModel.getFrom_address(),addOrderTextModel.getFrom_latitude(),addOrderTextModel.getFrom_longitude(),addOrderTextModel.getEnd_shipping_time(),addOrderTextModel.getCoupon_id(),addOrderTextModel.getOrder_description(),addOrderTextModel.getOrder_notes(),addOrderTextModel.getPayment_method(),addOrderTextModel.getHour_arrival_time())
+                .enqueue(new Callback<SingleOrderDataModel>() {
+                    @Override
+                    public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()&&response.body()!=null)
+                        {
+                            Intent intent = getIntent();
+                            intent.putExtra("order_id",response.body().getOrder().getId());
+                            setResult(RESULT_OK,intent);
+                            finish();
+                        }else
+                        {
+                            if (response.code()==500)
+                            {
+                                Toast.makeText(PackageActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else
+                            {
+                                Toast.makeText(PackageActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+
+                            try {
+                                Log.e("error",response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SingleOrderDataModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+                                Log.e("msg_category_error", t.getMessage() + "__");
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(PackageActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }catch (Exception e)
+                        {
+                            Log.e("Error",e.getMessage()+"__");
+                        }
+                    }
+                });
+    }
+    private void sendOrderTextWithImage()
+    {
+        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getUser_id()));
+        RequestBody order_type_part = Common.getRequestBodyText(addOrderTextModel.getOrder_type());
+
+        RequestBody family_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getFamily_id()));
+        RequestBody google_place_id_part = Common.getRequestBodyText(addOrderTextModel.getGoogle_place_id());
+        RequestBody bill_cost_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getBill_cost()));
+        RequestBody from_address_part = Common.getRequestBodyText(addOrderTextModel.getFrom_address());
+        RequestBody from_lat_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getFrom_latitude()));
+        RequestBody from_lng_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getFrom_longitude()));
+        RequestBody from_name_part = Common.getRequestBodyText(addOrderTextModel.getFrom_name());
+        RequestBody to_address_part = Common.getRequestBodyText(addOrderTextModel.getTo_address());
+        RequestBody to_lat_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getTo_latitude()));
+        RequestBody to_lng_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getTo_longitude()));
+        RequestBody arrival_time_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getEnd_shipping_time()));
+        RequestBody coupon_id_part = Common.getRequestBodyText(addOrderTextModel.getCoupon_id());
+        RequestBody details_part = Common.getRequestBodyText(addOrderTextModel.getOrder_description());
+        RequestBody notes_part = Common.getRequestBodyText(addOrderTextModel.getOrder_notes());
+        RequestBody payment_part = Common.getRequestBodyText(addOrderTextModel.getPayment_method());
+        RequestBody hours_part = Common.getRequestBodyText(addOrderTextModel.getHour_arrival_time());
+
+
+        Api.getService(Tags.base_url)
+                .sendTextOrderWithImage("Bearer "+userModel.getData().getToken(),user_id_part,order_type_part,family_id_part,google_place_id_part,bill_cost_part,to_address_part,to_lat_part,to_lng_part,from_name_part,from_address_part,from_lat_part,from_lng_part,arrival_time_part,coupon_id_part,details_part,payment_part,notes_part,hours_part,getMultiPartImages())
+                .enqueue(new Callback<SingleOrderDataModel>() {
+                    @Override
+                    public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful()&&response.body()!=null)
+                        {
+                            Intent intent =new Intent(PackageActivity.this, ChatActivity.class);
+                            intent.putExtra("order_id",response.body().getOrder().getId());
+                            startActivity(intent);
+                            finish();
+                        }else
+                        {
+                            if (response.code()==500)
+                            {
+                                Toast.makeText(PackageActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
+                            } else
+                            {
+                                Toast.makeText(PackageActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            }
+
+                            try {
+                                Log.e("error",response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SingleOrderDataModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            if (t.getMessage() != null) {
+
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(PackageActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }catch (Exception e)
+                        {
+                            Log.e("Error",e.getMessage()+"__");
+                        }
+                    }
+                });
+    }
+    private List<MultipartBody.Part> getMultiPartImages()
+    {
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        for (Uri uri :imagesList){
+            if (uri!=null){
+                MultipartBody.Part part = Common.getMultiPartImage(this,uri,"images[]");
+                parts.add(part);
+            }
+
+        }
+        return parts;
+    }
+
     private void CreateTimeDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(true)
@@ -175,23 +358,15 @@ public class PackageActivity extends AppCompatActivity {
         numberPicker.setDisplayedValues(timesList);
         numberPicker.setWrapSelectorWheel(false);
         numberPicker.setValue(1);
-        btn_select.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String val = timesList[numberPicker.getValue()];
-                binding.tvTime.setText(val);
-                setTime(numberPicker.getValue());
-                dialog.dismiss();
-            }
+        btn_select.setOnClickListener(v -> {
+            String val = timesList[numberPicker.getValue()];
+            binding.tvTime.setText(val);
+            setTime(numberPicker.getValue());
+            dialog.dismiss();
         });
 
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        btn_cancel.setOnClickListener(v -> dialog.dismiss());
 
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
         dialog.setView(view);
@@ -201,31 +376,41 @@ public class PackageActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance(new Locale(lang));
         switch (value) {
             case 0:
+                addOrderTextModel.setHour_arrival_time("1");
                 calendar.add(Calendar.HOUR_OF_DAY, 1);
                 break;
             case 1:
+                addOrderTextModel.setHour_arrival_time("2");
                 calendar.add(Calendar.HOUR_OF_DAY, 2);
 
                 break;
             case 2:
+                addOrderTextModel.setHour_arrival_time("3");
                 calendar.add(Calendar.HOUR_OF_DAY, 3);
 
                 break;
             case 3:
+                addOrderTextModel.setHour_arrival_time("4");
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
 
                 break;
             case 4:
+                addOrderTextModel.setHour_arrival_time("5");
                 calendar.add(Calendar.DAY_OF_MONTH, 2);
 
                 break;
             case 5:
+                addOrderTextModel.setHour_arrival_time("6");
                 calendar.add(Calendar.DAY_OF_MONTH, 3);
 
                 break;
+
         }
 
-        selected_time = calendar.getTimeInMillis() / 1000;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.ENGLISH);
+        String timeArrival =dateFormat.format(new Date(calendar.getTimeInMillis()));
+        addOrderTextModel.setEnd_shipping_time(timeArrival);
+
     }
 
     public void createDialogAlert()
@@ -366,14 +551,20 @@ public class PackageActivity extends AppCompatActivity {
             //coupon
         }else if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null){
             FavoriteLocationModel model = (FavoriteLocationModel) data.getSerializableExtra("data");
+            addOrderTextModel.setFrom_name(model.getAddress());
+            addOrderTextModel.setFrom_address(model.getAddress());
+            addOrderTextModel.setFrom_latitude(model.getLat());
+            addOrderTextModel.setFrom_longitude(model.getLng());
+            binding.tvAddress1.setText(model.getAddress());
+        }
+
+        else if (requestCode == 300 && resultCode == Activity.RESULT_OK && data != null){
+            FavoriteLocationModel model = (FavoriteLocationModel) data.getSerializableExtra("data");
             addOrderTextModel.setTo_address(model.getAddress());
-            addOrderTextModel.setTo_lat(model.getLat());
-            addOrderTextModel.setTo_lng(model.getLng());
-            if (imagesList.size()>0){
-                //sendOrderTextWithImage();
-            }else {
-               //sendOrderTextWithoutImage();
-            }
+            addOrderTextModel.setTo_latitude(model.getLat());
+            addOrderTextModel.setTo_longitude(model.getLng());
+            binding.tvAddress2.setText(model.getAddress());
+
         }
 
 

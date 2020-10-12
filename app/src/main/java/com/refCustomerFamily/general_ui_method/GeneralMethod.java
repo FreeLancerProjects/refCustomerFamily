@@ -81,21 +81,21 @@ public class GeneralMethod {
             CircleImageView imageView = (CircleImageView) view;
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse(endPoint)).into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL+endPoint)).into(imageView);
             }
         } else if (view instanceof RoundedImageView) {
             RoundedImageView imageView = (RoundedImageView) view;
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse( endPoint)).fit().into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL+ endPoint)).fit().into(imageView);
             }
         } else if (view instanceof ImageView) {
             ImageView imageView = (ImageView) view;
 
             if (endPoint != null) {
 
-                Picasso.get().load(Uri.parse( endPoint)).fit().into(imageView);
+                Picasso.get().load(Uri.parse(Tags.IMAGE_URL+ endPoint)).fit().into(imageView);
             }
         }
 

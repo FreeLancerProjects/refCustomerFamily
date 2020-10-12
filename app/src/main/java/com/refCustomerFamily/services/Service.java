@@ -40,8 +40,6 @@ public interface Service {
     );
 
 
-
-
     @FormUrlEncoded
     @POST("api/login")
     Call<UserModel> login(@Field("phone_code") String phone_code,
@@ -64,15 +62,14 @@ public interface Service {
     @Multipart
     @POST("api/register-client")
     Call<UserModel> signUpWithImage(@Part("name") RequestBody name,
-                                         @Part("email") RequestBody email,
-                                         @Part("phone_code") RequestBody phone_code,
-                                         @Part("phone") RequestBody phone,
-                                         @Part MultipartBody.Part logo,
-                                         @Part("software_type") RequestBody software_type
+                                    @Part("email") RequestBody email,
+                                    @Part("phone_code") RequestBody phone_code,
+                                    @Part("phone") RequestBody phone,
+                                    @Part MultipartBody.Part logo,
+                                    @Part("software_type") RequestBody software_type
 
 
     );
-
 
 
     @GET("api/categories-with-families")
@@ -82,11 +79,10 @@ public interface Service {
             @Query("page") int page);
 
 
-
     @GET("api/family-by-family-id")
     Call<FamilyModel> getFamilyByFamilyId(
             @Query("family_id") int family_id
-            );
+    );
 
 
     @GET("api/famlies-by-category-id")
@@ -143,10 +139,12 @@ public interface Service {
                                              @Field("from_address") String from_address,
                                              @Field("from_latitude") double from_latitude,
                                              @Field("from_longitude") double from_longitude,
-                                             @Field("end_shipping_time")String end_shipping_time,
+                                             @Field("end_shipping_time") String end_shipping_time,
                                              @Field("coupon_id") String coupon_id,
                                              @Field("order_description") String order_description,
-                                             @Field("payment_method") String payment_method
+                                             @Field("order_nots") String order_nots,
+                                             @Field("payment_method") String payment_method,
+                                             @Field("hour_arrival_time") String hour_arrival_time
 
 
     );
@@ -154,24 +152,25 @@ public interface Service {
     @Multipart
     @POST("api/create-order")
     Call<SingleOrderDataModel> sendTextOrderWithImage(@Header("Authorization") String user_token,
-                                             @Part("user_id") RequestBody user_id,
-                                             @Part("family_id") RequestBody family_id,
-                                             @Part("order_type") RequestBody order_type,
-                                             @Part("google_place_id") RequestBody google_place_id,
-                                             @Part("bill_cost") RequestBody bill_cost,
-                                             @Part("to_address") RequestBody to_address,
-                                             @Part("to_latitude") RequestBody to_latitude,
-                                             @Part("to_longitude") RequestBody to_longitude,
-                                             @Part("from_name") RequestBody from_name,
-                                             @Part("from_address") RequestBody from_address,
-                                             @Part("from_latitude") RequestBody from_latitude,
-                                             @Part("from_longitude") RequestBody from_longitude,
-                                             @Part("end_shipping_time")RequestBody end_shipping_time,
-                                             @Part("coupon_id") RequestBody coupon_id,
-                                             @Part("order_description") RequestBody order_description,
-                                             @Part("payment_method") RequestBody payment_method,
-                                             @Part("order_nots") RequestBody order_nots,
-                                             @Part List<MultipartBody.Part> images
+                                                      @Part("user_id") RequestBody user_id,
+                                                      @Part("family_id") RequestBody family_id,
+                                                      @Part("order_type") RequestBody order_type,
+                                                      @Part("google_place_id") RequestBody google_place_id,
+                                                      @Part("bill_cost") RequestBody bill_cost,
+                                                      @Part("to_address") RequestBody to_address,
+                                                      @Part("to_latitude") RequestBody to_latitude,
+                                                      @Part("to_longitude") RequestBody to_longitude,
+                                                      @Part("from_name") RequestBody from_name,
+                                                      @Part("from_address") RequestBody from_address,
+                                                      @Part("from_latitude") RequestBody from_latitude,
+                                                      @Part("from_longitude") RequestBody from_longitude,
+                                                      @Part("end_shipping_time") RequestBody end_shipping_time,
+                                                      @Part("coupon_id") RequestBody coupon_id,
+                                                      @Part("order_description") RequestBody order_description,
+                                                      @Part("payment_method") RequestBody payment_method,
+                                                      @Part("order_nots") RequestBody order_nots,
+                                                      @Part("hour_arrival_time") RequestBody hour_arrival_time,
+                                                      @Part List<MultipartBody.Part> images
 
     );
 

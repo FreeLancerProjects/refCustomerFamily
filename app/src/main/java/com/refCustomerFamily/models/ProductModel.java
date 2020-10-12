@@ -15,6 +15,7 @@ public class ProductModel implements Serializable {
     private String offer_type;
     private double offer_value;
     private double rating_value;
+    private int count = 1;
 
 
     public int getId() {
@@ -63,5 +64,13 @@ public class ProductModel implements Serializable {
 
     public double getRating_value() {
         return rating_value;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

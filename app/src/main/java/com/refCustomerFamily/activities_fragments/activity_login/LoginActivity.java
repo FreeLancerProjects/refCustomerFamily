@@ -185,11 +185,7 @@ public class LoginActivity extends AppCompatActivity implements Listeners.LoginL
 
     }
 
-    private void navigateToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 
     public void setItemData(CountryModel countryModel) {
         dialog.dismiss();
