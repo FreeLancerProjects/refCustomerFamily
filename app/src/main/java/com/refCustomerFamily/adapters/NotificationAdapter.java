@@ -19,9 +19,10 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
+
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationAdapterVH> {
 
-    private List<NotificationModel> notificationList;
+    private List<NotificationModel.Data> notificationList;
     private Context context;
     private LayoutInflater inflater;
     private String lang;
@@ -33,7 +34,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         this.context = context;
     }
 
-    public NotificationAdapter(List<NotificationModel> notificationList, Context context) {
+    public NotificationAdapter(List<NotificationModel.Data> notificationList, Context context) {
         this.notificationList = notificationList;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -52,12 +53,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull NotificationAdapterVH holder, int position) {
         holder.binding.setLang(lang);
-//        holder.binding.setModel(notificationList.get(position));
+        holder.binding.setModel(notificationList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return notificationList.size();
     }
 
     public class NotificationAdapterVH extends RecyclerView.ViewHolder {

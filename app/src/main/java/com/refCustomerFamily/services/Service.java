@@ -7,6 +7,8 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceGeocodeData;
 import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
+import com.refCustomerFamily.models.NotificationModel;
+import com.refCustomerFamily.models.SettingModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
 import com.refCustomerFamily.models.SliderModel;
 import com.refCustomerFamily.models.SubCategoryFamilyModel;
@@ -176,5 +178,11 @@ public interface Service {
 
     @GET("api/categories-with-families-by-family-id")
     Call<FamilyCategoryProductDataModel> getFamilyCategory_Products(@Query("family_id") int family_id);
+
+    @GET("api/sttings")
+    Call<SettingModel> getSetting();
+    @GET("api/Get-my-notifications")
+    Call<NotificationModel> getNotification(@Header("Authorization") String user_token,
+                                            @Query("user_id") int user_id);
 
 }
