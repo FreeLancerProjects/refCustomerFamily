@@ -34,7 +34,7 @@
                 android:layout_height="80dp"
                 android:layout_marginStart="5dp"
                 android:elevation="5dp"
-                image="@{model.family.logo}"
+                image="@{model.client.logo}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@{model.family.name}"
+                android:text="@{model.client.name}"
                 android:textColor="@color/gray12"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/user_image"

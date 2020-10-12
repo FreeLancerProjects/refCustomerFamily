@@ -7,6 +7,7 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceGeocodeData;
 import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
+import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.NotificationModel;
 import com.refCustomerFamily.models.SettingModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
@@ -73,6 +74,23 @@ public interface Service {
 
     );
 
+
+
+    @FormUrlEncoded
+    @POST("api/family-accept-order")
+    Call<ResponseBody> familyAcceptOrder(@Header("Authorization") String user_token,
+                                         @Field("client_id") int client_id,
+                                         @Field("order_id") int order_id,
+                                         @Field("family_id") int family_id
+    );
+
+    @GET("api/Get-current-or-previous-order-by-Status")
+    Call<OrderModel> getOrderByStatus(@Header("Authorization") String user_token,
+                                      @Query("user_id") int user_id,
+                                      @Query("order_type") String order_type,
+                                      @Query("user_type") String user_type,
+                                      @Query("status") String status
+    );
 
     @GET("api/categories-with-families")
     Call<SubCategoryFamilyModel> getCategoriesWithFamilies(

@@ -3,9 +3,9 @@ package com.refCustomerFamily.models;
 import java.io.Serializable;
 
 public class SingleOrderDataModel implements Serializable {
-    private OrderModel order;
+    private OrderModel.Data order;
 
-    public OrderModel getOrder() {
+    public OrderModel.Data getOrder() {
         return order;
     }
 }

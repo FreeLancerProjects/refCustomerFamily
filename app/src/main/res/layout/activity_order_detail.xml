@@ -12,6 +12,10 @@
             name="lang"
             type="String" />
 
+
+        <variable
+            name="model"
+            type="com.refCustomerFamily.models.OrderModel.Data" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -81,15 +85,14 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/card_client"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     app:cardBackgroundColor="@color/gray1"
                     app:cardCornerRadius="5dp"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/linear_time"
-                    >
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -98,24 +101,37 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/user_image"
+                            image="@{model.client.logo}"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_marginStart="5dp"
                             android:elevation="5dp"
-                            android:src="@drawable/chef"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:text="@string/user_name_test"
+                            android:text="@{model.client.name}"
                             android:textColor="@color/gray12"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@id/user_image"
                             app:layout_constraintStart_toEndOf="@id/user_image"
                             app:layout_constraintTop_toTopOf="@id/user_image" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@{model.client.email}"
+                            android:textColor="@color/gray12"
+                            android:textSize="13sp"
+                            app:layout_constraintBottom_toBottomOf="@id/user_image"
+                            app:layout_constraintStart_toEndOf="@id/user_image"
+                            app:layout_constraintTop_toBottomOf="@id/name" />
+
 
                         <ImageView
                             android:id="@+id/imgChat"
@@ -128,71 +144,16 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@id/user_image" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recViewOrderDetail"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_marginTop="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:background="@drawable/custom_bg_white"
-                            app:layout_constraintBottom_toTopOf="@id/linear_total"
-                            app:layout_constraintTop_toBottomOf="@id/user_image" />
-
-
-                        <LinearLayout
-                            android:id="@+id/linear_total"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@color/white"
-                            android:paddingTop="10dp"
-                            android:paddingBottom="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/recViewOrderDetail"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/total"
-                                android:textSize="16sp"
-                                android:layout_marginEnd="10dp"
-                                android:textColor="@color/gray12"
-                                />
-                            <TextView
-                                android:id="@+id/tv_total"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/_200"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="14sp"
-                                />
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="1dp"
-                                android:layout_weight="1"
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/payment"
-                                android:textSize="16sp"
-                                android:layout_marginEnd="10dp"
-                                android:textColor="@color/gray12"
-                                />
-                            <TextView
-                                android:id="@+id/tv_payment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/cash"
-                                android:textColor="@color/colorPrimary"
-                                android:textSize="14sp"
-                                />
-
-                        </LinearLayout>
-
+                        <ImageView
+                            android:id="@+id/imgCall"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/ic_phone_1"
+                            android:tint="@color/color_blue"
+                            app:layout_constraintBottom_toBottomOf="@id/user_image"
+                            app:layout_constraintEnd_toStartOf="@id/imgChat"
+                            app:layout_constraintTop_toTopOf="@id/user_image" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -200,45 +161,156 @@
                 </androidx.cardview.widget.CardView>
 
 
-                <LinearLayout
-                    android:id="@+id/linear_time"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_order"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@color/gray2"
-                    app:layout_constraintBottom_toTopOf="@id/linear_btn">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_client">
 
-                    <View
-                        android:layout_width="5dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="16dp"
-                        android:text="@string/time"
-                        android:textSize="18sp" />
-                    />
+                        android:padding="8dp">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"
-                        />
+                        <TextView
+                            android:id="@+id/tv_desc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:textColor="@color/gray12"
+                            android:text="@{model.order_description}"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="05:30 م"
-                        android:layout_gravity="center"
-                        android:textSize="16sp"
-                        android:layout_marginEnd="10dp"
-                        android:textColor="@color/gray12"
-                        />
+                        <View
+                            android:id="@+id/v1"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/gray6"
+                            app:layout_constraintTop_toBottomOf="@id/tv_desc" />
 
-                </LinearLayout>
+
+
+                        <ImageView
+                            android:id="@+id/start_loc_img"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/ic_pin3"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintStart_toStartOf="@id/v1"
+                            app:layout_constraintTop_toBottomOf="@id/v1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@{model.from_address}"
+                            android:textColor="@color/gray12"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/start_loc_img"
+                            app:layout_constraintStart_toEndOf="@id/start_loc_img"
+                            app:layout_constraintTop_toTopOf="@id/start_loc_img" />
+
+                        <ImageView
+                            android:id="@+id/end_loc_img"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/ic_flag"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintStart_toStartOf="@id/tv_desc"
+                            app:layout_constraintTop_toBottomOf="@id/start_loc_img" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@{model.to_address}"
+                            android:textColor="@color/gray12"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/end_loc_img"
+                            app:layout_constraintStart_toEndOf="@id/end_loc_img"
+                            app:layout_constraintTop_toTopOf="@id/end_loc_img" />
+
+                        <View
+                            android:id="@+id/v2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/gray6"
+                            app:layout_constraintTop_toBottomOf="@id/end_loc_img" />
+
+
+                        <LinearLayout
+                            android:id="@+id/linear_total"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/white"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            app:layout_constraintStart_toStartOf="@id/v2"
+                            app:layout_constraintTop_toBottomOf="@id/v2">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/total"
+                                android:textColor="@color/gray12"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_total"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text='@{model.bill_cost +" "+ @string/sar}'
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/payment"
+                                android:textColor="@color/gray12"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tv_payment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.payment_method}"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="14sp" />
+
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
 
                 <LinearLayout
                     android:id="@+id/linear_btn"
@@ -267,6 +339,22 @@
                         android:textColor="@color/white" />
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/view_status_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/view_status"
+                    android:visibility="gone"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+
+
+                    />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

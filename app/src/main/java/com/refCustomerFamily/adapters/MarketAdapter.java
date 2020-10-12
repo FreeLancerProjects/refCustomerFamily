@@ -23,7 +23,7 @@ import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapterVH> {
+public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.OrderAdapterVH> {
 
     private List<OrderModel.Data> orderlist;
     private Context context;
@@ -33,11 +33,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     UserModel userModel;
 
 
-    public OrderAdapter(Context context) {
+    public MarketAdapter(Context context) {
         this.context = context;
     }
 
-    public OrderAdapter(List<OrderModel.Data> orderlist, Context context) {
+    public MarketAdapter(List<OrderModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);

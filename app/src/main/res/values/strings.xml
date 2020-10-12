@@ -240,6 +240,12 @@
     <string name="day1">1 Day</string>
     <string name="day2">2 Day</string>
     <string name="day3">3 Day</string>
+    <string name="no_data_to_view">No data to View</string>
+    <string name="view_status">View Status</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delivery_package">Delivery Package</string>
+
     <string name="no_image">No Image</string>
     <string name="order_menu">Order Menu</string>
     <string name="item_total">Item Total</string>

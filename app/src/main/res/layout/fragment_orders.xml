@@ -18,25 +18,34 @@
             />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recViewOrders"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/black"
+            app:tabIndicatorHeight="5dp"
+            app:tabSelectedTextColor="@color/black"
+            app:tabIndicatorColor="@color/colorPrimary"
 
+            />
 
-        <ProgressBar
-            android:id="@+id/progBarOrders"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:visibility="gone" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            />
+    </LinearLayout>
 
-
-
-    </FrameLayout>
 </layout>

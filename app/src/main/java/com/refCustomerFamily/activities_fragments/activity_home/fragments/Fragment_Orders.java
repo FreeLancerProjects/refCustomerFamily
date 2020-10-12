@@ -1,6 +1,7 @@
 package com.refCustomerFamily.activities_fragments.activity_home.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,25 +10,45 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.DeliveryFragment;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.MarketsFragment;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.OrderFragment;
 import com.refCustomerFamily.adapters.OrderAdapter;
+import com.refCustomerFamily.adapters.ViewPagerAdapter;
 import com.refCustomerFamily.databinding.FragmentOrdersBinding;
+import com.refCustomerFamily.models.OrderModel;
+import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
+import com.refCustomerFamily.remote.Api;
+import com.refCustomerFamily.tags.Tags;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Fragment_Orders extends Fragment {
 
     private HomeActivity activity;
     private FragmentOrdersBinding binding;
     private Preferences preferences;
+    private UserModel userModel;
     private String lang;
-    private OrderAdapter orderAdapter;
+
+
+    private ViewPagerAdapter adapter;
+    private List<Fragment> fragmentList;
+    private List<String> titles;
+
     public static Fragment_Orders newInstance() {
         return new Fragment_Orders();
     }
@@ -49,12 +70,29 @@ public class Fragment_Orders extends Fragment {
     private void initView() {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(getActivity());
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-        binding.recViewOrders.setAdapter(new OrderAdapter(this.getContext()));
-        binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        binding.setLang(lang);
+        fragmentList = new ArrayList<>();
+        titles = new ArrayList<>();
+
+
+        fragmentList.add(OrderFragment.newInstance());
+        fragmentList.add(MarketsFragment.newInstance());
+        fragmentList.add(DeliveryFragment.newInstance());
+
+        titles.add(getString(R.string.productive_families));
+        titles.add(getString(R.string.markets));
+        titles.add(getString(R.string.delivery_package));
+        binding.tab.setupWithViewPager(binding.pager);
+        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter.addFragments_Titles(fragmentList, titles);
+        binding.pager.setAdapter(adapter);
+        binding.pager.setOffscreenPageLimit(3);
 
     }
 
 
 }
+

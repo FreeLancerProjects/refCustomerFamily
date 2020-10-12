@@ -240,6 +240,10 @@
     <string name="day1">1 يوم</string>
     <string name="day2">2 يوم</string>
     <string name="day3">3 يوم</string>
+    <string name="no_data_to_view">لا يوجد بيانات للعرض</string>
+    <string name="view_status">متايعة الحالة</string>
+    <string name="delivery_package">توصيل طرد</string>
+
     <string name="no_image">صورة غير متاحة</string>
     <string name="order_menu">قائمة الطلبات</string>
     <string name="item_total">المجموع</string>
