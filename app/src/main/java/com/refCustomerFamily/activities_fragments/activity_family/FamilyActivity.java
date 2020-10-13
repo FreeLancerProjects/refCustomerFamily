@@ -57,7 +57,8 @@ public class FamilyActivity extends AppCompatActivity {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(Language_Helper.updateResources(base, Language_Helper.getLanguage(base)));
+        Paper.init(base);
+        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang","ar")));
     }
 
     @Override

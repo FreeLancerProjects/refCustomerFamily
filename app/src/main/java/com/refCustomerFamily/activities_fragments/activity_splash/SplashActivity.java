@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
-        super.attachBaseContext(Language_Helper.updateResources(newBase, Paper.book().read("lang", Locale.getDefault().getLanguage())));
+        super.attachBaseContext(Language_Helper.updateResources(newBase, Paper.book().read("lang", "ar")));
 
     }
 

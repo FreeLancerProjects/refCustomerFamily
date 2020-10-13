@@ -25,9 +25,9 @@ public class LanguageActivity extends AppCompatActivity {
     private String selectedLang = "";
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        //Paper.init(newBase);
-        super.attachBaseContext(Language_Helper.updateResources(newBase, Language_Helper.getLanguage(newBase)));
+    protected void attachBaseContext(Context base) {
+        Paper.init(base);
+        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang","ar")));
     }
 
     @Override

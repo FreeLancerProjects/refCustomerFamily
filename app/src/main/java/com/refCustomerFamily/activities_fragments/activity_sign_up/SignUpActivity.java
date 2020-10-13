@@ -37,6 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
+import io.paperdb.Paper;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -55,7 +56,8 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(Language_Helper.updateResources(base, Language_Helper.getLanguage(base)));
+        Paper.init(base);
+        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang","ar")));
     }
 
     @Override
