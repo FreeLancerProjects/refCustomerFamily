@@ -33,9 +33,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     UserModel userModel;
 
 
-    public OrderAdapter(Context context) {
-        this.context = context;
-    }
 
     public OrderAdapter(List<OrderModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
@@ -43,7 +40,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
         inflater = LayoutInflater.from(context);
         preferences = Preferences.newInstance();
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        lang = Paper.book().read("lang", "ar");
 
     }
 
@@ -56,7 +53,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapterVH holder, int position) {
-        holder.binding.setLang(Language_Helper.getLanguage(context));
+        holder.binding.setLang(lang);
         holder.binding.setModel(orderlist.get(position));
 
         Log.e("adapter size:", orderlist.size() + "");

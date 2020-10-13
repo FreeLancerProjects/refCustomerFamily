@@ -48,7 +48,7 @@ public class Fragment_Offers extends Fragment {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
         Paper.init(activity);
-        lang = Language_Helper.getLanguage(this.getContext());
+        lang = Paper.book().read("lang","ar");
         binding.setLang(lang);
         binding.recViewOffers.setAdapter(new OfferAdapter(this.getContext()));
         binding.recViewOffers.setLayoutManager(new LinearLayoutManager(this.getContext()));

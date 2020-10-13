@@ -22,12 +22,12 @@ public class ProductModel implements Serializable {
     private String offer_started_at = "";
     private String offer_finished_at = "";
     private String is_shown;
-    private double price;
+    /*private double price;
     private double old_price;
     private String have_offer;
     private String offer_type;
     private double offer_value;
-    private double rating_value;
+    private double rating_value;*/
     private int count = 1;
 
 

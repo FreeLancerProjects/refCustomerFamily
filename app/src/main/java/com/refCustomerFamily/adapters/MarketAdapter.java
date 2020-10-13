@@ -43,7 +43,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.OrderAdapt
         inflater = LayoutInflater.from(context);
         preferences = Preferences.newInstance();
         Paper.init(context);
-        lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+        lang = Paper.book().read("lang", "ar");
 
     }
 
@@ -56,12 +56,8 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.OrderAdapt
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapterVH holder, int position) {
-        holder.binding.setLang(Language_Helper.getLanguage(context));
+        holder.binding.setLang(lang);
         holder.binding.setModel(orderlist.get(position));
-
-        Log.e("adapter size:", orderlist.size() + "");
-        Log.e("address:", orderlist.get(position).getFrom_address() + "");
-
 
         holder.itemView.setOnClickListener(view -> {
 

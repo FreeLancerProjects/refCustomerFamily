@@ -7,11 +7,13 @@ import androidx.multidex.MultiDexApplication;
 
 import com.refCustomerFamily.language.Language_Helper;
 
+import io.paperdb.Paper;
+
 
 public class App extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(Language_Helper.updateResources(base, Language_Helper.getLanguage(base)));
+        super.attachBaseContext(Language_Helper.updateResources(base,"ar"));
     }
 
     @Override
