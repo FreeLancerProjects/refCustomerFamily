@@ -76,7 +76,7 @@ public class NotificationActivity extends AppCompatActivity {
 
         binding.progBarNotification.setVisibility(View.VISIBLE);
 
-        Api.getService(Tags.base_url).getNotification("Bearer "+userModel.getUser().getToken(),userModel.getUser().getId()).enqueue(new Callback<NotificationModel>() {
+        Api.getService(Tags.base_url).getNotification("Bearer "+userModel.getData().getToken(),userModel.getData().getId()).enqueue(new Callback<NotificationModel>() {
             @Override
             public void onResponse(Call<NotificationModel> call, Response<NotificationModel> response) {
                 if (response.isSuccessful() && response.body() != null){
