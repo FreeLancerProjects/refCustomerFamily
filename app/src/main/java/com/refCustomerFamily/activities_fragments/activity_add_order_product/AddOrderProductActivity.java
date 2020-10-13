@@ -289,6 +289,7 @@ public class AddOrderProductActivity extends AppCompatActivity {
         addOrderTextModel.setOrder_notes(notes);
 
 
+        Log.e("order_type",addOrderTextModel.getOrder_type()+"_");
         RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getUser_id()));
         RequestBody order_type_part = Common.getRequestBodyText(addOrderTextModel.getOrder_type());
 
