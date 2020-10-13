@@ -2,7 +2,6 @@ package com.refCustomerFamily.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,17 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refCustomerFamily.databinding.ItemOrderBinding;
-import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.databinding.ItemPackageBinding;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
 
 import java.util.List;
-import java.util.Locale;
 
 import io.paperdb.Paper;
 
-public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.OrderAdapterVH> {
+public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAdapterVH> {
 
     private List<OrderModel.Data> orderlist;
     private Context context;
@@ -33,11 +31,11 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.OrderA
     UserModel userModel;
 
 
-    public DeliveryAdapter(Context context) {
+    public PackageAdapter(Context context) {
         this.context = context;
     }
 
-    public DeliveryAdapter(List<OrderModel.Data> orderlist, Context context) {
+    public PackageAdapter(List<OrderModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -50,7 +48,7 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.OrderA
     @NonNull
     @Override
     public OrderAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemOrderBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_order, parent, false);
+        ItemPackageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_package, parent, false);
         return new OrderAdapterVH(binding);
     }
 
@@ -78,9 +76,9 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.OrderA
     }
 
     public class OrderAdapterVH extends RecyclerView.ViewHolder {
-        public ItemOrderBinding binding;
+        public ItemPackageBinding binding;
 
-        public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
+        public OrderAdapterVH(@NonNull ItemPackageBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

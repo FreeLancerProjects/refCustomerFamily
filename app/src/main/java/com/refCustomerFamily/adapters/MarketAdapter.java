@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
+import com.refCustomerFamily.databinding.ItemMarketBinding;
 import com.refCustomerFamily.databinding.ItemOrderBinding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.OrderModel;
@@ -50,7 +51,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.OrderAdapt
     @NonNull
     @Override
     public OrderAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemOrderBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_order, parent, false);
+        ItemMarketBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_market, parent, false);
         return new OrderAdapterVH(binding);
     }
 
@@ -76,9 +77,9 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.OrderAdapt
     }
 
     public class OrderAdapterVH extends RecyclerView.ViewHolder {
-        public ItemOrderBinding binding;
+        public ItemMarketBinding binding;
 
-        public OrderAdapterVH(@NonNull ItemOrderBinding binding) {
+        public OrderAdapterVH(@NonNull ItemMarketBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

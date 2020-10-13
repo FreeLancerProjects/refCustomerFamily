@@ -1,7 +1,6 @@
 package com.refCustomerFamily.activities_fragments.activity_home.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,30 +10,22 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
-import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.DeliveryFragment;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.PackageFragment;
 import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.MarketsFragment;
 import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.OrderFragment;
-import com.refCustomerFamily.adapters.OrderAdapter;
 import com.refCustomerFamily.adapters.ViewPagerAdapter;
 import com.refCustomerFamily.databinding.FragmentOrdersBinding;
-import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
-import com.refCustomerFamily.remote.Api;
-import com.refCustomerFamily.tags.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import io.paperdb.Paper;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Fragment_Orders extends Fragment {
 
@@ -80,7 +71,7 @@ public class Fragment_Orders extends Fragment {
 
         fragmentList.add(OrderFragment.newInstance());
         fragmentList.add(MarketsFragment.newInstance());
-        fragmentList.add(DeliveryFragment.newInstance());
+        fragmentList.add(PackageFragment.newInstance());
 
         titles.add(getString(R.string.productive_families));
         titles.add(getString(R.string.markets));
