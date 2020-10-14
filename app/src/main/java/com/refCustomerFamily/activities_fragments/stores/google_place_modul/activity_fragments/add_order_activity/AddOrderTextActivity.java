@@ -141,6 +141,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
         });
         binding.close.setOnClickListener(v -> {super.onBackPressed();});
         binding.btnNext.setOnClickListener(v -> {
+            if(userModel!=null){
             if (canSend){
                 String order_text = binding.edtOrder.getText().toString();
                 if (!order_text.isEmpty()){
@@ -153,6 +154,9 @@ public class AddOrderTextActivity extends AppCompatActivity {
                 }else {
                     binding.edtOrder.setError(getString(R.string.field_req));
                 }
+            }}
+            else {
+                Common.CreateDialogAlert2(AddOrderTextActivity.this,getResources().getString(R.string.please_sign_in_or_sign_up));
             }
 
 

@@ -59,6 +59,7 @@ import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.remote.Api;
+import com.refCustomerFamily.share.Common;
 import com.refCustomerFamily.tags.Tags;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -142,10 +143,13 @@ public class ShopMapActivity extends AppCompatActivity implements OnMapReadyCall
 
 
         binding.btnNext.setOnClickListener(v -> {
-
+if(userModel!=null){
             Intent intent = new Intent(this, AddOrderTextActivity.class);
             intent.putExtra("data",placeModel);
-            startActivityForResult(intent,100);
+            startActivityForResult(intent,100);}
+else {
+    Common.CreateDialogAlert2(ShopMapActivity.this,getResources().getString(R.string.please_sign_in_or_sign_up));
+}
            /* if (userModel!=null){
                 Intent intent = new Intent(this, AddOrderTextActivity.class);
                 intent.putExtra("data",placeModel);
