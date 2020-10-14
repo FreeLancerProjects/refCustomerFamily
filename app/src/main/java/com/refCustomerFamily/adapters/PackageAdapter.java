@@ -56,12 +56,10 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAda
         holder.binding.setLang(lang);
         holder.binding.setModel(orderlist.get(position));
 
-
-
         holder.itemView.setOnClickListener(view -> {
 
             Intent intent = new Intent(context, OrderStepsActivity.class);
-            intent.putExtra("DATA", orderlist.get(position));
+            intent.putExtra("data", orderlist.get(position));
             context.startActivity(intent);
 
         });

@@ -2,12 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     >
 
     <data>
-
-
         <variable
             name="lang"
             type="String" />
@@ -116,16 +113,17 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="50dp"
+                                android:layout_marginTop="10dp"
 
                                 android:orientation="horizontal"
                                 android:padding="15dp">
 
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
+
                                     android:padding="5dp">
 
                                     <TextView
@@ -141,12 +139,13 @@
 
                                     <androidx.cardview.widget.CardView
                                         android:id="@+id/flImage"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="200dp"
                                         android:layout_height="120dp"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginTop="5dp"
                                         android:layout_marginEnd="5dp"
                                         android:layout_marginBottom="5dp"
+                                        android:layout_gravity="center"
                                         app:cardBackgroundColor="@color/white"
                                         app:cardCornerRadius="8dp"
                                         app:cardElevation="3dp">
@@ -174,7 +173,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_marginStart="20dp"
-                                android:layout_marginTop="50dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginEnd="20dp"
                                 android:background="@drawable/small_stroke_primary"
                                 android:hint="@string/name"

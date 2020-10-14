@@ -42,9 +42,7 @@ public class UserModel implements Serializable {
         private String created_at;
         private String updated_at;
         private String details;
-        private List<Stage> stage_fk;
-        private List<Stage_CLASS> class_fk;
-        private List<SkillModel> skills_fk;
+
         private String fireBaseToken;
 
         public User() {
@@ -173,97 +171,12 @@ public class UserModel implements Serializable {
         }
 
 
-        public List<SkillModel> getSkills_fk() {
-            return skills_fk;
-        }
 
         public String getDetails() {
             return details;
         }
 
-        public List<Stage> getStage_fk() {
-            return stage_fk;
-        }
 
 
-        public List<Stage_CLASS> getClass_fk() {
-            return class_fk;
-        }
-
-        public static class Stage implements Serializable {
-            private int id;
-            private int stage_id;
-            private StageClassName stage_class_name;
-
-            public int getId() {
-                return id;
-            }
-
-            public int getStage_id() {
-                return stage_id;
-            }
-
-            public StageClassName getStage_class_name() {
-                return stage_class_name;
-            }
-
-            public class StageClassName implements Serializable {
-                private int id;
-                private String title;
-
-                public int getId() {
-                    return id;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
-            }
-        }
-
-        public static class Stage_CLASS implements Serializable {
-            private int id;
-            private int class_id;
-            private StageClassName stage_class_name;
-
-            public int getId() {
-                return id;
-            }
-
-            public int getClass_id() {
-                return class_id;
-            }
-
-            public StageClassName getStage_class_name() {
-                return stage_class_name;
-            }
-
-            public class StageClassName implements Serializable {
-                private int id;
-                private String title;
-
-                public int getId() {
-                    return id;
-                }
-
-                public String getTitle() {
-                    return title;
-                }
-            }
-        }
-
-
-        public static class SkillModel implements Serializable{
-            private int id;
-            private String skill_type;
-
-            public int getId() {
-                return id;
-            }
-
-            public String getSkill_type() {
-                return skill_type;
-            }
-        }
     }
 }

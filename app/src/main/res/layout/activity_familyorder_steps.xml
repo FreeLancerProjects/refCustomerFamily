@@ -11,6 +11,7 @@
         <variable
             name="lang"
             type="String" />
+
         <variable
             name="model"
             type="com.refCustomerFamily.models.OrderModel.Data" />
@@ -68,18 +69,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/gray4"
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
-                />
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
-                >
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -100,9 +99,9 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_bg"
-                            android:tint="@color/white"
                             android:padding="13dp"
-                            android:src="@drawable/ic_check" />
+                            android:src="@drawable/ic_check"
+                            android:tint="@color/white" />
 
                         <View
                             android:id="@+id/view1"
@@ -123,7 +122,7 @@
                             android:id="@+id/tv1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/order_accepted"
+                            android:text="@string/The_family_agreed_to_your_request"
                             android:textColor="@color/gray4"
                             android:textSize="17sp"
 
@@ -132,18 +131,17 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            >
+                            android:layout_marginTop="5dp">
 
                             <TextView
                                 android:id="@+id/tv_order_id"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
                                 android:text="@string/order_id"
                                 android:textColor="@color/gray4"
                                 android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:layout_marginEnd="16dp"/>
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -174,7 +172,7 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_order_1"
+                            android:src="@drawable/ic_family"
                             android:tint="@color/colorPrimary" />
 
                         <View
@@ -196,29 +194,29 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tv2"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
                                 android:layout_weight="1"
-                                android:text="@string/order_will_be_ready"
+                                android:text="@string/Your_order_is_being_collected"
                                 android:textColor="@color/gray4"
                                 android:textSize="13sp"
-                                android:textStyle="bold"
-                                android:layout_marginEnd="16dp"/>
+                                android:textStyle="bold" />
 
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/tv_order_ready"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/preparation_is_underway"
-                                android:textColor="@color/colorPrimary" />
+                                android:textColor="@color/colorPrimary"
+                                android:visibility="gone" />
 
                         </LinearLayout>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -226,7 +224,8 @@
                             android:text="@string/family_make_order_ready"
                             android:textColor="@color/gray4"
                             android:textSize="13sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -249,7 +248,7 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_pin3"
+                            android:src="@drawable/ic_setting"
                             android:tint="@color/colorPrimary" />
 
                         <View
@@ -266,29 +265,30 @@
                         android:orientation="vertical"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tv3"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/the_request_is_being_submitted"
+                                android:layout_weight="1"
+                                android:text="@string/The_request_has_been_processed"
                                 android:textColor="@color/gray4"
                                 android:textSize="17sp"
-                                android:layout_weight="1"
 
                                 />
+
                             <TextView
-                                android:visibility="gone"
                                 android:id="@+id/tv_order_ready2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/prepared"
-                                android:textColor="@color/colorPrimary" />
+                                android:textColor="@color/colorPrimary"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -300,10 +300,10 @@
                             android:textColor="@color/gray4"
                             android:textSize="13sp"
                             android:textStyle="bold"
-
-                            />
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
@@ -322,8 +322,8 @@
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
-                            android:padding="13dp"
-                            android:src="@drawable/ic_pin3"
+                            android:padding="7dp"
+                            android:src="@drawable/ic_pin"
                             android:tint="@color/colorPrimary" />
 
                         <View
@@ -339,28 +339,29 @@
                         android:orientation="vertical"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tv4"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/the_request_is_being_submitted"
+                                android:layout_weight="1"
+                                android:text="@string/Your_request_from_the_delegate_has_been_accepted"
                                 android:textColor="@color/gray4"
                                 android:textSize="17sp"
-                                android:layout_weight="1"
 
                                 />
+
                             <TextView
-                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/prepared"
-                                android:textColor="@color/colorPrimary" />
+                                android:textColor="@color/colorPrimary"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -372,10 +373,10 @@
                             android:textColor="@color/gray4"
                             android:textSize="13sp"
                             android:textStyle="bold"
-
-                            />
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
@@ -395,7 +396,7 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_pin3"
+                            android:src="@drawable/ic_order_1"
                             android:tint="@color/colorPrimary" />
 
                         <View
@@ -411,28 +412,29 @@
                         android:orientation="vertical"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tv5"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/the_request_is_being_submitted"
+                                android:layout_weight="1"
+                                android:text="@string/The_request_has_been_delivered_to_the_representative"
                                 android:textColor="@color/gray4"
                                 android:textSize="17sp"
-                                android:layout_weight="1"
 
                                 />
+
                             <TextView
-                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/prepared"
-                                android:textColor="@color/colorPrimary" />
+                                android:textColor="@color/colorPrimary"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -444,10 +446,10 @@
                             android:textColor="@color/gray4"
                             android:textSize="13sp"
                             android:textStyle="bold"
-
-                            />
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
@@ -467,7 +469,7 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_pin3"
+                            android:src="@drawable/ic_delivery"
                             android:tint="@color/colorPrimary" />
 
                         <View
@@ -483,28 +485,29 @@
                         android:orientation="vertical"
                         android:paddingLeft="8dp"
                         android:paddingRight="8dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            >
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/tv6"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/the_request_is_being_submitted"
+                                android:layout_weight="1"
+                                android:text="@string/The_delegate_is_on_the_way_to_you"
                                 android:textColor="@color/gray4"
                                 android:textSize="17sp"
-                                android:layout_weight="1"
 
                                 />
+
                             <TextView
-                                android:visibility="gone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/prepared"
-                                android:textColor="@color/colorPrimary" />
+                                android:textColor="@color/colorPrimary"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -516,8 +519,7 @@
                             android:textColor="@color/gray4"
                             android:textSize="13sp"
                             android:textStyle="bold"
-
-                            />
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -540,7 +542,7 @@
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_pin3"
+                            android:src="@drawable/ic_like"
                             android:tint="@color/colorPrimary"
 
                             />
@@ -558,21 +560,21 @@
                             android:id="@+id/tv7"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/gray4"
                             android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/The_request_has_been_received_successfully"
+                            android:textColor="@color/gray4"
                             android:textSize="17sp"
-                            android:text="@string/the_delivery_was_successful"
 
                             />
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/tv_order_ready3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/sent_delivered_handed"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 

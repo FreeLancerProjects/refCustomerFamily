@@ -75,6 +75,8 @@ public class OrderStepsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             orderModel = (OrderModel.Data) getIntent().getSerializableExtra("data");
+            Log.e("lxllxl",orderModel.getOrder_type());
+
         }
 
 
