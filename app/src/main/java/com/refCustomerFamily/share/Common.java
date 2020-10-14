@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -19,11 +20,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_login.LoginActivity;
 import com.refCustomerFamily.databinding.DialogAlertBinding;
 
 import java.io.File;
@@ -42,6 +45,26 @@ public class Common {
 
         binding.tvMsg.setText(msg);
         binding.btnCancel.setOnClickListener(v -> dialog.dismiss()
+
+        );
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
+    }
+    public static void CreateDialogAlert2(Context context,String msg) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .create();
+
+        DialogAlertBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_alert, null, false);
+
+        binding.tvMsg.setText(msg);
+        binding.btnCancel.setOnClickListener(v -> {
+                    Intent intent=new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                    ((AppCompatActivity) context).finish();
+                    dialog.dismiss();
+                }
 
         );
         dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
