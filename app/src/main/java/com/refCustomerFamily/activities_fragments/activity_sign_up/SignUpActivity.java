@@ -172,6 +172,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
         if (requestCode == READ_REQ && resultCode == Activity.RESULT_OK && data != null) {
 
             uri = data.getData();
+            signUpModel.setLogo(uri.toString());
             File file = new File(Common.getImagePath(this, uri));
             Picasso.get().load(file).fit().into(binding.imgLogo);
 
@@ -182,6 +183,7 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
             uri = getUriFromBitmap(bitmap);
             if (uri != null) {
                 String path = Common.getImagePath(this, uri);
+                signUpModel.setLogo(uri.toString());
 
                 if (path != null) {
                     Picasso.get().load(new File(path)).fit().into(binding.imgLogo);
@@ -241,7 +243,6 @@ public class SignUpActivity extends AppCompatActivity implements Listeners.SignU
         if (uri == null) {
             signUpWithoutImage();
         } else {
-            signUpModel.setLogo(uri);
             signUpWithImage();
         }
     }

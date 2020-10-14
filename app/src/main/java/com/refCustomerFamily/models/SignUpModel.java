@@ -13,7 +13,7 @@ import com.refCustomerFamily.R;
 
 
 public class SignUpModel extends BaseObservable {
-    private Uri logo;
+    private String logo;
     private String name;
     private String email;
     private String phone_code;
@@ -90,16 +90,13 @@ public class SignUpModel extends BaseObservable {
     }
 
 
-
-
-    public Uri getLogo() {
+    public String getLogo() {
         return logo;
     }
 
-    public void setLogo(Uri logo) {
+    public void setLogo(String logo) {
         this.logo = logo;
     }
-
 
     public String getPhone_code() {
         return phone_code;
