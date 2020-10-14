@@ -50,4 +50,9 @@ public interface Listeners {
         void logout();
 
     }
+    interface UpdateProfileListener
+    {
+        void updateProfile();
+    }
+
 }

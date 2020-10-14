@@ -18,8 +18,15 @@
 
         <variable
             name="model"
-            type="com.refCustomerFamily.models.SignUpModel" />
+            type="com.refCustomerFamily.models.EditProfileModel" />
+        <variable
+            name="updateListener"
+            type="com.refCustomerFamily.interfaces.Listeners.UpdateProfileListener" />
 
+        <variable
+            name="backListener"
+            type="com.refCustomerFamily.interfaces.Listeners.BackListener"
+            />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -133,13 +140,13 @@
                                         android:textSize="13sp" />
 
                                     <androidx.cardview.widget.CardView
+                                        android:id="@+id/flImage"
                                         android:layout_width="wrap_content"
                                         android:layout_height="120dp"
                                         android:layout_marginStart="5dp"
                                         android:layout_marginTop="5dp"
                                         android:layout_marginEnd="5dp"
                                         android:layout_marginBottom="5dp"
-                                        android:onClick="@{()->listener.openSheet()}"
                                         app:cardBackgroundColor="@color/white"
                                         app:cardCornerRadius="8dp"
                                         app:cardElevation="3dp">
@@ -212,7 +219,7 @@
                                 android:paddingStart="10dp"
                                 android:paddingEnd="10dp"
                                 android:background="@drawable/small_rounded_primary"
-                                android:onClick="@{()->listener.checkDataValid()}"
+                                android:onClick="@{()->updateListener.updateProfile()}"
                                 android:text="@string/update_profile"
                                 android:textColor="@color/white"
                                 android:textSize="17sp" />

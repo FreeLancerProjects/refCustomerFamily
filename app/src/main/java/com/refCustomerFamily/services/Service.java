@@ -206,4 +206,24 @@ public interface Service {
     Call<OrderModel> getorderdetials(@Header("Authorization") String user_token,
                                      @Query("order_id") int order_id
     );
+    @FormUrlEncoded
+    @POST("api/update-profile")
+    Call<UserModel> updateProfileWithoutImage(@Header("Authorization") String user_token,
+                                              @Field("id") int id,
+                                              @Field("name") String name,
+                                              @Field("email") String email
+
+
+
+    );
+
+    @Multipart
+    @POST("api/update-profile")
+    Call<UserModel> updateProfileWithImage(@Header("Authorization") String user_token,
+                                           @Part("id") RequestBody id,
+                                           @Part("name") RequestBody name,
+                                           @Part("email") RequestBody email,
+                                           @Part MultipartBody.Part logo
+    );
+
 }
