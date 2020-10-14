@@ -83,9 +83,9 @@ public class FamilyOrderFragment extends Fragment {
 
 
                     if (orderList.size() == 0) {
-                        binding.tvNoData.setVisibility(View.VISIBLE);
+                        binding.linearNoData.setVisibility(View.VISIBLE);
                     } else {
-                        binding.tvNoData.setVisibility(View.GONE);
+                        binding.linearNoData.setVisibility(View.GONE);
                     }
                 } else {
                     Log.e("Fragment_Orders: ", response.errorBody().toString());

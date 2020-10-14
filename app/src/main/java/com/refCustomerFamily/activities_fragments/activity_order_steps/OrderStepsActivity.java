@@ -36,7 +36,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderStepsActivity extends AppCompatActivity {
+public class
+OrderStepsActivity extends AppCompatActivity {
 
     private ActivityOrderStepsBinding binding;
     private String lang;
