@@ -256,5 +256,12 @@
     <string name="preparation_is_underway">Preparation is underway</string>
     <string name="prepared">Prepared</string>
     <string name="sent_delivered_handed">sent delivered handed</string>
+    <string name="The_family_agreed_to_your_request">The family agreed to your request</string>
+    <string name="Your_order_is_being_collected">Your order is being collected</string>
+    <string name="The_request_has_been_processed">The request has been processed</string>
+    <string name="Your_request_from_the_delegate_has_been_accepted">Your request from the delegate has been accepted</string>
+    <string name="The_request_has_been_delivered_to_the_representative">The request has been delivered to the delegate</string>
+    <string name="The_delegate_is_on_the_way_to_you">The delegate is on the way to you</string>
+    <string name="The_request_has_been_received_successfully">The request has been received successfully</string>
 
 </resources>

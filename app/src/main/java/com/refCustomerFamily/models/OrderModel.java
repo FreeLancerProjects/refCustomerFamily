@@ -30,6 +30,7 @@ public class OrderModel implements Serializable {
         private String bill_step;
         private String bill_image;
         private String payment_method;
+        private String from_name;
         private String from_address;
         private String from_latitude;
         private String from_longitude;
@@ -77,6 +78,14 @@ public class OrderModel implements Serializable {
 
         public String getStatus() {
             return status;
+        }
+
+        public String getFrom_name() {
+            return from_name;
+        }
+
+        public void setFrom_name(String from_name) {
+            this.from_name = from_name;
         }
 
         public String getGoogle_place_id() {
