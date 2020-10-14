@@ -2,7 +2,6 @@ package com.refCustomerFamily.activities_fragments.activity_orderdetail;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
-import com.refCustomerFamily.adapters.OrderDetailAdapter;
 import com.refCustomerFamily.databinding.ActivityOrderDetailBinding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.OrderModel;
@@ -85,6 +83,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         binding.viewStatusBtn.setOnClickListener(view -> {
 
             Intent intent = new Intent(OrderDetailActivity.this, OrderStepsActivity.class);
+            intent.putExtra("data",orderModel);
             startActivity(intent);
 
 

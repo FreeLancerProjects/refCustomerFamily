@@ -243,7 +243,6 @@
     <string name="no_data_to_view">No data to View</string>
     <string name="view_status">View Status</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delivery_package">Delivery Package</string>
 
     <string name="no_image">No Image</string>
@@ -254,4 +253,8 @@
     <string name="drop_off_location">Drop off location</string>
     <string name="deliver_within">Deliver within</string>
     <string name="pick_up_location">Pick up location</string>
+    <string name="preparation_is_underway">Preparation is underway</string>
+    <string name="prepared">Prepared</string>
+    <string name="sent_delivered_handed">sent delivered handed</string>
+
 </resources>

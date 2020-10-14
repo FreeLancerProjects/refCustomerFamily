@@ -202,5 +202,8 @@ public interface Service {
     @GET("api/Get-my-notifications")
     Call<NotificationModel> getNotification(@Header("Authorization") String user_token,
                                             @Query("user_id") int user_id);
-
+    @GET("api/get-one-order")
+    Call<OrderModel> getorderdetials(@Header("Authorization") String user_token,
+                                     @Query("order_id") int order_id
+    );
 }

@@ -252,5 +252,8 @@
     <string name="drop_off_location">مكان تسليم الشحنة</string>
     <string name="deliver_within">التوصيل في خلال</string>
     <string name="pick_up_location">موقع استلام الشحنة</string>
+    <string name="preparation_is_underway">جارى التجهيز</string>
+    <string name="prepared">تم التجهيز</string>
+    <string name="sent_delivered_handed">تم التسليم</string>
 
 </resources>

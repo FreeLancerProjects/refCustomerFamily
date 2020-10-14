@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
+import com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity;
 import com.refCustomerFamily.databinding.ItemFamilyOrderBinding;
 import com.refCustomerFamily.databinding.ItemOrderBinding;
 import com.refCustomerFamily.databinding.ItemOrderFamilyBinding;
@@ -34,7 +35,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
     private String lang;
     Preferences preferences;
     UserModel userModel;
-
 
 
     public OrderAdapter(List<OrderModel.Data> orderlist, Context context) {
@@ -64,10 +64,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
 
         holder.itemView.setOnClickListener(view -> {
+            if (orderlist.get(position).getOrder_type().equals("family")) {
+                Intent intent = new Intent(context, FamilyOrderStepsActivity.class);
+                intent.putExtra("data", orderlist.get(position));
+                context.startActivity(intent);
 
-            Intent intent = new Intent(context, OrderStepsActivity.class);
-            intent.putExtra("DATA", orderlist.get(position));
-            context.startActivity(intent);
+            } else {
+                Intent intent = new Intent(context, OrderStepsActivity.class);
+                intent.putExtra("data", orderlist.get(position));
+                context.startActivity(intent);
+
+            }
 
         });
 

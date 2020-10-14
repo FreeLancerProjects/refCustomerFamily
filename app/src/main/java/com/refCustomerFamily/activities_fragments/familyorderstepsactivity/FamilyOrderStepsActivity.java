@@ -1,24 +1,21 @@
-package com.refCustomerFamily.activities_fragments.activity_order_steps;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.databinding.DataBindingUtil;
+package com.refCustomerFamily.activities_fragments.familyorderstepsactivity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
+import com.refCustomerFamily.databinding.ActivityFamilyorderStepsBinding;
 import com.refCustomerFamily.databinding.ActivityOrderStepsBinding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.OrderModel;
@@ -31,14 +28,13 @@ import com.refCustomerFamily.tags.Tags;
 import java.util.Locale;
 
 import io.paperdb.Paper;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderStepsActivity extends AppCompatActivity {
+public class FamilyOrderStepsActivity extends AppCompatActivity {
 
-    private ActivityOrderStepsBinding binding;
+    private ActivityFamilyorderStepsBinding binding;
     private String lang;
     private OrderModel.Data orderModel;
     private Preferences preferences;
@@ -54,7 +50,7 @@ public class OrderStepsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_order_steps);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_familyorder_steps);
 
         initView();
         getDataFromIntent();
@@ -108,7 +104,7 @@ public class OrderStepsActivity extends AppCompatActivity {
 //                            }
                         } else {
 
-                            Toast.makeText(OrderStepsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(FamilyOrderStepsActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             try {
                                 Log.e("Error_code", response.code() + "_" + response.errorBody().string());
                             } catch (Exception e) {
@@ -133,16 +129,19 @@ public class OrderStepsActivity extends AppCompatActivity {
     }
 
     private void updatedata(OrderModel body) {
+
         binding.setModel(body.getOrder());
-        if (body.getOrder().getStatus().equals("driver_accepted_order")) {
+        if (body.getOrder().getStatus().equals("family-accept-order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
-        } else if (body.getOrder().getStatus().equals("driver_finished_collect_order")) {
+        }
+        else if (body.getOrder().getStatus().equals("family_prepare_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -150,7 +149,7 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
 
 
-        } else if (body.getOrder().getStatus().equals("driver_in_way")) {
+        } else if (body.getOrder().getStatus().equals("family_end_prepare_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -161,22 +160,94 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
+
+
+        }
+
+        else if (body.getOrder().getStatus().equals(" driver_accepted_order")) {
+            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+
+            binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
+            binding.tv3.setTextColor(getResources().getColor(R.color.black));
+            binding.tv4.setTextColor(getResources().getColor(R.color.black));
+
+        }
+        else if (body.getOrder().getStatus().equals("family_give_order_to_driver")) {
+            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+
+            binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
+            binding.tv3.setTextColor(getResources().getColor(R.color.black));
+            binding.tv4.setTextColor(getResources().getColor(R.color.black));
+            binding.tv5.setTextColor(getResources().getColor(R.color.black));
+
+        }
+   else if (body.getOrder().getStatus().equals("driver_in_way")) {
+            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+
+            binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+
+            binding.tv1.setTextColor(getResources().getColor(R.color.black));
+            binding.tv2.setTextColor(getResources().getColor(R.color.black));
+            binding.tv3.setTextColor(getResources().getColor(R.color.black));
+            binding.tv4.setTextColor(getResources().getColor(R.color.black));
+            binding.tv5.setTextColor(getResources().getColor(R.color.black));
+            binding.tv6.setTextColor(getResources().getColor(R.color.black));
 
 
         } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
+            binding.tv4.setTextColor(getResources().getColor(R.color.black));
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
+            binding.tv6.setTextColor(getResources().getColor(R.color.black));
+            binding.tv7.setTextColor(getResources().getColor(R.color.black));
 
         }
 

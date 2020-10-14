@@ -7,9 +7,14 @@ import java.util.List;
 public class OrderModel implements Serializable {
 
     private List<Data> data;
+    private Data order;
 
     public List<Data> getData() {
         return data;
+    }
+
+    public Data getOrder() {
+        return order;
     }
 
     public static class Data implements Serializable {
