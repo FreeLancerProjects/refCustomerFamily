@@ -26,7 +26,10 @@ import com.refCustomerFamily.models.FamilyCategory;
 import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
 import com.refCustomerFamily.models.ProductModel;
+import com.refCustomerFamily.models.UserModel;
+import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.remote.Api;
+import com.refCustomerFamily.share.Common;
 import com.refCustomerFamily.tags.Tags;
 import com.squareup.picasso.Picasso;
 
@@ -53,12 +56,13 @@ public class FamilyActivity extends AppCompatActivity {
     private List<ProductModel> selectedProductList;
     private int parent_pos = -1;
     private double total = 0.0;
-
+    private UserModel userModel;
+    private Preferences preferences;
 
     @Override
     protected void attachBaseContext(Context base) {
         Paper.init(base);
-        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang","ar")));
+        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang", "ar")));
     }
 
     @Override
@@ -84,17 +88,19 @@ public class FamilyActivity extends AppCompatActivity {
         familyCategoryList = new ArrayList<>();
         Paper.init(this);
         lang = Paper.book().read("lang", "ar");
+        preferences=Preferences.newInstance();
+        userModel=preferences.getUserData(this);
         binding.setLang(lang);
         binding.setModel(familyModel);
         categoryAdapter = new CategoryAdapter(familyCategoryList, this);
         binding.recViewCategory.setAdapter(categoryAdapter);
         binding.recViewCategory.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        familyAdapter = new FamilyProductAdapter(productModelList,this);
+        familyAdapter = new FamilyProductAdapter(productModelList, this);
         binding.recViewFamily.setAdapter(familyAdapter);
         binding.recViewFamily.setLayoutManager(new LinearLayoutManager(this));
 
-        if (familyModel.getBanner()!=null&&!familyModel.getBanner().isEmpty()&&!familyModel.getBanner().equals("0")){
-            Picasso.get().load(Uri.parse(Tags.IMAGE_URL+ familyModel.getBanner())).fit().into(binding.imageSliderTop, new com.squareup.picasso.Callback() {
+        if (familyModel.getBanner() != null && !familyModel.getBanner().isEmpty() && !familyModel.getBanner().equals("0")) {
+            Picasso.get().load(Uri.parse(Tags.IMAGE_URL + familyModel.getBanner())).fit().into(binding.imageSliderTop, new com.squareup.picasso.Callback() {
                 @Override
                 public void onSuccess() {
                     binding.flNoImage.setVisibility(View.GONE);
@@ -107,19 +113,24 @@ public class FamilyActivity extends AppCompatActivity {
                 }
             });
 
-        }else {
+        } else {
             binding.flNoImage.setVisibility(View.VISIBLE);
 
         }
 
 
         binding.addToCart.setOnClickListener(view -> {
-            if (selectedProductList.size()>0){
-                Intent intent = new Intent(this, AddOrderProductActivity.class);
-                intent.putExtra("data",familyModel);
-                intent.putExtra("cost",total);
+            if (selectedProductList.size() > 0) {
+                if (userModel!=null){
+                    Intent intent = new Intent(this, AddOrderProductActivity.class);
+                intent.putExtra("data", familyModel);
+                intent.putExtra("cost", total);
                 intent.putExtra("products", (Serializable) selectedProductList);
-                startActivityForResult(intent,100);
+                startActivityForResult(intent, 100);
+            }
+            else {
+                    Common.CreateDialogAlert2(FamilyActivity.this,getResources().getString(R.string.please_sign_in_or_sign_up));
+                }
             }
 
         });
@@ -138,7 +149,7 @@ public class FamilyActivity extends AppCompatActivity {
             public void onResponse(Call<FamilyCategoryProductDataModel> call, Response<FamilyCategoryProductDataModel> response) {
                 binding.progBar.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
-                   familyCategoryList.clear();
+                    familyCategoryList.clear();
                     familyCategoryList.addAll(response.body().getData().getCategories());
                     if (familyCategoryList.size() > 0) {
                         categoryAdapter.notifyDataSetChanged();
@@ -196,40 +207,40 @@ public class FamilyActivity extends AppCompatActivity {
         parent_pos = adapterPosition;
         productModelList.clear();
         productModelList.addAll(familyCategory.getProducts());
-        if (familyCategoryList.size()>0){
+        if (familyCategoryList.size() > 0) {
             familyAdapter.notifyDataSetChanged();
             binding.tvNoData.setVisibility(View.GONE);
-        }else {
+        } else {
             binding.tvNoData.setVisibility(View.VISIBLE);
 
         }
     }
 
     public void updateProduct(ProductModel model, int adapterPosition) {
-        familyCategoryList.get(parent_pos).getProducts().set(adapterPosition,model);
+        familyCategoryList.get(parent_pos).getProducts().set(adapterPosition, model);
         familyAdapter.notifyItemChanged(adapterPosition);
     }
 
     public void addToCart(ProductModel model, int adapterPosition) {
         int itemPos = isItemInCart(model);
-        if (itemPos==-1){
+        if (itemPos == -1) {
             selectedProductList.add(model);
 
-        }else {
-            selectedProductList.set(itemPos,model);
+        } else {
+            selectedProductList.set(itemPos, model);
 
         }
         total = calculateTotal();
-        binding.tvTotal.setText(String.format(Locale.ENGLISH,"%s %s",total,getString(R.string.sar)));
+        binding.tvTotal.setText(String.format(Locale.ENGLISH, "%s %s", total, getString(R.string.sar)));
         familyAdapter.notifyItemChanged(adapterPosition);
 
     }
 
-    private int isItemInCart(ProductModel productModel){
-        int pos =-1;
-        for (int index = 0;index<selectedProductList.size();index++){
+    private int isItemInCart(ProductModel productModel) {
+        int pos = -1;
+        for (int index = 0; index < selectedProductList.size(); index++) {
             ProductModel model = selectedProductList.get(index);
-            if (model.getId()==productModel.getId()){
+            if (model.getId() == productModel.getId()) {
                 pos = index;
                 return pos;
             }
@@ -237,10 +248,10 @@ public class FamilyActivity extends AppCompatActivity {
         return pos;
     }
 
-    private double calculateTotal(){
+    private double calculateTotal() {
         double total = 0.0;
-        for (ProductModel model : selectedProductList){
-            total += model.getPrice()*model.getCount();
+        for (ProductModel model : selectedProductList) {
+            total += model.getPrice() * model.getCount();
         }
         return total;
     }
@@ -248,13 +259,13 @@ public class FamilyActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==100&&resultCode==RESULT_OK&&data!=null){
+        if (requestCode == 100 && resultCode == RESULT_OK && data != null) {
             selectedProductList.clear();
             total = 0.0;
-            binding.tvTotal.setText(String.format(Locale.ENGLISH,"%s %s",total,getString(R.string.sar)));
-            int order_id = data.getIntExtra("order_id",0);
-            Intent intent =new Intent(this, ChatActivity.class);
-            intent.putExtra("order_id",order_id);
+            binding.tvTotal.setText(String.format(Locale.ENGLISH, "%s %s", total, getString(R.string.sar)));
+            int order_id = data.getIntExtra("order_id", 0);
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("order_id", order_id);
             startActivity(intent);
             finish();
         }
