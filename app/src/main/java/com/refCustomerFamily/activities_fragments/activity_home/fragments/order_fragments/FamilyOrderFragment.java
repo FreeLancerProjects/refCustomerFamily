@@ -12,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.adapters.MarketAdapter;
 import com.refCustomerFamily.adapters.OrderAdapter;
-import com.refCustomerFamily.databinding.FragmentMarketsBinding;
-import com.refCustomerFamily.databinding.FragmentOrderBinding;
+import com.refCustomerFamily.databinding.FragmentFamilyOrdersBinding;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -31,26 +29,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MarketsFragment extends Fragment {
+public class FamilyOrderFragment extends Fragment {
 
 
-    private FragmentMarketsBinding binding;
+    private FragmentFamilyOrdersBinding binding;
     private Preferences preferences;
     private UserModel userModel;
     private String lang;
-    private MarketAdapter orderAdapter;
+    private OrderAdapter orderAdapter;
     private List<OrderModel.Data> orderList;
 
-    public static MarketsFragment newInstance() {
-
-        return new MarketsFragment();
+    public static FamilyOrderFragment newInstance() {
+        return new FamilyOrderFragment();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_markets, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_family_orders, container, false);
         initView();
         return binding.getRoot();
     }
@@ -59,44 +57,49 @@ public class MarketsFragment extends Fragment {
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(getActivity());
         orderList = new ArrayList<>();
-        orderAdapter = new MarketAdapter(orderList, getActivity());
+        orderAdapter = new OrderAdapter(orderList, getActivity());
         Paper.init(getActivity());
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
-        binding.recViewOrders.setAdapter(orderAdapter);
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        binding.recViewOrders.setAdapter(orderAdapter);
 
 
         getOrders();
     }
-    private void getOrders() {
+
+    public void getOrders() {
+        Log.e("mmmmmmm",userModel.getData().getId()+"");
         binding.progBarOrders.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url).getOrderByStatus("Bearer " + userModel.getData().getToken(),
-                userModel.getData().getId(), "google", "client", "current").enqueue(new Callback<OrderModel>() {
+                userModel.getData().getId(), "family", "client", "current").enqueue(new Callback<OrderModel>() {
             @Override
             public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
                 binding.progBarOrders.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                     orderList.addAll(response.body().getData());
                     orderAdapter.notifyDataSetChanged();
+                    Log.e("size:", response.body().getData().size() + "");
 
-                    if (orderList.size() == 0){
+
+                    if (orderList.size() == 0) {
                         binding.tvNoData.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         binding.tvNoData.setVisibility(View.GONE);
                     }
-                }else {
-                    Log.e("Fragment_Orders: ",response.errorBody().toString());
+                } else {
+                    Log.e("Fragment_Orders: ", response.errorBody().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<OrderModel> call, Throwable t) {
                 binding.progBarOrders.setVisibility(View.GONE);
-                Log.e("Fragment_Orders: ",t.getMessage());
+                Log.e("Fragment_Orders: ", t.getMessage());
             }
         });
 
 
     }
+
 }

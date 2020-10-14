@@ -22,7 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
         >
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab"
@@ -36,6 +35,7 @@
             app:tabTextColor="@color/black"
             app:tabIndicatorHeight="5dp"
             app:tabSelectedTextColor="@color/black"
+            android:background="@drawable/small_stroke_primary"
             app:tabIndicatorColor="@color/colorPrimary"
 
             />

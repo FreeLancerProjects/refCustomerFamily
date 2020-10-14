@@ -73,7 +73,8 @@
                             android:layout_height="wrap_content"
                             app:sb_checked_color="@color/colorAccent"
                             app:sb_checkline_color="@color/colorAccent"
-                            app:sb_show_indicator="false" />
+                            app:sb_show_indicator="false"
+                            android:visibility="gone"/>
                     </FrameLayout>
 
                     <FrameLayout

@@ -173,8 +173,8 @@ public interface Service {
     @POST("api/create-order")
     Call<SingleOrderDataModel> sendTextOrderWithImage(@Header("Authorization") String user_token,
                                                       @Part("user_id") RequestBody user_id,
-                                                      @Part("family_id") RequestBody family_id,
                                                       @Part("order_type") RequestBody order_type,
+                                                      @Part("family_id") RequestBody family_id,
                                                       @Part("google_place_id") RequestBody google_place_id,
                                                       @Part("bill_cost") RequestBody bill_cost,
                                                       @Part("to_address") RequestBody to_address,

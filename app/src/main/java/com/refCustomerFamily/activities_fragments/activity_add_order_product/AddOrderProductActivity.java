@@ -292,7 +292,6 @@ public class AddOrderProductActivity extends AppCompatActivity {
         Log.e("order_type",addOrderTextModel.getOrder_type()+"_");
         RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getUser_id()));
         RequestBody order_type_part = Common.getRequestBodyText(addOrderTextModel.getOrder_type());
-
         RequestBody family_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getFamily_id()));
         RequestBody google_place_id_part = Common.getRequestBodyText(addOrderTextModel.getGoogle_place_id());
         RequestBody bill_cost_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getBill_cost()));

@@ -10,8 +10,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refCustomerFamily.databinding.ItemOrderBinding;
+import com.refCustomerFamily.databinding.ItemOrderPackageBinding;
 import com.refCustomerFamily.databinding.ItemPackageBinding;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
@@ -31,9 +33,6 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAda
     UserModel userModel;
 
 
-    public PackageAdapter(Context context) {
-        this.context = context;
-    }
 
     public PackageAdapter(List<OrderModel.Data> orderlist, Context context) {
         this.orderlist = orderlist;
@@ -48,7 +47,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAda
     @NonNull
     @Override
     public OrderAdapterVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemPackageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_package, parent, false);
+        ItemOrderPackageBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_order_package, parent, false);
         return new OrderAdapterVH(binding);
     }
 
@@ -61,7 +60,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAda
 
         holder.itemView.setOnClickListener(view -> {
 
-            Intent intent = new Intent(context, OrderDetailActivity.class);
+            Intent intent = new Intent(context, OrderStepsActivity.class);
             intent.putExtra("DATA", orderlist.get(position));
             context.startActivity(intent);
 
@@ -76,9 +75,9 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAda
     }
 
     public class OrderAdapterVH extends RecyclerView.ViewHolder {
-        public ItemPackageBinding binding;
+        public ItemOrderPackageBinding binding;
 
-        public OrderAdapterVH(@NonNull ItemPackageBinding binding) {
+        public OrderAdapterVH(@NonNull ItemOrderPackageBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
 

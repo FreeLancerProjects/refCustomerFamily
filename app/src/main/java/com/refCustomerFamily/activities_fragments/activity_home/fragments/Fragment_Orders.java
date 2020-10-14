@@ -13,9 +13,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
-import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.PackageFragment;
-import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.MarketsFragment;
-import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.OrderFragment;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.PackageOrderFragment;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.GoogleOrderFragment;
+import com.refCustomerFamily.activities_fragments.activity_home.fragments.order_fragments.FamilyOrderFragment;
 import com.refCustomerFamily.adapters.ViewPagerAdapter;
 import com.refCustomerFamily.databinding.FragmentOrdersBinding;
 import com.refCustomerFamily.models.UserModel;
@@ -34,11 +34,10 @@ public class Fragment_Orders extends Fragment {
     private Preferences preferences;
     private UserModel userModel;
     private String lang;
-
-
     private ViewPagerAdapter adapter;
     private List<Fragment> fragmentList;
     private List<String> titles;
+
 
     public static Fragment_Orders newInstance() {
         return new Fragment_Orders();
@@ -59,29 +58,30 @@ public class Fragment_Orders extends Fragment {
     }
 
     private void initView() {
-        activity = (HomeActivity) getActivity();
+        titles = new ArrayList<>();
         preferences = Preferences.newInstance();
+        activity = (HomeActivity) getActivity();
         userModel = preferences.getUserData(getActivity());
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         fragmentList = new ArrayList<>();
-        titles = new ArrayList<>();
 
-
-        fragmentList.add(OrderFragment.newInstance());
-        fragmentList.add(MarketsFragment.newInstance());
-        fragmentList.add(PackageFragment.newInstance());
+        fragmentList.add(FamilyOrderFragment.newInstance());
+        fragmentList.add(GoogleOrderFragment.newInstance());
+        fragmentList.add(PackageOrderFragment.newInstance());
 
         titles.add(getString(R.string.productive_families));
         titles.add(getString(R.string.markets));
         titles.add(getString(R.string.delivery_package));
         binding.tab.setupWithViewPager(binding.pager);
-        adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        adapter = new ViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         adapter.addFragments_Titles(fragmentList, titles);
         binding.pager.setAdapter(adapter);
-        binding.pager.setOffscreenPageLimit(3);
 
+        binding.pager.setAdapter(adapter);
+        binding.pager.setOffscreenPageLimit(fragmentList.size());
+        binding.pager.setCurrentItem(0,false);
     }
 
 
