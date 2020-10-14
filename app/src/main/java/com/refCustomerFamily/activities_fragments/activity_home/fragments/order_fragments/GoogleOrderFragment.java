@@ -79,9 +79,9 @@ public class GoogleOrderFragment extends Fragment {
                     orderAdapter.notifyDataSetChanged();
 
                     if (orderList.size() == 0){
-                        binding.tvNoData.setVisibility(View.VISIBLE);
+                        binding.linearNoData.setVisibility(View.VISIBLE);
                     }else {
-                        binding.tvNoData.setVisibility(View.GONE);
+                        binding.linearNoData.setVisibility(View.GONE);
                     }
                 }else {
                     Log.e("Fragment_Orders: ",response.errorBody().toString());
