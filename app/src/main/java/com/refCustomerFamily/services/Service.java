@@ -7,6 +7,8 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceGeocodeData;
 import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
+import com.refCustomerFamily.models.MessageDataModel;
+import com.refCustomerFamily.models.MessageModel;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.NotificationModel;
 import com.refCustomerFamily.models.SettingModel;
@@ -233,4 +235,46 @@ public interface Service {
             @Field("phone_token") String phone_token,
             @Field("software_type") String software_type
     );
+
+    @GET("api/Get-chat-messages-by-roomID")
+    Call<MessageDataModel> getRoomMessages(
+            @Header("Authorization") String user_token,
+
+            @Query("room_id") int room_id,
+            @Query("page") int pagination_status
+    );
+
+
+    @FormUrlEncoded
+    @POST("api/send-message")
+    Call<MessageModel> sendmessagetext(
+            @Header("Authorization") String user_token,
+
+            @Field("from_user_id") String from_user_id,
+
+            @Field("to_user_id") String to_user_id,
+            @Field("message_kind") String message_kind,
+            @Field("chat_room_id") String chat_room_id,
+            @Field("message") String message
+
+
+    );
+
+
+    @Multipart
+    @POST("api/send-message")
+    Call<MessageModel> sendmessagewithimage
+            (
+                    @Header("Authorization") String user_token,
+
+                    @Part("from_user_id") RequestBody from_user_id,
+
+                    @Part("to_user_id") RequestBody to_user_id,
+                    @Part("message_kind") RequestBody message_kind,
+                    @Part("chat_room_id") RequestBody chat_room_id,
+
+                    @Part MultipartBody.Part imagepart
+
+//
+            );
 }

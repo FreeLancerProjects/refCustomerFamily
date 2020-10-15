@@ -18,6 +18,7 @@ import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_add_order_product.AddOrderProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_cart.CartActivity;
 import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
+import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.adapters.CategoryAdapter;
 import com.refCustomerFamily.adapters.FamilyProductAdapter;
 import com.refCustomerFamily.databinding.ActivityFamilyBinding;
@@ -25,6 +26,7 @@ import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.FamilyCategory;
 import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
+import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.ProductModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -264,9 +266,12 @@ public class FamilyActivity extends AppCompatActivity {
             total = 0.0;
             binding.tvTotal.setText(String.format(Locale.ENGLISH, "%s %s", total, getString(R.string.sar)));
             int order_id = data.getIntExtra("order_id", 0);
-            Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("order_id", order_id);
+            OrderModel.Data order=new OrderModel.Data();
+            order.setId(order_id);
+            Intent intent = new Intent(this, OrderStepsActivity.class);
+            intent.putExtra("data", order);
             startActivity(intent);
+
             finish();
         }
     }

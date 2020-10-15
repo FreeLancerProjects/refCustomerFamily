@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
+import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refCustomerFamily.databinding.ActivityOrderStepsBinding;
 import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -36,8 +38,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class
-OrderStepsActivity extends AppCompatActivity {
+public class OrderStepsActivity extends AppCompatActivity {
 
     private ActivityOrderStepsBinding binding;
     private String lang;
@@ -69,7 +70,56 @@ OrderStepsActivity extends AppCompatActivity {
         binding.setLang(lang);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        binding.imgChat.setOnClickListener(view -> {
 
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("chat_user_data",chatUserModel);
+            startActivityForResult(intent,1000);
+        });
+
+        binding.imgCall.setOnClickListener(view -> {
+            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
+
+            if (intent != null) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                    } else {
+                        startActivity(intent);
+                    }
+                } else {
+                    startActivity(intent);
+                }
+            }
+
+        });
+        binding.imgChat.setOnClickListener(view -> {
+
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("chat_user_data",chatUserModel);
+            startActivityForResult(intent,1000);
+        });
+
+        binding.imgCall.setOnClickListener(view -> {
+            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
+
+            if (intent != null) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                    } else {
+                        startActivity(intent);
+                    }
+                } else {
+                    startActivity(intent);
+                }
+            }
+
+        });
     }
 
     private void getDataFromIntent() {
@@ -137,6 +187,9 @@ OrderStepsActivity extends AppCompatActivity {
 
     private void updatedata(OrderModel body) {
         binding.setModel(body.getOrder());
+        if (!body.getOrder().getStatus().equals("new")) {
+            binding.llchat.setVisibility(View.VISIBLE);
+        }
         if (body.getOrder().getStatus().equals("driver_accepted_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 

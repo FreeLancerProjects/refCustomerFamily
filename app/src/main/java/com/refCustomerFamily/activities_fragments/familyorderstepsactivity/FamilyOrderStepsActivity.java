@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +13,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refCustomerFamily.databinding.ActivityFamilyorderStepsBinding;
 import com.refCustomerFamily.databinding.ActivityOrderStepsBinding;
 import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -64,9 +69,57 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
         binding.setLang(lang);
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        binding.imgChat.setOnClickListener(view -> {
 
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(),orderModel.getFamily().getLogo(),orderModel.getFamily().getId()+"",orderModel.getFamily_chat().getId());
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("chat_user_data",chatUserModel);
+            startActivityForResult(intent,1000);
+        });
+
+        binding.imgCall.setOnClickListener(view -> {
+            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getFamily().getPhone_code() + orderModel.getFamily().getPhone(),null));
+
+            if (intent != null) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                    } else {
+                        startActivity(intent);
+                    }
+                } else {
+                    startActivity(intent);
+                }
+            }
+
+        });
+        binding.imgChatt.setOnClickListener(view -> {
+
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(),orderModel.getDriver().getLogo(),orderModel.getDriver().getId()+"",orderModel.getFamily_chat().getId());
+            Intent intent = new Intent(this, ChatActivity.class);
+            intent.putExtra("chat_user_data",chatUserModel);
+            startActivityForResult(intent,1000);
+        });
+
+        binding.imgCalll.setOnClickListener(view -> {
+            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getDriver().getPhone_code() + orderModel.getDriver().getPhone(),null));
+
+            if (intent != null) {
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                    } else {
+                        startActivity(intent);
+                    }
+                } else {
+                    startActivity(intent);
+                }
+            }
+
+        });
     }
-
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent != null) {
@@ -131,6 +184,10 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
     private void updatedata(OrderModel body) {
 
         binding.setModel(body.getOrder());
+         if(!body.getOrder().getStatus().equals("new")){
+            binding.llchat.setVisibility(View.VISIBLE);
+        }
+
         if (body.getOrder().getStatus().equals("family-accept-order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
@@ -179,6 +236,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
             binding.tv4.setTextColor(getResources().getColor(R.color.black));
+            binding.llchatt.setVisibility(View.VISIBLE);
 
         }
         else if (body.getOrder().getStatus().equals("family_give_order_to_driver")) {
@@ -199,6 +257,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
             binding.tv4.setTextColor(getResources().getColor(R.color.black));
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
+            binding.llchatt.setVisibility(View.VISIBLE);
 
         }
    else if (body.getOrder().getStatus().equals("driver_in_way")) {
@@ -222,6 +281,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv4.setTextColor(getResources().getColor(R.color.black));
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
             binding.tv6.setTextColor(getResources().getColor(R.color.black));
+            binding.llchatt.setVisibility(View.VISIBLE);
 
 
         } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
@@ -248,6 +308,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
             binding.tv6.setTextColor(getResources().getColor(R.color.black));
             binding.tv7.setTextColor(getResources().getColor(R.color.black));
+            binding.llchatt.setVisibility(View.VISIBLE);
 
         }
 
