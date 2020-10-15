@@ -71,15 +71,15 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(),orderModel.getFamily().getLogo(),orderModel.getFamily().getId()+"",orderModel.getFamily_chat().getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data",chatUserModel);
-            startActivityForResult(intent,1000);
+            intent.putExtra("chat_user_data", chatUserModel);
+            startActivityForResult(intent, 1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {
-            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
-            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getFamily().getPhone_code() + orderModel.getFamily().getPhone(),null));
+            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getFamily().getPhone_code() + orderModel.getFamily().getPhone(), null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -96,15 +96,15 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
         });
         binding.imgChatt.setOnClickListener(view -> {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(),orderModel.getDriver().getLogo(),orderModel.getDriver().getId()+"",orderModel.getFamily_chat().getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data",chatUserModel);
-            startActivityForResult(intent,1000);
+            intent.putExtra("chat_user_data", chatUserModel);
+            startActivityForResult(intent, 1000);
         });
 
         binding.imgCalll.setOnClickListener(view -> {
-            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
-            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getDriver().getPhone_code() + orderModel.getDriver().getPhone(),null));
+            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getDriver().getPhone_code() + orderModel.getDriver().getPhone(), null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -120,6 +120,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
 
         });
     }
+
     private void getDataFromIntent() {
         Intent intent = getIntent();
         if (intent != null) {
@@ -184,20 +185,25 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
     private void updatedata(OrderModel body) {
 
         binding.setModel(body.getOrder());
-         if(!body.getOrder().getStatus().equals("new")){
+        orderModel = body.getOrder();
+        if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }
+        if (body.getOrder().getStatus().equals("pennding")) {
+            binding.llchat.setVisibility(View.GONE);
 
-        if (body.getOrder().getStatus().equals("family-accept-order")) {
+        }
+        if (body.getOrder().getStatus().equals("family_accepted_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
-        }
-        else if (body.getOrder().getStatus().equals("family_prepare_order")) {
+        } else if (body.getOrder().getStatus().equals("family_prepare_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
 
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -210,6 +216,9 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -219,13 +228,15 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
 
 
-        }
-
-        else if (body.getOrder().getStatus().equals(" driver_accepted_order")) {
+        } else if (body.getOrder().getStatus().equals(" driver_accepted_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image4.setColorFilter(getResources().getColor(R.color.white));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -238,13 +249,17 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv4.setTextColor(getResources().getColor(R.color.black));
             binding.llchatt.setVisibility(View.VISIBLE);
 
-        }
-        else if (body.getOrder().getStatus().equals("family_give_order_to_driver")) {
+        } else if (body.getOrder().getStatus().equals("family_give_order_to_driver")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image4.setColorFilter(getResources().getColor(R.color.white));
+            binding.image5.setColorFilter(getResources().getColor(R.color.white));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -259,14 +274,19 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
             binding.llchatt.setVisibility(View.VISIBLE);
 
-        }
-   else if (body.getOrder().getStatus().equals("driver_in_way")) {
+        } else if (body.getOrder().getStatus().equals("driver_in_way")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image4.setColorFilter(getResources().getColor(R.color.white));
+            binding.image5.setColorFilter(getResources().getColor(R.color.white));
+            binding.image6.setColorFilter(getResources().getColor(R.color.white));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -292,6 +312,13 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
             binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image4.setColorFilter(getResources().getColor(R.color.white));
+            binding.image5.setColorFilter(getResources().getColor(R.color.white));
+            binding.image6.setColorFilter(getResources().getColor(R.color.white));
+            binding.image7.setColorFilter(getResources().getColor(R.color.white));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));

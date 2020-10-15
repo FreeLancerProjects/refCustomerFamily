@@ -98,10 +98,10 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
-                            android:background="@drawable/circle_bg"
+                            android:background="@drawable/circle_not_bg"
                             android:padding="13dp"
-                            android:src="@drawable/ic_check"
-                            android:tint="@color/white" />
+                            android:src="@drawable/ic_add"
+                            android:tint="@color/colorAccent" />
 
                         <View
                             android:id="@+id/view1"

@@ -72,15 +72,15 @@ public class OrderStepsActivity extends AppCompatActivity {
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data",chatUserModel);
-            startActivityForResult(intent,1000);
+            intent.putExtra("chat_user_data", chatUserModel);
+            startActivityForResult(intent, 1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {
-            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
-            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
+            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(), null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -97,15 +97,15 @@ public class OrderStepsActivity extends AppCompatActivity {
         });
         binding.imgChat.setOnClickListener(view -> {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(),orderModel.getClient().getLogo(),orderModel.getClient().getId()+"",orderModel.getDriver_chat().getId());
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data",chatUserModel);
-            startActivityForResult(intent,1000);
+            intent.putExtra("chat_user_data", chatUserModel);
+            startActivityForResult(intent, 1000);
         });
 
         binding.imgCall.setOnClickListener(view -> {
-            Log.e("lldldll",orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
-            intent = new Intent(Intent.ACTION_DIAL,  Uri.fromParts("tel" , orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(),null));
+            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(), null));
 
             if (intent != null) {
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -126,7 +126,7 @@ public class OrderStepsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             orderModel = (OrderModel.Data) getIntent().getSerializableExtra("data");
-            Log.e("lxllxl",orderModel.getOrder_type());
+          //  Log.e("lxllxl", orderModel.getOrder_type());
 
         }
 
@@ -190,8 +190,14 @@ public class OrderStepsActivity extends AppCompatActivity {
         if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }
+        if (body.getOrder().getStatus().equals("pennding")) {
+            binding.llchat.setVisibility(View.GONE);
+
+        }
         if (body.getOrder().getStatus().equals("driver_accepted_order")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+
 
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -205,11 +211,18 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
 
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+
 
         } else if (body.getOrder().getStatus().equals("driver_in_way")) {
             binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -224,6 +237,10 @@ public class OrderStepsActivity extends AppCompatActivity {
             binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image1.setColorFilter(getResources().getColor(R.color.white));
+            binding.image2.setColorFilter(getResources().getColor(R.color.white));
+            binding.image3.setColorFilter(getResources().getColor(R.color.white));
+            binding.image5.setColorFilter(getResources().getColor(R.color.white));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
