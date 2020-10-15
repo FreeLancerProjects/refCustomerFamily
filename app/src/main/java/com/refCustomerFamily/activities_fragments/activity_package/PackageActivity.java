@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
+import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_map_search.MapSearchActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.adapters.AddOrderImagesAdapter;
@@ -35,6 +36,7 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.databinding.ActivityPackageBinding;
 import com.refCustomerFamily.databinding.DialogSelectImage2Binding;
 import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -78,7 +80,7 @@ public class PackageActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context base) {
         Paper.init(base);
-        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang","ar")));
+        super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang", "ar")));
     }
 
 
@@ -99,8 +101,8 @@ public class PackageActivity extends AppCompatActivity {
         binding.setLang(lang);
         addOrderTextModel = new AddOrderTextModel();
         imagesList = new ArrayList<>();
-        binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        addOrderImagesAdapter = new AddOrderImagesAdapter(imagesList,this);
+        binding.recViewImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        addOrderImagesAdapter = new AddOrderImagesAdapter(imagesList, this);
         binding.recViewImages.setAdapter(addOrderImagesAdapter);
 
 
@@ -134,8 +136,9 @@ public class PackageActivity extends AppCompatActivity {
             Intent intent = new Intent(PackageActivity.this, AddCouponActivity.class);
             startActivity(intent);
         });
-        binding.close.setOnClickListener(v -> {super.onBackPressed();});
-
+        binding.close.setOnClickListener(v -> {
+            super.onBackPressed();
+        });
 
 
         addOrderTextModel.setUser_id(userModel.getData().getId());
@@ -148,46 +151,46 @@ public class PackageActivity extends AppCompatActivity {
         addOrderTextModel.setHour_arrival_time("1");
         addOrderTextModel.setOrder_notes("");
         Calendar calendar = Calendar.getInstance(new Locale(lang));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.ENGLISH);
-        String timeArrival =dateFormat.format(new Date(calendar.getTimeInMillis()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        String timeArrival = dateFormat.format(new Date(calendar.getTimeInMillis()));
         addOrderTextModel.setEnd_shipping_time(timeArrival);
 
 
         binding.btnSend.setOnClickListener(view -> {
 
             String order_text = binding.edtOrder.getText().toString();
-            if (!order_text.isEmpty()&&!addOrderTextModel.getFrom_address().isEmpty()&&!addOrderTextModel.getTo_address().isEmpty()){
-                Common.CloseKeyBoard(this,binding.edtOrder);
+            if (!order_text.isEmpty() && !addOrderTextModel.getFrom_address().isEmpty() && !addOrderTextModel.getTo_address().isEmpty()) {
+                Common.CloseKeyBoard(this, binding.edtOrder);
                 binding.edtOrder.setError(null);
                 binding.tvAddress1.setError(null);
                 binding.tvAddress2.setError(null);
                 addOrderTextModel.setOrder_description(order_text);
-                if (imagesList.size()>0){
+                if (imagesList.size() > 0) {
                     sendOrderTextWithImage();
-                }else {
+                } else {
                     sendOrderTextWithoutImage();
                 }
-            }else {
-                if (order_text.isEmpty()){
+            } else {
+                if (order_text.isEmpty()) {
                     binding.edtOrder.setError(getString(R.string.field_req));
 
-                }else {
+                } else {
                     binding.edtOrder.setError(null);
 
                 }
 
-                if (addOrderTextModel.getFrom_address().isEmpty()){
+                if (addOrderTextModel.getFrom_address().isEmpty()) {
                     binding.tvAddress1.setError(getString(R.string.field_req));
 
-                }else {
+                } else {
                     binding.tvAddress1.setError(null);
 
                 }
 
-                if (addOrderTextModel.getTo_address().isEmpty()){
+                if (addOrderTextModel.getTo_address().isEmpty()) {
                     binding.tvAddress2.setError(getString(R.string.field_req));
 
-                }else {
+                } else {
                     binding.tvAddress2.setError(null);
 
                 }
@@ -198,36 +201,34 @@ public class PackageActivity extends AppCompatActivity {
 
     }
 
-    private void sendOrderTextWithoutImage()
-    {
+    private void sendOrderTextWithoutImage() {
 
-        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendTextOrder("Bearer "+userModel.getData().getToken(),addOrderTextModel.getUser_id(),addOrderTextModel.getFamily_id(),addOrderTextModel.getOrder_type(),addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()),addOrderTextModel.getTo_address(),addOrderTextModel.getTo_latitude(),addOrderTextModel.getTo_longitude(),addOrderTextModel.getFrom_name(),addOrderTextModel.getFrom_address(),addOrderTextModel.getFrom_latitude(),addOrderTextModel.getFrom_longitude(),addOrderTextModel.getEnd_shipping_time(),addOrderTextModel.getCoupon_id(),addOrderTextModel.getOrder_description(),addOrderTextModel.getOrder_notes(),addOrderTextModel.getPayment_method(),addOrderTextModel.getHour_arrival_time())
+                .sendTextOrder("Bearer " + userModel.getData().getToken(), addOrderTextModel.getUser_id(), addOrderTextModel.getFamily_id(), addOrderTextModel.getOrder_type(), addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()), addOrderTextModel.getTo_address(), addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude(), addOrderTextModel.getFrom_name(), addOrderTextModel.getFrom_address(), addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude(), addOrderTextModel.getEnd_shipping_time(), addOrderTextModel.getCoupon_id(), addOrderTextModel.getOrder_description(), addOrderTextModel.getOrder_notes(), addOrderTextModel.getPayment_method(), addOrderTextModel.getHour_arrival_time())
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null)
-                        {
-                            Intent intent = getIntent();
-                            intent.putExtra("order_id",response.body().getOrder().getId());
-                            setResult(RESULT_OK,intent);
+                        if (response.isSuccessful() && response.body() != null) {
+                            int order_id = response.body().getOrder().getId();
+                            OrderModel.Data order = new OrderModel.Data();
+                            order.setId(order_id);
+                            Intent intent = new Intent(PackageActivity.this, OrderStepsActivity.class);
+                            intent.putExtra("data", order);
+                            startActivity(intent);
                             finish();
-                        }else
-                        {
-                            if (response.code()==500)
-                            {
+                        } else {
+                            if (response.code() == 500) {
                                 Toast.makeText(PackageActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                            } else
-                            {
-                                Toast.makeText(PackageActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
 
                             try {
-                                Log.e("error",response.errorBody().string());
+                                Log.e("error", response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -247,22 +248,21 @@ public class PackageActivity extends AppCompatActivity {
                                     Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        }catch (Exception e)
-                        {
-                            Log.e("Error",e.getMessage()+"__");
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
                         }
                     }
                 });
     }
-    private void sendOrderTextWithImage()
-    {
-        ProgressDialog dialog = Common.createProgressDialog(this,getString(R.string.wait));
+
+    private void sendOrderTextWithImage() {
+        ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
         dialog.setCancelable(false);
         dialog.show();
 
         RequestBody user_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getUser_id()));
         RequestBody order_type_part = Common.getRequestBodyText(addOrderTextModel.getOrder_type());
-        Log.e("order_type",addOrderTextModel.getOrder_type()+"_");
+        Log.e("order_type", addOrderTextModel.getOrder_type() + "_");
 
         RequestBody family_id_part = Common.getRequestBodyText(String.valueOf(addOrderTextModel.getFamily_id()));
         RequestBody google_place_id_part = Common.getRequestBodyText(addOrderTextModel.getGoogle_place_id());
@@ -283,29 +283,25 @@ public class PackageActivity extends AppCompatActivity {
 
 
         Api.getService(Tags.base_url)
-                .sendTextOrderWithImage("Bearer "+userModel.getData().getToken(),user_id_part,order_type_part,family_id_part,google_place_id_part,bill_cost_part,to_address_part,to_lat_part,to_lng_part,from_name_part,from_address_part,from_lat_part,from_lng_part,arrival_time_part,coupon_id_part,details_part,payment_part,notes_part,hours_part,getMultiPartImages())
+                .sendTextOrderWithImage("Bearer " + userModel.getData().getToken(), user_id_part, order_type_part, family_id_part, google_place_id_part, bill_cost_part, to_address_part, to_lat_part, to_lng_part, from_name_part, from_address_part, from_lat_part, from_lng_part, arrival_time_part, coupon_id_part, details_part, payment_part, notes_part, hours_part, getMultiPartImages())
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
                         dialog.dismiss();
-                        if (response.isSuccessful()&&response.body()!=null)
-                        {
-                            Intent intent =new Intent(PackageActivity.this, ChatActivity.class);
-                            intent.putExtra("order_id",response.body().getOrder().getId());
+                        if (response.isSuccessful() && response.body() != null) {
+                            Intent intent = new Intent(PackageActivity.this, ChatActivity.class);
+                            intent.putExtra("order_id", response.body().getOrder().getId());
                             startActivity(intent);
                             finish();
-                        }else
-                        {
-                            if (response.code()==500)
-                            {
+                        } else {
+                            if (response.code() == 500) {
                                 Toast.makeText(PackageActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
-                            } else
-                            {
-                                Toast.makeText(PackageActivity.this,getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
 
                             try {
-                                Log.e("error",response.errorBody().string());
+                                Log.e("error", response.errorBody().string());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -324,19 +320,18 @@ public class PackageActivity extends AppCompatActivity {
                                     Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        }catch (Exception e)
-                        {
-                            Log.e("Error",e.getMessage()+"__");
+                        } catch (Exception e) {
+                            Log.e("Error", e.getMessage() + "__");
                         }
                     }
                 });
     }
-    private List<MultipartBody.Part> getMultiPartImages()
-    {
+
+    private List<MultipartBody.Part> getMultiPartImages() {
         List<MultipartBody.Part> parts = new ArrayList<>();
-        for (Uri uri :imagesList){
-            if (uri!=null){
-                MultipartBody.Part part = Common.getMultiPartImage(this,uri,"images[]");
+        for (Uri uri : imagesList) {
+            if (uri != null) {
+                MultipartBody.Part part = Common.getMultiPartImage(this, uri, "images[]");
                 parts.add(part);
             }
 
@@ -374,6 +369,7 @@ public class PackageActivity extends AppCompatActivity {
         dialog.setView(view);
         dialog.show();
     }
+
     private void setTime(int value) {
         Calendar calendar = Calendar.getInstance(new Locale(lang));
         switch (value) {
@@ -409,14 +405,13 @@ public class PackageActivity extends AppCompatActivity {
 
         }
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",Locale.ENGLISH);
-        String timeArrival =dateFormat.format(new Date(calendar.getTimeInMillis()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        String timeArrival = dateFormat.format(new Date(calendar.getTimeInMillis()));
         addOrderTextModel.setEnd_shipping_time(timeArrival);
 
     }
 
-    public void createDialogAlert()
-    {
+    public void createDialogAlert() {
         dialog = new AlertDialog.Builder(this)
                 .create();
 
@@ -429,16 +424,16 @@ public class PackageActivity extends AppCompatActivity {
         dialog.setView(binding.getRoot());
         dialog.show();
     }
-    public void checkReadPermission()
-    {
+
+    public void checkReadPermission() {
         if (ActivityCompat.checkSelfPermission(this, READ_PERM) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{READ_PERM}, READ_REQ);
         } else {
             SelectImage(READ_REQ);
         }
     }
-    public void checkCameraPermission()
-    {
+
+    public void checkCameraPermission() {
 
 
         if (ContextCompat.checkSelfPermission(this, write_permission) == PackageManager.PERMISSION_GRANTED
@@ -449,8 +444,8 @@ public class PackageActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{camera_permission, write_permission}, CAMERA_REQ);
         }
     }
-    private void SelectImage(int req)
-    {
+
+    private void SelectImage(int req) {
 
         Intent intent = new Intent();
 
@@ -509,8 +504,7 @@ public class PackageActivity extends AppCompatActivity {
             cropImage(uri);
 
 
-        }
-        else if (requestCode == CAMERA_REQ && resultCode == Activity.RESULT_OK && data != null) {
+        } else if (requestCode == CAMERA_REQ && resultCode == Activity.RESULT_OK && data != null) {
 
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             Uri uri = getUriFromBitmap(bitmap);
@@ -520,47 +514,43 @@ public class PackageActivity extends AppCompatActivity {
             }
 
 
-        }
-        else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
 
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri uri = result.getUri();
 
-                if (imagesList.size()>0){
-                    imagesList.add(imagesList.size()-1,uri);
-                    addOrderImagesAdapter.notifyItemInserted(imagesList.size()-1);
+                if (imagesList.size() > 0) {
+                    imagesList.add(imagesList.size() - 1, uri);
+                    addOrderImagesAdapter.notifyItemInserted(imagesList.size() - 1);
 
-                }else {
+                } else {
                     imagesList.add(uri);
                     imagesList.add(null);
-                    addOrderImagesAdapter.notifyItemRangeInserted(0,imagesList.size());
+                    addOrderImagesAdapter.notifyItemRangeInserted(0, imagesList.size());
                 }
 
 
                 dialog.dismiss();
 
-                binding.recViewImages.postDelayed(()->{
-                    binding.recViewImages.smoothScrollToPosition(imagesList.size()-1);
-                },100);
+                binding.recViewImages.postDelayed(() -> {
+                    binding.recViewImages.smoothScrollToPosition(imagesList.size() - 1);
+                }, 100);
 
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
-        }
-        else if (requestCode == 100 && resultCode == Activity.RESULT_OK && data != null){
+        } else if (requestCode == 100 && resultCode == Activity.RESULT_OK && data != null) {
             //coupon
-        }else if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null){
+        } else if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null) {
             FavoriteLocationModel model = (FavoriteLocationModel) data.getSerializableExtra("data");
             addOrderTextModel.setFrom_name(model.getAddress());
             addOrderTextModel.setFrom_address(model.getAddress());
             addOrderTextModel.setFrom_latitude(model.getLat());
             addOrderTextModel.setFrom_longitude(model.getLng());
             binding.tvAddress1.setText(model.getAddress());
-        }
-
-        else if (requestCode == 300 && resultCode == Activity.RESULT_OK && data != null){
+        } else if (requestCode == 300 && resultCode == Activity.RESULT_OK && data != null) {
             FavoriteLocationModel model = (FavoriteLocationModel) data.getSerializableExtra("data");
             addOrderTextModel.setTo_address(model.getAddress());
             addOrderTextModel.setTo_latitude(model.getLat());
@@ -570,15 +560,12 @@ public class PackageActivity extends AppCompatActivity {
         }
 
 
-
     }
-
-
 
 
     private void cropImage(Uri uri) {
 
-        CropImage.activity(uri).setAspectRatio(1,1).setGuidelines(CropImageView.Guidelines.ON).start(this);
+        CropImage.activity(uri).setAspectRatio(1, 1).setGuidelines(CropImageView.Guidelines.ON).start(this);
 
     }
 
@@ -591,10 +578,10 @@ public class PackageActivity extends AppCompatActivity {
 
     public void delete(int adapterPosition) {
         imagesList.remove(adapterPosition);
-        if (imagesList.size()==1){
+        if (imagesList.size() == 1) {
             imagesList.clear();
             addOrderImagesAdapter.notifyDataSetChanged();
-        }else {
+        } else {
             addOrderImagesAdapter.notifyItemRemoved(adapterPosition);
         }
     }

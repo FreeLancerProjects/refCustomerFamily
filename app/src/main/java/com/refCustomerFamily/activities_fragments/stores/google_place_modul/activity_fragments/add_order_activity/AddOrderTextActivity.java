@@ -27,6 +27,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
+import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
+import com.refCustomerFamily.activities_fragments.activity_package.PackageActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_map_search.MapSearchActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.adapters.AddOrderImagesAdapter;
@@ -36,6 +38,7 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.databinding.ActivityAddOrderTextBinding;
 import com.refCustomerFamily.databinding.DialogSelectImage2Binding;
 import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -141,6 +144,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
         });
         binding.close.setOnClickListener(v -> {super.onBackPressed();});
         binding.btnNext.setOnClickListener(v -> {
+            if(userModel!=null){
             if (canSend){
                 String order_text = binding.edtOrder.getText().toString();
                 if (!order_text.isEmpty()){
@@ -153,6 +157,9 @@ public class AddOrderTextActivity extends AppCompatActivity {
                 }else {
                     binding.edtOrder.setError(getString(R.string.field_req));
                 }
+            }}
+            else {
+                Common.CreateDialogAlert2(AddOrderTextActivity.this,getResources().getString(R.string.please_sign_in_or_sign_up));
             }
 
 
@@ -204,9 +211,12 @@ public class AddOrderTextActivity extends AppCompatActivity {
                         dialog.dismiss();
                         if (response.isSuccessful()&&response.body()!=null)
                         {
-                            Intent intent = getIntent();
-                            intent.putExtra("order_id",response.body().getOrder().getId());
-                            setResult(RESULT_OK,intent);
+                            int order_id = response.body().getOrder().getId();
+                            OrderModel.Data order = new OrderModel.Data();
+                            order.setId(order_id);
+                            Intent intent = new Intent(AddOrderTextActivity.this, OrderStepsActivity.class);
+                            intent.putExtra("data", order);
+                            startActivity(intent);
                             finish();
                         }else
                         {

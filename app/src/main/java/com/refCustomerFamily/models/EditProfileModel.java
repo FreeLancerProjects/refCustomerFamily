@@ -15,7 +15,7 @@ import com.refCustomerFamily.R;
 
 public class EditProfileModel extends BaseObservable {
 
-    private String image_url;
+    private String logo;
     private String name;
     private String email;
 
@@ -86,7 +86,7 @@ public class EditProfileModel extends BaseObservable {
         notifyPropertyChanged(BR.name);
         this.email = "";
         notifyPropertyChanged(BR.email);
-        this.image_url ="";
+        this.logo ="";
 
 
 
@@ -95,12 +95,12 @@ public class EditProfileModel extends BaseObservable {
 
 
     @Bindable
-    public String getImage_url() {
-        return image_url;
+    public String getLogo() {
+        return logo;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     @Bindable

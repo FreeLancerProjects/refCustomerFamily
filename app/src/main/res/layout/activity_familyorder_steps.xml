@@ -216,6 +216,36 @@
                                 android:visibility="gone" />
 
                         </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/llchat"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imgChat"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:background="@drawable/circle_bg_green"
+                                android:padding="7dp"
+
+                                android:src="@drawable/ic_comment_1"
+                                android:tint="@color/white" />
+
+                            <ImageView
+                                android:id="@+id/imgCall"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/circle_bg_blue"
+                                android:padding="7dp"
+                                android:src="@drawable/ic_phone_1"
+                                android:tint="@color/white" />
+
+
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -428,6 +458,36 @@
                                 android:textSize="17sp"
 
                                 />
+                            <LinearLayout
+                                android:id="@+id/llchatt"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/imgChatt"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="@drawable/circle_bg_green"
+                                    android:padding="7dp"
+
+                                    android:src="@drawable/ic_comment_1"
+                                    android:tint="@color/white" />
+
+                                <ImageView
+                                    android:id="@+id/imgCalll"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginStart="10dp"
+                                    android:background="@drawable/circle_bg_blue"
+                                    android:padding="7dp"
+                                    android:src="@drawable/ic_phone_1"
+                                    android:tint="@color/white" />
+
+
+                            </LinearLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"

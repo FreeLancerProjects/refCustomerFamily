@@ -3,6 +3,7 @@ package com.refCustomerFamily.preferences;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.DefaultSettings;
 import com.refCustomerFamily.models.UserModel;
 import com.google.gson.Gson;
@@ -128,6 +129,22 @@ public class Preferences {
         editor2.clear();
         editor2.apply();
 
+    }
+    public void create_update_ChatUserData(Context context , ChatUserModel chatUserModel)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        Gson gson = new Gson();
+        String userDataGson = gson.toJson(chatUserModel);
+        editor.putString("chat_user_data",userDataGson);
+        editor.apply();
+    }
+
+    public ChatUserModel getChatUserData(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("chatUserPref",Context.MODE_PRIVATE);
+        String userDataGson = preferences.getString("chat_user_data","");
+        return new Gson().fromJson(userDataGson, ChatUserModel.class);
     }
 
 }

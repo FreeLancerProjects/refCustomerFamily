@@ -156,7 +156,7 @@
                                             android:layout_height="match_parent"
                                             android:clickable="false"
                                             android:longClickable="false"
-                                            android:src="@drawable/user"
+                                            image="@{model.logo}"
                                             app:civ_border_color="@color/white"
                                             app:civ_border_width="1dp"
                                             app:civ_circle_background_color="@color/white" />

@@ -24,6 +24,7 @@ import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.activities_fragments.activity_package.PackageActivity;
 import com.refCustomerFamily.activities_fragments.activity_product_family.ProductFamilyActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_google_stores.GoogleStoresActivity;
+import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.add_order_activity.AddOrderTextActivity;
 import com.refCustomerFamily.adapters.CategoryAdapter;
 import com.refCustomerFamily.adapters.ProductAdapter;
 import com.refCustomerFamily.adapters.SlidingImage_Adapter;
@@ -32,6 +33,7 @@ import com.refCustomerFamily.models.SliderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.remote.Api;
+import com.refCustomerFamily.share.Common;
 import com.refCustomerFamily.tags.Tags;
 
 import java.io.IOException;
@@ -85,7 +87,6 @@ public class Fragment_Main extends Fragment {
         binding.progBarSlider.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(activity, R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
 
-
         binding.layout1.setOnClickListener(view -> {
 
             Intent intent = new Intent(this.getContext(), ProductFamilyActivity.class);
@@ -96,18 +97,20 @@ public class Fragment_Main extends Fragment {
         binding.layout2.setOnClickListener(view -> {
 
             Intent intent = new Intent(activity, GoogleStoresActivity.class);
-            intent.putExtra("lat",activity.user_lat);
-            intent.putExtra("lng",activity.user_lng);
+            intent.putExtra("lat", activity.user_lat);
+            intent.putExtra("lng", activity.user_lng);
 
             startActivity(intent);
 
         });
         binding.layout3.setOnClickListener(view -> {
+            if (userModel != null) {
+                Intent intent = new Intent(activity, PackageActivity.class);
 
-            Intent intent = new Intent(activity, PackageActivity.class);
-
-            startActivity(intent);
-
+                startActivity(intent);
+            } else {
+                Common.CreateDialogAlert2(activity, getResources().getString(R.string.please_sign_in_or_sign_up));
+            }
         });
 
     }
@@ -158,6 +161,7 @@ public class Fragment_Main extends Fragment {
         });
 
     }
+
     private void change_slide_image() {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
