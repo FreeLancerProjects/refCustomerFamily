@@ -47,11 +47,13 @@
                 app:contentInsetRight="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                tools:layout_editor_absoluteX="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->backListener.back()}">
 
                     <ImageView
                         android:id="@+id/back"

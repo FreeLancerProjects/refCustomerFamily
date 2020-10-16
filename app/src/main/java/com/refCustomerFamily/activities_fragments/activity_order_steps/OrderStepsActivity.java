@@ -21,6 +21,7 @@ import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refCustomerFamily.databinding.ActivityOrderStepsBinding;
+import com.refCustomerFamily.interfaces.Listeners;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.OrderModel;
@@ -38,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderStepsActivity extends AppCompatActivity {
+public class OrderStepsActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private ActivityOrderStepsBinding binding;
     private String lang;
@@ -69,6 +70,7 @@ public class OrderStepsActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         preferences = Preferences.newInstance();
+        binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
 
@@ -282,5 +284,10 @@ public class OrderStepsActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 }

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
+import com.refCustomerFamily.activities_fragments.activity_profile.UpdateProfileActivity;
 import com.refCustomerFamily.activities_fragments.activity_setting.SettingsActivity;
 import com.refCustomerFamily.databinding.FragmentProfileBinding;
 import com.refCustomerFamily.models.MarketCatogryModel;
@@ -67,6 +68,12 @@ public class Fragment_Profile extends Fragment  {
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
+        userModel = preferences.getUserData(getActivity());
+        binding.setModel(userModel);
+        binding.editImg.setOnClickListener(view -> {
+            Intent intent =  new Intent(getActivity(), UpdateProfileActivity.class);
+            startActivity(intent);
+        });
 
 
     }
