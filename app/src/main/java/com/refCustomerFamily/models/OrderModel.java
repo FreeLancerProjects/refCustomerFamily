@@ -48,7 +48,7 @@ public class OrderModel implements Serializable {
         private User client;
         private User driver;
         private DriverChat driver_chat;
-        private DriverChat family_chat;
+        private FamilyChat family_chat;
         public void setId(int id) {
             this.id = id;
         }
@@ -177,7 +177,7 @@ public class OrderModel implements Serializable {
             return driver_chat;
         }
 
-        public DriverChat getFamily_chat() {
+        public FamilyChat getFamily_chat() {
             return family_chat;
         }
 
@@ -321,6 +321,28 @@ public class OrderModel implements Serializable {
         }
 
         public class DriverChat implements Serializable {
+            private int id;
+            private int order_id;
+            private int first_user_id;
+            private int second_user_id;
+
+            public int getId() {
+                return id;
+            }
+
+            public int getOrder_id() {
+                return order_id;
+            }
+
+            public int getFirst_user_id() {
+                return first_user_id;
+            }
+
+            public int getSecond_user_id() {
+                return second_user_id;
+            }
+        }
+        public class FamilyChat implements Serializable {
             private int id;
             private int order_id;
             private int first_user_id;

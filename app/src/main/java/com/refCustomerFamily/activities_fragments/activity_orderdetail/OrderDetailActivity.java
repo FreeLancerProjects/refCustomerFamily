@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
+import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refCustomerFamily.databinding.ActivityOrderDetailBinding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.OrderModel;

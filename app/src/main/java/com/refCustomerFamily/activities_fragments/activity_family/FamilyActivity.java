@@ -17,8 +17,8 @@ import android.widget.Toast;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_add_order_product.AddOrderProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_cart.CartActivity;
-import com.refCustomerFamily.activities_fragments.activity_chat.ChatActivity;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
+import com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity;
 import com.refCustomerFamily.adapters.CategoryAdapter;
 import com.refCustomerFamily.adapters.FamilyProductAdapter;
 import com.refCustomerFamily.databinding.ActivityFamilyBinding;
@@ -268,7 +268,7 @@ public class FamilyActivity extends AppCompatActivity {
             int order_id = data.getIntExtra("order_id", 0);
             OrderModel.Data order=new OrderModel.Data();
             order.setId(order_id);
-            Intent intent = new Intent(this, OrderStepsActivity.class);
+            Intent intent = new Intent(this, FamilyOrderStepsActivity.class);
             intent.putExtra("data", order);
             startActivity(intent);
 

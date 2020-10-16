@@ -8,5 +8,5 @@ public class Tags {
     public static final String session_login = "login";
     public static final String session_logout = "logout";
     public static final int not_id = 3254;
-
+    public static final String not_tag = "refcustomer_not_tag";
 }
