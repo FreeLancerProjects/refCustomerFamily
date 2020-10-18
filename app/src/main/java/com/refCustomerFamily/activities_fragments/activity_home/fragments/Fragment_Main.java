@@ -79,6 +79,7 @@ public class Fragment_Main extends Fragment {
     private void initView() {
         activity = (HomeActivity) getActivity();
         preferences = Preferences.newInstance();
+        userModel = preferences.getUserData(activity);
         Paper.init(activity);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
 

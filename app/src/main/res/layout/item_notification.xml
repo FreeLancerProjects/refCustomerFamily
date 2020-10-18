@@ -53,9 +53,18 @@
                 app:cardCornerRadius="10dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="1287dp"
                     android:layout_height="match_parent">
 
+                    <TextView
+                        android:id="@+id/tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="35dp"
+                        android:text="@{model.title}"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -64,16 +73,16 @@
                         android:textColor="@color/gray12"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv" />
 
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:layout_margin="10dp"
                         android:padding="7dp"
-                        android:visibility="gone"
                         android:src="@drawable/ic_closee"
                         android:tint="@color/gray12"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Html;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -25,12 +24,14 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
+import com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity;
 import com.refCustomerFamily.models.NotFireModel;
+import com.refCustomerFamily.models.OrderModel;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.refCustomerFamily.R;
-import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.MessageModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -189,6 +190,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             String title = map.get("title");
             String body = map.get("message");
             String order_id = map.get("order_id");
+            String order_type = map.get("order_type");
             ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
             String current_class = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
             Log.e("mkjjj", current_class);
@@ -198,11 +200,11 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                     EventBus.getDefault().post(new NotFireModel(true));
 
                 } else {
-                    Loadnworder(title, body, order_id);
+                    Loadnworder(title, body, order_id, order_type);
 
                 }
             } else {
-                Loadnworder(title, body, order_id);
+                Loadnworder(title, body, order_id, order_type);
 
             }
         }
@@ -213,7 +215,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void Loadnworder(String title, String body, String order_id) {
+    private void Loadnworder(String title, String body, String order_id, String order_type) {
         String sound_Path = "android.resource://" + getPackageName() + "/" + R.raw.not;
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         String CHANNEL_ID = "my_channel_02";
@@ -237,11 +239,16 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         builder.setLargeIcon(bitmap);
 
         Intent intent = null;
+        OrderModel.Data ordermodel = new OrderModel.Data();
+        ordermodel.setId(Integer.parseInt(order_id));
+        if (order_type.equals("family")) {
+            intent = new Intent(this, FamilyOrderStepsActivity.class);
+        } else {
+            intent = new Intent(this, OrderStepsActivity.class);
+        }
 
-        intent = new Intent(this, HomeActivity.class);
 
-
-        intent.putExtra("not", true);
+        intent.putExtra("data", ordermodel);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
@@ -468,6 +475,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             String title = map.get("title");
             String body = map.get("message");
             String order_id = map.get("order_id");
+            String order_type = map.get("order_type");
             ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
             String current_class = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
             Log.e("mkjjj", current_class);
@@ -477,11 +485,11 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                     EventBus.getDefault().post(new NotFireModel(true));
 
                 } else {
-                    Loadoladorder(title, body, order_id);
+                    Loadoladorder(title, body, order_id, order_type);
 
                 }
             } else {
-                Loadoladorder(title, body, order_id);
+                Loadoladorder(title, body, order_id, order_type);
 
             }
 
@@ -489,7 +497,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         }
     }
 
-    private void Loadoladorder(String title, String body, String order_id) {
+    private void Loadoladorder(String title, String body, String order_id, String order_type) {
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         String CHANNEL_ID = "my_channel_02";
         CharSequence CHANNEL_NAME = "my_channel_name";
@@ -518,11 +526,16 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         builder.setLargeIcon(bitmap);
 
         Intent intent = null;
+        OrderModel.Data ordermodel = new OrderModel.Data();
+        ordermodel.setId(Integer.parseInt(order_id));
+        if (order_type.equals("family")) {
+            intent = new Intent(this, FamilyOrderStepsActivity.class);
+        } else {
+            intent = new Intent(this, OrderStepsActivity.class);
+        }
 
-        intent = new Intent(this, HomeActivity.class);
 
-
-        intent.putExtra("not", true);
+        intent.putExtra("data", ordermodel);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(this);
