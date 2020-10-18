@@ -68,6 +68,8 @@ public class GoogleOrderFragment extends Fragment {
         getOrders();
     }
     public void getOrders() {
+        orderList.clear();
+        orderAdapter.notifyDataSetChanged();
         binding.progBarOrders.setVisibility(View.VISIBLE);
         Api.getService(Tags.base_url).getOrderByStatus("Bearer " + userModel.getData().getToken(),
                 userModel.getData().getId(), "google", "client", "current").enqueue(new Callback<OrderModel>() {
@@ -96,5 +98,10 @@ public class GoogleOrderFragment extends Fragment {
         });
 
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrders();
     }
 }

@@ -23,12 +23,18 @@ import com.refCustomerFamily.databinding.ActivityFamilyorderStepsBinding;
 import com.refCustomerFamily.databinding.ActivityOrderStepsBinding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.ChatUserModel;
+import com.refCustomerFamily.models.MessageModel;
+import com.refCustomerFamily.models.NotFireModel;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.remote.Api;
 import com.refCustomerFamily.share.Common;
 import com.refCustomerFamily.tags.Tags;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Locale;
 
@@ -59,11 +65,13 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
 
         initView();
         getDataFromIntent();
+        preferences.create_update_orderUserData(this, orderModel.getId() + "");
         getOrderDetials();
 
     }
 
     private void initView() {
+        EventBus.getDefault().register(this);
         Paper.init(this);
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
@@ -368,5 +376,19 @@ public class FamilyOrderStepsActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void listenToNewMessage(NotFireModel notFireModel) {
+        getOrderDetials();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+        preferences.clearorder(this);
     }
 }

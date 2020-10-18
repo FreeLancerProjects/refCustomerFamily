@@ -24,8 +24,7 @@ public class MessageModel implements Serializable {
         this.image = image;
         this.room_id = room_id;
         this.is_read = is_read;
-        this.date = date;
-        this.from_user = from_user;
+
     }
 
     public MessageModel getData() {

@@ -69,8 +69,11 @@ public class FamilyOrderFragment extends Fragment {
     }
 
     public void getOrders() {
-        Log.e("mmmmmmm",userModel.getData().getId()+"");
+        orderList.clear();
+        orderAdapter.notifyDataSetChanged();
+        Log.e("mmmmmmm", userModel.getData().getId() + "");
         binding.progBarOrders.setVisibility(View.VISIBLE);
+        // binding.linearNoData.setVisibility(View.GONE);
         Api.getService(Tags.base_url).getOrderByStatus("Bearer " + userModel.getData().getToken(),
                 userModel.getData().getId(), "family", "client", "current").enqueue(new Callback<OrderModel>() {
             @Override
@@ -102,4 +105,9 @@ public class FamilyOrderFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrders();
+    }
 }

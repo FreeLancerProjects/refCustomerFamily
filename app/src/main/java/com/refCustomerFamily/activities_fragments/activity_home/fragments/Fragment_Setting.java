@@ -30,6 +30,7 @@ import com.refCustomerFamily.models.DefaultSettings;
 import com.refCustomerFamily.models.MarketCatogryModel;
 import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.activities_fragments.activity_profile.ProfileActivity;
+import com.refCustomerFamily.tags.Tags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,6 +192,8 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
     @Override
     public void logout() {
         if(preferences.getUserData(activity)!=null){
+            preferences.create_update_userData(activity,null);
+            preferences.createSession(activity, Tags.session_logout);
             Intent intent=new Intent(activity, LoginActivity.class);
             activity.finish();
             startActivity(intent);

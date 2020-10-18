@@ -177,7 +177,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemViewType(int position) {
         MessageModel messageModel = messageModelList.get(position);
-        Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
+//        Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
         if (messageModel == null) {
 
             return ITEM_LOADMORE;
