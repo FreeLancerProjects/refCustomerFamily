@@ -21,6 +21,7 @@ import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refCustomerFamily.databinding.ActivityOrderStepsBinding;
+import com.refCustomerFamily.interfaces.Listeners;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.MessageModel;
@@ -44,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderStepsActivity extends AppCompatActivity {
+public class OrderStepsActivity extends AppCompatActivity implements Listeners.BackListener {
 
     private ActivityOrderStepsBinding binding;
     private String lang;
@@ -77,6 +78,7 @@ public class OrderStepsActivity extends AppCompatActivity {
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
         binding.setLang(lang);
         preferences = Preferences.newInstance();
+        binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
 
@@ -104,8 +106,8 @@ public class OrderStepsActivity extends AppCompatActivity {
 
         });
         binding.imgChat.setOnClickListener(view -> {
-            Log.e("kdkkdck", orderModel.getDriver_chat().getId() + "");
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId());
+
+            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("chat_user_data", chatUserModel);
             startActivityForResult(intent, 1000);
@@ -134,7 +136,7 @@ public class OrderStepsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             orderModel = (OrderModel.Data) getIntent().getSerializableExtra("data");
-            //  Log.e("lxllxl", orderModel.getOrder_type());
+          //  Log.e("lxllxl", orderModel.getOrder_type());
 
         }
 
@@ -195,7 +197,6 @@ public class OrderStepsActivity extends AppCompatActivity {
 
     private void updatedata(OrderModel body) {
         binding.setModel(body.getOrder());
-        orderModel = body.getOrder();
         if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }
@@ -291,6 +292,11 @@ public class OrderStepsActivity extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    @Override
+    public void back() {
+        finish();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -7,6 +7,10 @@
 
     <data>
 
+        <variable
+            name="backListener"
+            type="com.refCustomerFamily.interfaces.Listeners.BackListener"
+            />
 
         <variable
             name="lang"
@@ -42,7 +46,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:onClick="@{()->backListener.back()}">
 
                     <ImageView
                         android:id="@+id/back"
