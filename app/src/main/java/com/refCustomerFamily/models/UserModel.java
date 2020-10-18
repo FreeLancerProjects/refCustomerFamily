@@ -171,11 +171,9 @@ public class UserModel implements Serializable {
         }
 
 
-
         public String getDetails() {
             return details;
         }
-
 
 
     }

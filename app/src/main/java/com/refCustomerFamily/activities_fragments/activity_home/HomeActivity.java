@@ -86,6 +86,11 @@ public class HomeActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         preferences = Preferences.newInstance();
         userModel = preferences.getUserData(this);
+        if (userModel!=null&&userModel.getData().getNotification_status().equals("on")) {
+            binding.switchBtn.setChecked(true);
+        } else {
+            binding.switchBtn.setChecked(false);
+        }
         if (userModel != null) {
             updateToken();
         }
