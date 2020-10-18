@@ -58,13 +58,13 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         }
 
         if (getSession().equals(Tags.session_login)) {
-            //   Log.e("sllslslls", "lslslsls");
+               Log.e("sllslslls", "lslslsls");
             if (map.get("to_user_id") != null) {
-                //     Log.e("sllslslls", "lslslsls");
+                     Log.e("sllslslls",getCurrentUser_id()+"");
 
                 int to_id = Integer.parseInt(map.get("to_user_id"));
                 if (getCurrentUser_id() == to_id) {
-                    //       Log.e("sllslslls", "lslslsls");
+                           Log.e("sllslslls", "lslslsls");
 
                     manageNotification(map);
                 }
