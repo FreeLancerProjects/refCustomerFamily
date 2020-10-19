@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back"
-        tools:context="com.refFamily.activities_fragments.activity_verification_code.VerificationCodeActivity">
+        tools:context="com.refDelegateFamily.activities_fragments.activity_verification_code.VerificationCodeActivity">
 
         <TextView
             android:id="@+id/tv1"
@@ -105,8 +105,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnResendCode"
             android:background="@drawable/small_rounded_primary"
             android:textColor="@color/white"
             android:textSize="16sp"

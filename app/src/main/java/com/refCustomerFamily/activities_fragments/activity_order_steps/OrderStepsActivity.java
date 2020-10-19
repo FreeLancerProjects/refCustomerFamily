@@ -205,7 +205,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
         }
         if (body.getOrder().getStatus().equals("driver_accepted_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            //binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
 
 
@@ -213,8 +213,8 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
         } else if (body.getOrder().getStatus().equals("driver_finished_collect_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image2.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -226,9 +226,9 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
 
         } else if (body.getOrder().getStatus().equals("driver_in_way")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -243,10 +243,10 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
 
         } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));

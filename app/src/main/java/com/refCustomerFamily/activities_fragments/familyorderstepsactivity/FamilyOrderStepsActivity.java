@@ -204,14 +204,14 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
         }
         if (body.getOrder().getStatus().equals("family_accepted_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+          //  binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
         } else if (body.getOrder().getStatus().equals("family_prepare_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
 
@@ -223,9 +223,9 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
 
         } else if (body.getOrder().getStatus().equals("family_end_prepare_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -239,10 +239,10 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
 
         } else if (body.getOrder().getStatus().equals(" driver_accepted_order")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -260,11 +260,11 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.llchatt.setVisibility(View.VISIBLE);
 
         } else if (body.getOrder().getStatus().equals("family_give_order_to_driver")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -285,12 +285,12 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.llchatt.setVisibility(View.VISIBLE);
 
         } else if (body.getOrder().getStatus().equals("driver_in_way")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -315,13 +315,13 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
 
         } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
-            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+//            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
