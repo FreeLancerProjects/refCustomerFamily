@@ -49,6 +49,7 @@
                 android:layout_gravity="end|bottom"
                 android:background="@drawable/circle_bg"
                 android:padding="10dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_edit"
                 android:tint="@color/white" />
 
@@ -87,8 +88,8 @@
             android:padding="7dp"
             android:src="@drawable/ic_mail"
             android:tint="@color/colorPrimary"
-            app:layout_constraintStart_toEndOf="@id/email"
-            app:layout_constraintTop_toTopOf="@id/ic_phone" />
+            app:layout_constraintStart_toStartOf="@id/ic_phone"
+            app:layout_constraintTop_toBottomOf="@id/ic_phone" />
 
         <TextView
             android:id="@+id/email"
@@ -99,7 +100,7 @@
             android:textColor="@color/gray12"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/ic_mail"
-            app:layout_constraintStart_toEndOf="@id/ic_phone"
+            app:layout_constraintStart_toEndOf="@id/ic_mail"
             app:layout_constraintTop_toTopOf="@id/ic_mail"
 
 
@@ -114,7 +115,7 @@
             android:padding="7dp"
             android:src="@drawable/ic_phone_1"
             android:tint="@color/colorPrimary"
-            app:layout_constraintStart_toEndOf="@id/phone"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rating_bar"
 
             />
@@ -128,7 +129,7 @@
             android:textColor="@color/gray12"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/ic_phone"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ic_phone"
             app:layout_constraintTop_toTopOf="@id/ic_phone" />
 
         <androidx.cardview.widget.CardView
@@ -137,9 +138,9 @@
             android:layout_height="50dp"
             android:layout_marginTop="35dp"
             app:cardCornerRadius="15dp"
-            app:layout_constraintEnd_toEndOf="@id/ic_mail"
-            app:layout_constraintStart_toStartOf="@id/phone"
-            app:layout_constraintTop_toBottomOf="@id/phone">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -178,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="30dp"
-                    android:text="2"
+                    android:text='@{model.data.client_orders_count+""}'
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -197,6 +198,7 @@
             android:layout_height="50dp"
             android:layout_marginTop="35dp"
             app:cardCornerRadius="15dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/ic_mail"
             app:layout_constraintStart_toStartOf="@id/phone"
             app:layout_constraintTop_toBottomOf="@id/order_card">

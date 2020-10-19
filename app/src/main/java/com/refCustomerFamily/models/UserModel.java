@@ -42,6 +42,7 @@ public class UserModel implements Serializable {
         private String created_at;
         private String updated_at;
         private String details;
+        private int client_orders_count;
 
         private String fireBaseToken;
 
@@ -170,6 +171,9 @@ public class UserModel implements Serializable {
             this.fireBaseToken = fireBaseToken;
         }
 
+        public int getClient_orders_count() {
+            return client_orders_count;
+        }
 
         public String getDetails() {
             return details;
