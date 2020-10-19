@@ -52,6 +52,11 @@ public interface Service {
 
     );
 
+    @FormUrlEncoded
+    @POST("api/drive_profile")
+    Call<UserModel> getProfile(@Header("Authorization") String user_token,
+                                @Field("int id") int id
+    );
 
     @FormUrlEncoded
     @POST("api/register-client")
