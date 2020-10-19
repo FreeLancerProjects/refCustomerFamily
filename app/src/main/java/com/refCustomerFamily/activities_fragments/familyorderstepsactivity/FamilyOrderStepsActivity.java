@@ -80,11 +80,16 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
+try {
+    ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId());
+    Intent intent = new Intent(this, ChatActivity.class);
+    intent.putExtra("chat_user_data", chatUserModel);
+    startActivityForResult(intent, 1000);
+}
+catch (Exception e){
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId());
-            Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data", chatUserModel);
-            startActivityForResult(intent, 1000);
+}
+
         });
 
         binding.imgCall.setOnClickListener(view -> {
@@ -105,11 +110,15 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
         });
         binding.imgChatt.setOnClickListener(view -> {
+try {
+    ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId());
+    Intent intent = new Intent(this, ChatActivity.class);
+    intent.putExtra("chat_user_data", chatUserModel);
+    startActivityForResult(intent, 1000);
+}catch (Exception e){
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId());
-            Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data", chatUserModel);
-            startActivityForResult(intent, 1000);
+}
+
         });
 
         binding.imgCalll.setOnClickListener(view -> {

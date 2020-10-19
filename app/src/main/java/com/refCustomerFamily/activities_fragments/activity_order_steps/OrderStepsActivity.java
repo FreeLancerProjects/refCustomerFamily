@@ -81,11 +81,15 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
         binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
+            try {
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId());
+                Intent intent = new Intent(this, ChatActivity.class);
+                intent.putExtra("chat_user_data", chatUserModel);
+                startActivityForResult(intent, 1000);
+            } catch (Exception e) {
 
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getClient().getName(), orderModel.getClient().getLogo(), orderModel.getClient().getId() + "", orderModel.getDriver_chat().getId());
-            Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data", chatUserModel);
-            startActivityForResult(intent, 1000);
+            }
+
         });
 
         binding.imgCall.setOnClickListener(view -> {
@@ -136,7 +140,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
         Intent intent = getIntent();
         if (intent != null) {
             orderModel = (OrderModel.Data) getIntent().getSerializableExtra("data");
-          //  Log.e("lxllxl", orderModel.getOrder_type());
+            //  Log.e("lxllxl", orderModel.getOrder_type());
 
         }
 
@@ -303,6 +307,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
     public void listenToNewMessage(NotFireModel notFireModel) {
         getOrderDetials();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
