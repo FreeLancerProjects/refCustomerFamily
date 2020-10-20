@@ -251,6 +251,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.llchat.setVisibility(View.GONE);
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -264,7 +265,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
-
+binding.llchat.setVisibility(View.GONE);
         }
 
 

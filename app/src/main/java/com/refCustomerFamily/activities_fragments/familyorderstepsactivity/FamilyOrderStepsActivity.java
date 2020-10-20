@@ -80,15 +80,14 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         binding.setBackListener(this);
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
-try {
-    ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId());
-    Intent intent = new Intent(this, ChatActivity.class);
-    intent.putExtra("chat_user_data", chatUserModel);
-    startActivityForResult(intent, 1000);
-}
-catch (Exception e){
+            try {
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId());
+                Intent intent = new Intent(this, ChatActivity.class);
+                intent.putExtra("chat_user_data", chatUserModel);
+                startActivityForResult(intent, 1000);
+            } catch (Exception e) {
 
-}
+            }
 
         });
 
@@ -110,14 +109,14 @@ catch (Exception e){
 
         });
         binding.imgChatt.setOnClickListener(view -> {
-try {
-    ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId());
-    Intent intent = new Intent(this, ChatActivity.class);
-    intent.putExtra("chat_user_data", chatUserModel);
-    startActivityForResult(intent, 1000);
-}catch (Exception e){
+            try {
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId());
+                Intent intent = new Intent(this, ChatActivity.class);
+                intent.putExtra("chat_user_data", chatUserModel);
+                startActivityForResult(intent, 1000);
+            } catch (Exception e) {
 
-}
+            }
 
         });
 
@@ -213,7 +212,7 @@ try {
 
         }
         if (body.getOrder().getStatus().equals("family_accepted_order")) {
-          //  binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            //  binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
@@ -274,6 +273,7 @@ try {
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image4.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image5.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.llchat.setVisibility(View.GONE);
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
             binding.image3.setColorFilter(getResources().getColor(R.color.white));
@@ -354,7 +354,7 @@ try {
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
             binding.tv6.setTextColor(getResources().getColor(R.color.black));
             binding.tv7.setTextColor(getResources().getColor(R.color.black));
-            binding.llchatt.setVisibility(View.VISIBLE);
+            binding.llchatt.setVisibility(View.GONE);
 
         }
 
