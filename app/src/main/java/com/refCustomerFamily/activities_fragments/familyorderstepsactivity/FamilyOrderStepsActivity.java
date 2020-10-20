@@ -66,7 +66,6 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
         initView();
         getDataFromIntent();
-        preferences.create_update_orderUserData(this, orderModel.getId() + "");
         getOrderDetials();
 
     }
@@ -204,6 +203,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
 
         binding.setModel(body.getOrder());
         orderModel = body.getOrder();
+        preferences.create_update_orderUserData(this, orderModel.getId() + "");
+
         if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }
