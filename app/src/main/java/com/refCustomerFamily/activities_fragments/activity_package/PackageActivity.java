@@ -225,13 +225,13 @@ public class PackageActivity extends AppCompatActivity {
                                 Toast.makeText(PackageActivity.this, "Server Error", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
-                            }
+                                Log.e("mmmmm",response.code()+"");
+                                Log.e("sssss",response.message()+"");
 
-                            try {
-                                Log.e("error", response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
                             }
+                            Log.e("mmmmm",response.code()+"");
+                            Log.e("sssss",response.message()+"");
+
                         }
                     }
 
@@ -246,10 +246,12 @@ public class PackageActivity extends AppCompatActivity {
                                     Toast.makeText(PackageActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(PackageActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
+                                    Log.e("5555555555",t.getMessage()+"");
                                 }
                             }
                         } catch (Exception e) {
                             Log.e("Error", e.getMessage() + "__");
+
                         }
                     }
                 });

@@ -323,9 +323,9 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
 
     private void sendmessageimage() {
-        ProgressDialog dialog = Common.createProgressDialog(this, getResources().getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
+//        ProgressDialog dialog = Common.createProgressDialog(this, getResources().getString(R.string.wait));
+//        dialog.setCancelable(false);
+//        dialog.show();
 
         RequestBody user_part = Common.getRequestBodyText(userModel.getData().getId() + "");
         RequestBody reciver_part = Common.getRequestBodyText(chatUserModel.getId() + "");
@@ -340,7 +340,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 .enqueue(new Callback<MessageModel>() {
                     @Override
                     public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-                        dialog.dismiss();
+                //        dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             //listener.onSuccess(response.body());
 
@@ -363,7 +363,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                     @Override
                     public void onFailure(Call<MessageModel> call, Throwable t) {
                         try {
-                            dialog.dismiss();
+              //              dialog.dismiss();
                             Toast.makeText(ChatActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
@@ -374,16 +374,14 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
 
     private void sendmessagetext(String message) {
-        final Dialog dialog = Common.createProgressDialog(ChatActivity.this, getString(R.string.wait));
-        dialog.setCancelable(false);
-        dialog.show();
+
 
         try {
             Api.getService(Tags.base_url)
                     .sendmessagetext("Bearer " + userModel.getData().getToken(), userModel.getData().getId() + "", chatUserModel.getId(), "text", chatUserModel.getRoom_id() + "", message).enqueue(new Callback<MessageModel>() {
                 @Override
                 public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-                    dialog.dismiss();
+               //     dialog.dismiss();
                     if (response.isSuccessful()) {
 
                         Log.e("llll", response.toString());
@@ -405,7 +403,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
                 @Override
                 public void onFailure(Call<MessageModel> call, Throwable t) {
-                    dialog.dismiss();
+                 //   dialog.dismiss();
                     try {
                         Toast.makeText(ChatActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                         Log.e("Error", t.getMessage());
@@ -415,7 +413,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 }
             });
         } catch (Exception e) {
-            dialog.dismiss();
+            //dialog.dismiss();
             Log.e("error", e.getMessage().toString());
         }
     }

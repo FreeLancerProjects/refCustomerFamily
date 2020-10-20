@@ -110,7 +110,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
         });
         binding.imgChat.setOnClickListener(view -> {
-
+Log.e("cccccc",orderModel.getDriver().getName()+"   "+orderModel.getDriver_chat().getId());
             ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId());
             Intent intent = new Intent(this, ChatActivity.class);
             intent.putExtra("chat_user_data", chatUserModel);
@@ -201,6 +201,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
     private void updatedata(OrderModel body) {
         binding.setModel(body.getOrder());
+        orderModel=body.getOrder();
         if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }
