@@ -161,8 +161,8 @@
     <string name="another_reason">سبب اخر</string>
     <string name="refuse_confirm">تأكيد الرفض</string>
     <string name="update_confirm">تأكيد التعديل</string>
-    <string name="update_profile">تعديل البروفايل</string>
-    <string name="profile_1">الروفايل</string>
+    <string name="update_profile">تعديل الملف الشخصى</string>
+    <string name="profile_1">الملف الشخصى</string>
     <string name="productive_families">أسر منتجة</string>
     <string name="markets">متاجر</string>
     <string name="send_package">ارسال طرد</string>
