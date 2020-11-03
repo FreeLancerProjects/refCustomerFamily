@@ -82,6 +82,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
         editProfileModel = new EditProfileModel();
         binding.setUpdateListener(this);
         binding.setModel(editProfileModel);
+        binding.setModel2(userModel);
         updateUI();
 
         binding.flImage.setOnClickListener(view -> checkCameraPermission());
@@ -96,10 +97,11 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
 
         editProfileModel.setName(userModel.getData().getName());
         editProfileModel.setEmail(userModel.getData().getEmail());
-
-
+        Log.e("mmmmmmmm",userModel.getData().getLogo());
         if (userModel.getData().getLogo()!=null)
         {
+            Log.e("cccccccccccccc",userModel.getData().getLogo());
+
             Picasso.get().load(Uri.parse(Tags.IMAGE_URL+userModel.getData().getLogo())).fit().into(binding.imgLogo);
 
         }

@@ -117,6 +117,8 @@ public class Fragment_Profile extends Fragment  {
                             e.printStackTrace();
                         }
                     } else {
+                        Log.e("cccccccccc",response.errorBody()+"");
+
                         Toast.makeText(getActivity(), getString(R.string.failed), Toast.LENGTH_SHORT).show();
                     }
                 }
