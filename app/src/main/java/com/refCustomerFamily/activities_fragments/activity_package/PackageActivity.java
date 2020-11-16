@@ -150,6 +150,20 @@ public class PackageActivity extends AppCompatActivity {
         addOrderTextModel.setPayment_method("cash");
         addOrderTextModel.setHour_arrival_time("1");
         addOrderTextModel.setOrder_notes("");
+        binding.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.frcard.setBackgroundResource(R.drawable.small_stroke_primary2);
+                binding.frcash.setBackgroundResource(0);
+            }
+        });
+        binding.cash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.frcash.setBackgroundResource(R.drawable.small_stroke_primary2);
+                binding.frcard.setBackgroundResource(0);
+            }
+        });
         Calendar calendar = Calendar.getInstance(new Locale(lang));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
         String timeArrival = dateFormat.format(new Date(calendar.getTimeInMillis()));

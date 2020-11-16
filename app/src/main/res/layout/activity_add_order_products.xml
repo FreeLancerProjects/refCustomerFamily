@@ -157,6 +157,173 @@
                         android:gravity="center"
                         android:text="@string/add_comment"
                         />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/payment_type"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cash"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="3dp"
+
+                            >
+
+                            <FrameLayout
+                                android:id="@+id/frcash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:background="@drawable/small_stroke_primary2"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:orientation="horizontal"
+
+                                    >
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/ic_check"
+                                        android:tint="@color/colorPrimary"
+
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:text="@string/cash"
+                                        android:textColor="@color/gray11"
+                                        android:textSize="15sp" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="Cash"
+                                            android:textSize="5sp"
+                                            tools:ignore="HardcodedText,SmallSp"
+
+                                            />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:text="كــاش"
+                                            android:textSize="5sp"
+                                            tools:ignore="HardcodedText,SmallSp" />
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:padding="3dp"
+                                        android:src="@drawable/cash" />
+                                </LinearLayout>
+                            </FrameLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="3dp"
+                            app:cardBackgroundColor="@color/white"
+                            android:layout_margin="5dp"
+
+                            >
+                            <FrameLayout
+                                android:id="@+id/frcard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:paddingStart="10dp"
+                                android:paddingEnd="10dp"
+                                >
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_gravity="center"
+
+                                    >
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/ic_check"
+                                        android:tint="@color/colorPrimary"
+
+                                        />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginEnd="10dp"
+                                        android:textSize="15sp"
+                                        android:textColor="@color/gray11"
+                                        android:text="@string/electronic"
+                                        />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:orientation="vertical"
+                                        >
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="5sp"
+                                            android:text="card"
+                                            tools:ignore="HardcodedText,SmallSp"
+                                            android:layout_gravity="center_horizontal"
+
+                                            />
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="5sp"
+                                            android:text="كارد"
+                                            tools:ignore="HardcodedText,SmallSp"
+                                            android:layout_gravity="center_horizontal"
+                                            />
+                                    </LinearLayout>
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:src="@drawable/credit"
+                                        android:padding="3dp"
+                                        />
+                                </LinearLayout>
+                            </FrameLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
                     <LinearLayout
                         android:id="@+id/llNotes"
                         android:layout_width="match_parent"

@@ -263,5 +263,6 @@
     <string name="The_request_has_been_delivered_to_the_representative">The request has been delivered to the delegate</string>
     <string name="The_delegate_is_on_the_way_to_you">The delegate is on the way to you</string>
     <string name="The_request_has_been_received_successfully">The request has been received successfully</string>
+    <string name="electronic">ُElectronic</string>
 
 </resources>

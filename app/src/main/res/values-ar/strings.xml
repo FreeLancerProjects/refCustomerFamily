@@ -262,5 +262,6 @@
     <string name="The_request_has_been_delivered_to_the_representative">تم تسليم الطلب للمندوب</string>
     <string name="The_delegate_is_on_the_way_to_you">المندوب فى الطريق اليك</string>
     <string name="The_request_has_been_received_successfully">تم استلام الطلب بنجاح</string>
+    <string name="electronic">الكترونى</string>
 
 </resources>

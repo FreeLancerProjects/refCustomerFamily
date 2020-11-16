@@ -9,7 +9,7 @@ public class MessageModel implements Serializable {
     private String from_user_id;
     private String message_kind;
     private String message;
-    private String image;
+    private String file_link;
     private String room_id;
     private String is_read;
     private long date;
@@ -21,7 +21,7 @@ public class MessageModel implements Serializable {
         this.from_user_id = from_user_id;
         this.message_kind = message_kind;
         this.message = message;
-        this.image = image;
+        this.file_link = image;
         this.room_id = room_id;
         this.is_read = is_read;
 
@@ -51,10 +51,9 @@ public class MessageModel implements Serializable {
         return message;
     }
 
-    public String getImage() {
-        return image;
+    public String getFile_link() {
+        return file_link;
     }
-
 
     public String getRoom_id() {
         return room_id;

@@ -47,7 +47,6 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Paper.init(context);
         activity = (ChatActivity) context;
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
-
     }
 
     @NonNull
@@ -177,7 +176,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemViewType(int position) {
         MessageModel messageModel = messageModelList.get(position);
-//        Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
+        Log.e("lsllsl", messageModel.getTo_user_id()+ " " + messageModel.getType());
         if (messageModel == null) {
 
             return ITEM_LOADMORE;
@@ -187,12 +186,16 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_LEFT;
             } else {
+                Log.e("lsllsl", messageModel.getFile_link());
+
                 return ITEM_image_LEFT;
             }
         } else {
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_RIGHT;
             } else {
+                Log.e("lsllsl", messageModel.getFile_link());
+
                 return ITEM_image_RIGHT;
             }
 

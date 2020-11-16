@@ -154,7 +154,20 @@ public class AddOrderProductActivity extends AppCompatActivity {
         addOrderTextModel.setPayment_method("cash");
         addOrderTextModel.setEnd_shipping_time("");
         addOrderTextModel.setOrder_notes("");
-
+        binding.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.frcard.setBackgroundResource(R.drawable.small_stroke_primary2);
+                binding.frcash.setBackgroundResource(0);
+            }
+        });
+        binding.cash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.frcash.setBackgroundResource(R.drawable.small_stroke_primary2);
+                binding.frcard.setBackgroundResource(0);
+            }
+        });
         getVAT();
     }
 
