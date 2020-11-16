@@ -185,18 +185,22 @@ public class AddOrderTextActivity extends AppCompatActivity {
         String timeArrival = dateFormat.format(new Date(calendar.getTimeInMillis()));
         addOrderTextModel.setEnd_shipping_time(timeArrival);
         addOrderTextModel.setHour_arrival_time("1");
-binding.card.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        binding.frcard.setBackgroundResource(R.drawable.small_stroke_primary2);
-        binding.frcash.setBackgroundResource(0);
-    }
-});
+        binding.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.frcard.setBackgroundResource(R.drawable.small_stroke_primary2);
+                binding.frcash.setBackgroundResource(0);
+                binding.iconcash.setVisibility(View.GONE);
+                binding.iconcard.setVisibility(View.VISIBLE);
+            }
+        });
         binding.cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 binding.frcash.setBackgroundResource(R.drawable.small_stroke_primary2);
                 binding.frcard.setBackgroundResource(0);
+                binding.iconcash.setVisibility(View.VISIBLE);
+                binding.iconcard.setVisibility(View.GONE);
             }
         });
     }

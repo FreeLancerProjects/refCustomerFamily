@@ -155,6 +155,8 @@ public class PackageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 binding.frcard.setBackgroundResource(R.drawable.small_stroke_primary2);
                 binding.frcash.setBackgroundResource(0);
+                binding.iconcash.setVisibility(View.GONE);
+                binding.iconcard.setVisibility(View.VISIBLE);
             }
         });
         binding.cash.setOnClickListener(new View.OnClickListener() {
@@ -162,6 +164,8 @@ public class PackageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 binding.frcash.setBackgroundResource(R.drawable.small_stroke_primary2);
                 binding.frcard.setBackgroundResource(0);
+                binding.iconcash.setVisibility(View.VISIBLE);
+                binding.iconcard.setVisibility(View.GONE);
             }
         });
         Calendar calendar = Calendar.getInstance(new Locale(lang));

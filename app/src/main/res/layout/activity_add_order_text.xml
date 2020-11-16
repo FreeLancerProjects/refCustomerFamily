@@ -210,6 +210,7 @@
 
                                 >
                                 <ImageView
+                                    android:id="@+id/iconcash"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:src="@drawable/ic_check"
@@ -283,10 +284,12 @@
 
                                 >
                                 <ImageView
+                                    android:id="@+id/iconcard"
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:src="@drawable/ic_check"
                                     android:tint="@color/colorPrimary"
+                                    android:visibility="gone"
 
                                     />
                                 <TextView
