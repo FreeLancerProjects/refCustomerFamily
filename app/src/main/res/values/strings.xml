@@ -270,5 +270,6 @@
     <string name="contactus">ContactUs</string>
     <string name="no_feedback_to_show">No Feedback to show</string>
     <string name="suc">success</string>
+    <string name="send">Send</string>
 
 </resources>

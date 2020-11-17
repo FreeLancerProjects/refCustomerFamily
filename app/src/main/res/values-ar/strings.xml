@@ -269,5 +269,6 @@
     <string name="contactus">إتصل بنا</string>
     <string name="no_feedback_to_show">لا يوجد تعليقات لعرضها</string>
     <string name="suc">تم بنجاح</string>
+    <string name="send">ارسال</string>
 
 </resources>
