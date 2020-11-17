@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">رف العميل</string>
-    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
-    <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
+    <string name="map_api_key">AIzaSyA5XgBptKhW7SYPcbvWFCbg0Wn0C3MReXQ</string>
+    <string name="search_key">AIzaSyA5XgBptKhW7SYPcbvWFCbg0Wn0C3MReXQ</string>
 
     <string name="field_req">الحقل مطلوب</string>
     <string name="login">تسجيل دخول</string>
@@ -270,5 +270,9 @@
     <string name="no_feedback_to_show">لا يوجد تعليقات لعرضها</string>
     <string name="suc">تم بنجاح</string>
     <string name="send">ارسال</string>
+    <string name="comment">تعليق</string>
+    <string name="add_rate">اضافة تقييم</string>
+    <string name="driver">سواق</string>
+    <string name="family">اسره منتجه</string>
 
 </resources>

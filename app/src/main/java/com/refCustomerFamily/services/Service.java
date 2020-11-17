@@ -55,7 +55,7 @@ public interface Service {
     @FormUrlEncoded
     @POST("api/drive_profile")
     Call<UserModel> getProfile(@Header("Authorization") String user_token,
-                                @Field("id") int id
+                               @Field("id") int id
     );
 
     @FormUrlEncoded
@@ -80,7 +80,6 @@ public interface Service {
 
 
     );
-
 
 
     @FormUrlEncoded
@@ -206,20 +205,22 @@ public interface Service {
 
     @GET("api/sttings")
     Call<SettingModel> getSetting();
+
     @GET("api/Get-my-notifications")
     Call<NotificationModel> getNotification(@Header("Authorization") String user_token,
                                             @Query("user_id") int user_id);
+
     @GET("api/get-one-order")
     Call<OrderModel> getorderdetials(@Header("Authorization") String user_token,
                                      @Query("order_id") int order_id
     );
+
     @FormUrlEncoded
     @POST("api/update-profile")
     Call<UserModel> updateProfileWithoutImage(@Header("Authorization") String user_token,
                                               @Field("id") int id,
                                               @Field("name") String name,
                                               @Field("email") String email
-
 
 
     );
@@ -232,6 +233,7 @@ public interface Service {
                                            @Part("email") RequestBody email,
                                            @Part MultipartBody.Part logo
     );
+
     @FormUrlEncoded
     @POST("api/firebase-tokens")
     Call<ResponseBody> updateToken(
@@ -282,6 +284,7 @@ public interface Service {
 
 //
             );
+
     @FormUrlEncoded
     @POST("api/contact-us")
     Call<ResponseBody> contactUs(@Field("name") String name,
@@ -291,5 +294,17 @@ public interface Service {
                                  @Field("message") String message
 
 
+    );
+
+    @FormUrlEncoded
+    @POST("api/add-rate")
+    Call<ResponseBody> addRate(
+            @Header("Authorization") String user_token,
+            @Field("from_user_id") String from_user_id,
+            @Field("to_user_id") String to_user_id,
+            @Field("order_id") String order_id,
+            @Field("rating") double rating,
+            @Field("notification_id") String notification_id,
+            @Field("rating_comment") String rating_comment
     );
 }

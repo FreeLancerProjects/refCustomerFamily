@@ -1,6 +1,7 @@
 <resources>
+<!--    AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q-->
     <string name="app_name">Ref Customer </string>
-    <string name="map_api_key">AIzaSyA6QI378BHt9eqBbiJKtqWHTSAZxcSwN3Q</string>
+    <string name="map_api_key">AIzaSyA5XgBptKhW7SYPcbvWFCbg0Wn0C3MReXQ</string>
     <string name="search_key">AIzaSyAeyMUJgKAhnNXbILHONb1um72CNzELFRY</string>
     <string name="field_req">Field required</string>
     <string name="login">Login</string>
@@ -271,5 +272,9 @@
     <string name="no_feedback_to_show">No Feedback to show</string>
     <string name="suc">success</string>
     <string name="send">Send</string>
+    <string name="comment">Comment</string>
+    <string name="add_rate">Add Rate</string>
+    <string name="driver">Driver</string>
+    <string name="family">Family</string>
 
 </resources>

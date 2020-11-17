@@ -2,6 +2,7 @@ package com.refCustomerFamily.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_notification.NotificationActivity;
 import com.refCustomerFamily.databinding.ItemNotificationBinding;
 import com.refCustomerFamily.models.NotificationModel;
 import com.refCustomerFamily.models.UserModel;
@@ -54,6 +56,18 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationAdapterVH holder, int position) {
         holder.binding.setLang(lang);
         holder.binding.setModel(notificationList.get(position));
+        if (notificationList.get(position).getAction_type().equals("rate_driver") || notificationList.get(position).getAction_type().equals("rate_family")) {
+            holder.binding.tvAddRate.setVisibility(View.VISIBLE);
+        }
+        holder.binding.tvAddRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (context instanceof NotificationActivity) {
+                    NotificationActivity notificationActivity = (NotificationActivity) context;
+                    notificationActivity.CreateAddRateAlertDialog(notificationList.get(position));
+                }
+            }
+        });
     }
 
     @Override
