@@ -264,5 +264,11 @@
     <string name="The_delegate_is_on_the_way_to_you">The delegate is on the way to you</string>
     <string name="The_request_has_been_received_successfully">The request has been received successfully</string>
     <string name="electronic">ُElectronic</string>
+    <string name="users_feedback">Users Feedback</string>
+    <string name="subject">Subject</string>
+    <string name="message">Message</string>
+    <string name="contactus">ContactUs</string>
+    <string name="no_feedback_to_show">No Feedback to show</string>
+    <string name="suc">success</string>
 
 </resources>

@@ -59,7 +59,10 @@
             android:name=".activities_fragments.activity_package.PackageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
+        <activity
+            android:name=".activities_fragments.activity_contact_us.ContactUsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_about_app.AboutAppActivity;
+import com.refCustomerFamily.activities_fragments.activity_contact_us.ContactUsActivity;
 import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.activities_fragments.activity_language.LanguageActivity;
 import com.refCustomerFamily.activities_fragments.activity_login.LoginActivity;
@@ -213,7 +214,11 @@ public class Fragment_Setting extends Fragment implements Listeners.SettingActio
         startActivity(intent);
     }
 
-
+    @Override
+    public void contactUs() {
+        Intent intent = new Intent(activity, ContactUsActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

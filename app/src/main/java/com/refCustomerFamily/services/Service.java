@@ -282,4 +282,14 @@ public interface Service {
 
 //
             );
+    @FormUrlEncoded
+    @POST("api/contact-us")
+    Call<ResponseBody> contactUs(@Field("name") String name,
+                                 @Field("email") String email,
+                                 @Field("phone") String phone,
+                                 @Field("subject") String subject,
+                                 @Field("message") String message
+
+
+    );
 }

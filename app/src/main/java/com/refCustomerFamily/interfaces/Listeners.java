@@ -1,6 +1,8 @@
 package com.refCustomerFamily.interfaces;
 
 
+import com.google.gson.internal.$Gson$Preconditions;
+
 public interface Listeners {
 
     interface SignUpListener{
@@ -49,6 +51,7 @@ public interface Listeners {
         void about();
         void logout();
         void share();
+        void contactUs();
 
     }
     interface UpdateProfileListener

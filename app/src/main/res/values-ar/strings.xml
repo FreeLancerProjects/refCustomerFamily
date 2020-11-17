@@ -263,5 +263,11 @@
     <string name="The_delegate_is_on_the_way_to_you">المندوب فى الطريق اليك</string>
     <string name="The_request_has_been_received_successfully">تم استلام الطلب بنجاح</string>
     <string name="electronic">الكترونى</string>
+    <string name="users_feedback">ملاحظات المستخدمين</string>
+    <string name="subject">الموضوع</string>
+    <string name="message">الرسالة</string>
+    <string name="contactus">إتصل بنا</string>
+    <string name="no_feedback_to_show">لا يوجد تعليقات لعرضها</string>
+    <string name="suc">تم بنجاح</string>
 
 </resources>
