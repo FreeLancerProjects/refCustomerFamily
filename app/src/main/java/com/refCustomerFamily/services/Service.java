@@ -11,6 +11,7 @@ import com.refCustomerFamily.models.MessageDataModel;
 import com.refCustomerFamily.models.MessageModel;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.NotificationModel;
+import com.refCustomerFamily.models.PackageResponse;
 import com.refCustomerFamily.models.SettingModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
 import com.refCustomerFamily.models.SliderModel;
@@ -307,4 +308,10 @@ public interface Service {
             @Field("notification_id") String notification_id,
             @Field("rating_comment") String rating_comment
     );
+    @FormUrlEncoded
+    @POST("api/pay-bill")
+    Call<PackageResponse> pay(@Header("Authorization") String user_token,
+                              @Field("bill_cost") String bill_cost,
+                              @Field("user_id") String user_id,
+                              @Field("order_id") String order_id);
 }

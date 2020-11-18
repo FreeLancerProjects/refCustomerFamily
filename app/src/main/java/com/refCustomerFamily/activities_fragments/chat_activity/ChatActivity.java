@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_web_view.WebViewActivity;
 import com.refCustomerFamily.adapters.Chat_Adapter;
 import com.refCustomerFamily.databinding.ActivityChatBinding;
 import com.refCustomerFamily.databinding.DialogSelectImageBinding;
@@ -39,6 +40,8 @@ import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.MessageDataModel;
 import com.refCustomerFamily.models.MessageModel;
+import com.refCustomerFamily.models.OrderModel;
+import com.refCustomerFamily.models.PackageResponse;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
 import com.refCustomerFamily.remote.Api;
@@ -58,6 +61,7 @@ import java.util.Locale;
 import io.paperdb.Paper;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,6 +82,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private ChatUserModel chatUserModel;
     private int current_page = 1;
     private boolean isLoading = false;
+    private OrderModel orderModel;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -89,8 +94,55 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
         initView();
+        getOrder();
+
         getChatMessages();
 
+    }
+
+    private void getOrder() {
+
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .getorderdetials("Bearer " + userModel.getData().getToken(), chatUserModel.getOrder_id())
+                .enqueue(new Callback<OrderModel>() {
+                    @Override
+                    public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                        dialog.dismiss();
+                        if (response.isSuccessful() && response.body() != null) {
+                            update(response.body());
+
+
+                        } else {
+                            dialog.dismiss();
+                            try {
+                                Log.e("error_code", response.code() + "" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<OrderModel> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
+    }
+
+    private void update(OrderModel body) {
+        this.orderModel = body;
+        Log.e("ksksksk",body.getOrder().getPayment_online_status());
+        if (body.getOrder().getBill_step().equals("bill_attach") && body.getOrder().getPayment_method().equals("online") && body.getOrder().getPayment_online_status() != null && body.getOrder().getPayment_online_status().equals("unpaid")) {
+            binding.llBill.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initView() {
@@ -124,7 +176,12 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 checkdata();
             }
         });
-
+        binding.llBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pay();
+            }
+        });
         binding.imagePhoto.setOnClickListener(view -> CreateImageAlertDialog());
         binding.recView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -157,6 +214,74 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
             binding.setName(chatUserModel.getName());
 
         }
+    }
+
+    private void pay() {
+
+        //  Log.e("data",or)
+
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .pay("Bearer " + userModel.getData().getToken(), orderModel.getOrder().getBill_cost() + "", userModel.getData().getId() + "", orderModel.getOrder().getId() + "")
+                .enqueue(new Callback<PackageResponse>() {
+                    @Override
+                    public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
+
+                       // Log.e("datttaa", response.code()+"    "+orderModel.getOrder().getId() + "_" + orderModel.getOrder().getBill_cost() + "_" + userModel.getData().getId());
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            binding.llBill.setVisibility(View.GONE);
+                            Intent intent = new Intent(ChatActivity.this, WebViewActivity.class);
+                            intent.putExtra("data", response.body());
+                            startActivityForResult(intent, 100);
+                            // chatUserModel.setBill_step("bill_attach");
+//                            if (chat_adapter == null) {
+//                                messagedatalist.add(response.body());
+//                                chat_adapter = new Chat_Adapter(messagedatalist, userModel.getData().getId(), ChatActivity.this);
+//                                binding.recView.setAdapter(chat_adapter);
+//                                chat_adapter.notifyDataSetChanged();
+//                                new Handler().postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
+//
+//                                    }
+//                                }, 100);
+//                            } else {
+//                                messagedatalist.add(response.body());
+//                                chat_adapter.notifyItemInserted(messagedatalist.size() - 1);
+//
+//                                new Handler().postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
+//
+//                                    }
+//                                }, 100);
+//                            }
+                            getOrder();
+                        } else {
+
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PackageResponse> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
     }
 
 
@@ -340,7 +465,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                 .enqueue(new Callback<MessageModel>() {
                     @Override
                     public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-                //        dialog.dismiss();
+                        //        dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
                             //listener.onSuccess(response.body());
 
@@ -363,7 +488,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                     @Override
                     public void onFailure(Call<MessageModel> call, Throwable t) {
                         try {
-              //              dialog.dismiss();
+                            //              dialog.dismiss();
                             Toast.makeText(ChatActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
@@ -381,7 +506,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                     .sendmessagetext("Bearer " + userModel.getData().getToken(), userModel.getData().getId() + "", chatUserModel.getId(), "text", chatUserModel.getRoom_id() + "", message).enqueue(new Callback<MessageModel>() {
                 @Override
                 public void onResponse(Call<MessageModel> call, Response<MessageModel> response) {
-               //     dialog.dismiss();
+                    //     dialog.dismiss();
                     if (response.isSuccessful()) {
 
                         Log.e("llll", response.toString());
@@ -403,7 +528,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
                 @Override
                 public void onFailure(Call<MessageModel> call, Throwable t) {
-                 //   dialog.dismiss();
+                    //   dialog.dismiss();
                     try {
                         Toast.makeText(ChatActivity.this, getString(R.string.something), Toast.LENGTH_SHORT).show();
                         Log.e("Error", t.getMessage());
@@ -441,6 +566,10 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
             sendmessageimage();
 
 
+        }
+        else {
+            binding.llBill.setVisibility(View.GONE);
+            getOrder();
         }
 
     }

@@ -80,7 +80,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId());
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId());
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
@@ -109,7 +109,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         });
         binding.imgChatt.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId());
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId());
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
@@ -204,7 +204,12 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         binding.setModel(body.getOrder());
         orderModel = body.getOrder();
         preferences.create_update_orderUserData(this, orderModel.getId() + "");
-
+   if(body.getOrder().getDriver()!=null&&!body.getOrder().getDriver().getShow_phone_status().equals("show")){
+            binding.imgCalll.setVisibility(View.GONE);
+        }
+      if(body.getOrder().getFamily()!=null&&!body.getOrder().getFamily().getShow_phone_status().equals("show")){
+            binding.imgCall.setVisibility(View.GONE);
+        }
         if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }

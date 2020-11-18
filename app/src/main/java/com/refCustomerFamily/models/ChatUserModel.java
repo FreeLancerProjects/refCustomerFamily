@@ -8,15 +8,15 @@ public class ChatUserModel implements Serializable {
     private String image;
     private String id;
     private int room_id;
+    private int order_id;
 
 
-
-    public ChatUserModel(String name, String image, String id, int room_id) {
+    public ChatUserModel(String name, String image, String id, int room_id, int order_id) {
         this.name = name;
         this.image = image;
         this.id = id;
         this.room_id = room_id;
-
+        this.order_id = order_id;
     }
 
     public String getName() {
@@ -35,5 +35,7 @@ public class ChatUserModel implements Serializable {
         return room_id;
     }
 
-
+    public int getOrder_id() {
+        return order_id;
+    }
 }

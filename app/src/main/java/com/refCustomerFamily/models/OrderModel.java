@@ -28,6 +28,7 @@ public class OrderModel implements Serializable {
         private String status;
         private String google_place_id;
         private String bill_step;
+        private String payment_online_status;
         private String bill_image;
         private String payment_method;
         private String from_name;
@@ -99,6 +100,10 @@ public class OrderModel implements Serializable {
 
         public String getBill_step() {
             return bill_step;
+        }
+
+        public String getPayment_online_status() {
+            return payment_online_status;
         }
 
         public String getBill_image() {
@@ -209,6 +214,7 @@ public class OrderModel implements Serializable {
             private String forget_password_code;
             private String email_verified_at;
             private String deleted_at;
+            private String show_phone_status;
 
             public int getId() {
                 return id;
@@ -317,6 +323,10 @@ public class OrderModel implements Serializable {
 
             public String getDeleted_at() {
                 return deleted_at;
+            }
+
+            public String getShow_phone_status() {
+                return show_phone_status;
             }
         }
 

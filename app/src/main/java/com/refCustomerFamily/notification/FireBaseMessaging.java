@@ -631,7 +631,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         builder.setContentTitle(fromusername);
         builder.setLargeIcon(bitmap);
         Intent intent = new Intent(this, ChatActivity.class);
-        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()));
+        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()),0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("chat_user_data", chatUserModel);
         intent.putExtra("from_fire", true);
@@ -664,7 +664,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         builder.setContentTitle(fromusername);
 
         Intent intent = new Intent(this, ChatActivity.class);
-        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()));
+        ChatUserModel chatUserModel = new ChatUserModel(fromusername, null, messageModel.getFrom_user_id() + "", Integer.parseInt(messageModel.getRoom_id()),0);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("chat_user_data", chatUserModel);
         intent.putExtra("from_fire", true);

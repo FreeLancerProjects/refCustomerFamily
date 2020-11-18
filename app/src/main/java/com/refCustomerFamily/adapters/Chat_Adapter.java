@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
+import com.refCustomerFamily.databinding.ChatBillLeftRowBinding;
 import com.refCustomerFamily.databinding.ChatImageLeftRowBinding;
 import com.refCustomerFamily.databinding.ChatImageRightRowBinding;
 import com.refCustomerFamily.databinding.ChatMessageLeftRowBinding;
@@ -29,7 +30,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final int ITEM_image_LEFT = 3;
     private final int ITEM_image_RIGHT = 4;
     private final int ITEM_LOADMORE = 5;
-
+    private final int itembill = 6;
     private final String lang;
 
 
@@ -47,6 +48,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Paper.init(context);
         activity = (ChatActivity) context;
         lang = Paper.book().read("lang", Locale.getDefault().getLanguage());
+
     }
 
     @NonNull
@@ -68,7 +70,13 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ChatImageRightRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_image_right_row, parent, false);
             return new RightImageEventHolder(binding);
 
-        } else {
+        }
+        else if (viewType == itembill) {
+            ChatBillLeftRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.chat_bill_left_row, parent, false);
+            return new BillEventHolder(binding);
+
+        }
+        else {
 
             LoadMoreBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.load_more, parent, false);
             return new LoadMoreHolder(binding);
@@ -107,7 +115,17 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             eventHolder.binding.setLang(lang);
 
 
-        } else if (holder instanceof LoadMoreHolder) {
+        }
+
+        else if (holder instanceof BillEventHolder) {
+            BillEventHolder eventHolder = (BillEventHolder) holder;
+
+            eventHolder.binding.setMessagemodel(messageModel);
+            eventHolder.binding.setLang(lang);
+
+
+        }
+        else if (holder instanceof LoadMoreHolder) {
             LoadMoreHolder typingHolder = (LoadMoreHolder) holder;
 
 
@@ -171,12 +189,20 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         }
     }
+    public class BillEventHolder extends RecyclerView.ViewHolder {
+        public ChatBillLeftRowBinding binding;
 
+        public BillEventHolder(@NonNull ChatBillLeftRowBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
+        }
+    }
 
     @Override
     public int getItemViewType(int position) {
         MessageModel messageModel = messageModelList.get(position);
-        Log.e("lsllsl", messageModel.getTo_user_id()+ " " + messageModel.getType());
+        //  Log.e("lsllsl", current_user_id + " " + messageModel.getTo_user_id());
         if (messageModel == null) {
 
             return ITEM_LOADMORE;
@@ -185,24 +211,26 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             //  Log.e("type",messageModel.getType());
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_LEFT;
-            } else {
-                Log.e("lsllsl", messageModel.getFile_link());
+            }
+            else  if (messageModel.getType().equals("text_file")) {
+                return itembill;
+            }
 
+            else {
                 return ITEM_image_LEFT;
             }
         } else {
             if (messageModel.getType().equals("text")) {
                 return ITEM_MESSAGE_RIGHT;
-            } else {
-                Log.e("lsllsl", messageModel.getFile_link());
+            }
 
+            else {
                 return ITEM_image_RIGHT;
             }
 
 
         }
     }
-
 
 }
 

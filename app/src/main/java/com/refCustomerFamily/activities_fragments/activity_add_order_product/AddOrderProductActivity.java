@@ -161,6 +161,7 @@ public class AddOrderProductActivity extends AppCompatActivity {
                 binding.frcash.setBackgroundResource(0);
                 binding.iconcash.setVisibility(View.GONE);
                 binding.iconcard.setVisibility(View.VISIBLE);
+                addOrderTextModel.setPayment_method("online");
             }
         });
         binding.cash.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +171,8 @@ public class AddOrderProductActivity extends AppCompatActivity {
                 binding.frcard.setBackgroundResource(0);
                 binding.iconcash.setVisibility(View.VISIBLE);
                 binding.iconcard.setVisibility(View.GONE);
+                addOrderTextModel.setPayment_method("cash");
+
             }
         });
         getVAT();

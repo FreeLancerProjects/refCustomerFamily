@@ -19,7 +19,7 @@ public class AddOrderTextModel implements Serializable {
     private String coupon_id = "0";
     private String order_description="";
     private String order_notes="";
-    private String payment_method = "cash";
+    private String payment_method = "";
     private String hour_arrival_time="";
 
     public int getUser_id() {

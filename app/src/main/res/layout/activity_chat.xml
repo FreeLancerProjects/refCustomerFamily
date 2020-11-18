@@ -46,7 +46,7 @@
 
                 <LinearLayout
                     android:id="@+id/ll_back"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:onClick="@{()->backListener.back()}"
@@ -89,6 +89,38 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_bill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="5dp"
+                    android:orientation="horizontal"
+                    android:gravity="end"
+                    android:layout_gravity="end"
+                    android:visibility="gone"
+
+                    >
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:text="@string/pay"
+                        />
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_add"
+                        android:tint="@color/white"
+                        android:padding="8dp"
+
+                        />
+
+                </LinearLayout>
 
             </androidx.appcompat.widget.Toolbar>
 

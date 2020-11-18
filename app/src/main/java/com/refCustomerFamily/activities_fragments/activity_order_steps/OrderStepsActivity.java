@@ -57,6 +57,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
 
     @Override
     protected void attachBaseContext(Context base) {
+        Paper.init(base);
         super.attachBaseContext(Language_Helper.updateResources(base, Paper.book().read("lang", "ar")));
     }
 
@@ -82,7 +83,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId());
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId(),orderModel.getId());
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
@@ -109,31 +110,31 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             }
 
         });
-        binding.imgChat.setOnClickListener(view -> {
-Log.e("cccccc",orderModel.getDriver().getName()+"   "+orderModel.getDriver_chat().getId());
-            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId());
-            Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chat_user_data", chatUserModel);
-            startActivityForResult(intent, 1000);
-        });
-
-        binding.imgCall.setOnClickListener(view -> {
-            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
-            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(), null));
-
-            if (intent != null) {
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
-                    } else {
-                        startActivity(intent);
-                    }
-                } else {
-                    startActivity(intent);
-                }
-            }
-
-        });
+//        binding.imgChat.setOnClickListener(view -> {
+//Log.e("cccccc",orderModel.getDriver().getName()+"   "+orderModel.getDriver_chat().getId());
+//            ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId());
+//            Intent intent = new Intent(this, ChatActivity.class);
+//            intent.putExtra("chat_user_data", chatUserModel);
+//            startActivityForResult(intent, 1000);
+//        });
+//
+//        binding.imgCall.setOnClickListener(view -> {
+//            Log.e("lldldll", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone());
+//            intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", orderModel.getClient().getPhone_code() + orderModel.getClient().getPhone(), null));
+//
+//            if (intent != null) {
+//                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+//                    } else {
+//                        startActivity(intent);
+//                    }
+//                } else {
+//                    startActivity(intent);
+//                }
+//            }
+//
+//        });
     }
 
     private void getDataFromIntent() {
@@ -202,6 +203,9 @@ Log.e("cccccc",orderModel.getDriver().getName()+"   "+orderModel.getDriver_chat(
     private void updatedata(OrderModel body) {
         binding.setModel(body.getOrder());
         orderModel=body.getOrder();
+        if(body.getOrder().getDriver()!=null&&!body.getOrder().getDriver().getShow_phone_status().equals("show")){
+            binding.imgCall.setVisibility(View.GONE);
+        }
         if (!body.getOrder().getStatus().equals("new")) {
             binding.llchat.setVisibility(View.VISIBLE);
         }

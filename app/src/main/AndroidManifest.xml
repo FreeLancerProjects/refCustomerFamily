@@ -49,7 +49,10 @@
             android:name=".activities_fragments.activity_map_delivery_location.MapDeliveryLocationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-
+        <activity
+            android:name=".activities_fragments.activity_web_view.WebViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
 
         <activity
             android:name=".activities_fragments.activity_add_order_product.AddOrderProductActivity"
