@@ -83,7 +83,7 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId(),orderModel.getId());
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getDriver_chat().getId(),orderModel.getId(),"driver");
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);

@@ -80,7 +80,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId());
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId(),"family");
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
@@ -109,7 +109,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         });
         binding.imgChatt.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId());
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId(),"driver");
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
