@@ -201,8 +201,12 @@ public class VerificationCodeActivity extends AppCompatActivity {
                     public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                         dialog.dismiss();
                         if (response.isSuccessful() && response.body() != null) {
+                            if(response.body().getData().getUser_type().equals("client")){
                             preferences.create_update_userData(VerificationCodeActivity.this, response.body());
-                            navigateToSplashLoadingActivity();
+                            navigateToSplashLoadingActivity();}
+                            else {
+                               Toast.makeText(VerificationCodeActivity.this,getResources().getString(R.string.not_found),Toast.LENGTH_LONG).show();
+                            }
                         } else {
 
 

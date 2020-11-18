@@ -171,7 +171,7 @@ public class NotificationActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
         dialog.show();
-
+Log.e("ldkdkkd",notificationModel.getTo_user_id()+"  "+notificationModel.getFrom_user_id());
         Api.getService(Tags.base_url)
                 .addRate("Bearer " + userModel.getData().getToken(), notificationModel.getTo_user_id() + "", notificationModel.getFrom_user_id() + "", notificationModel.getOrder_id() + "", rate, notificationModel.getId() + "", comment)
                 .enqueue(new Callback<ResponseBody>() {
