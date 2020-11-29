@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
@@ -30,6 +31,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_web_view.WebViewActivity;
 import com.refCustomerFamily.adapters.Chat_Adapter;
@@ -83,6 +85,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     private int current_page = 1;
     private boolean isLoading = false;
     private OrderModel orderModel;
+    private ImagePopup imagePopup;
 
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -147,6 +150,12 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
     }
 
     private void initView() {
+        imagePopup = new ImagePopup(this);
+        imagePopup.setFullScreen(true);
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(false);
+        imagePopup.setImageOnClickClose(true);
         EventBus.getDefault().register(this);
 
         getDataFromIntent();
@@ -679,6 +688,10 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         }
         return null;
     }
+    public void showimage(String image) {
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+image);
+        imagePopup.viewPopup();
 
+    }
 
 }

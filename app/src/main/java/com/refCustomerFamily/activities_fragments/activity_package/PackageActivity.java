@@ -150,6 +150,8 @@ public class PackageActivity extends AppCompatActivity {
         addOrderTextModel.setPayment_method("cash");
         addOrderTextModel.setHour_arrival_time("1");
         addOrderTextModel.setOrder_notes("");
+        binding.card.setVisibility(View.GONE);
+
         binding.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

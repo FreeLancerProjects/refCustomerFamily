@@ -185,6 +185,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
         String timeArrival = dateFormat.format(new Date(calendar.getTimeInMillis()));
         addOrderTextModel.setEnd_shipping_time(timeArrival);
         addOrderTextModel.setHour_arrival_time("1");
+        binding.card.setVisibility(View.GONE);
         binding.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -151,9 +151,14 @@ public class AddOrderProductActivity extends AppCompatActivity {
         addOrderTextModel.setFrom_longitude(familyModel.getTracker_fk().getLongitude());
         addOrderTextModel.setFrom_name(familyModel.getName());
         addOrderTextModel.setCoupon_id("0");
-        addOrderTextModel.setPayment_method("cash");
         addOrderTextModel.setEnd_shipping_time("");
         addOrderTextModel.setOrder_notes("");
+        binding.cash.setVisibility(View.GONE);
+        binding.frcard.setBackgroundResource(R.drawable.small_stroke_primary2);
+        binding.frcash.setBackgroundResource(0);
+        binding.iconcash.setVisibility(View.GONE);
+        binding.iconcard.setVisibility(View.VISIBLE);
+        addOrderTextModel.setPayment_method("online");
         binding.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

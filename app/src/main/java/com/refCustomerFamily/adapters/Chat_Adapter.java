@@ -3,6 +3,7 @@ package com.refCustomerFamily.adapters;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -92,16 +93,29 @@ public class Chat_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             eventHolder.binding.setMessagemodel(messageModel);
             eventHolder.binding.setLang(lang);
-
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChatActivity chatActivity=(ChatActivity)context;
+                    chatActivity.showimage(messageModel.getFile_link());
+                }
+            });
 
         } else if (holder instanceof LeftImageEventHolder) {
             LeftImageEventHolder eventHolder = (LeftImageEventHolder) holder;
 
             eventHolder.binding.setMessagemodel(messageModel);
             eventHolder.binding.setLang(lang);
+            eventHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ChatActivity chatActivity=(ChatActivity)context;
+                    chatActivity.showimage(messageModel.getFile_link());
+                }
+            });
 
 
-        } else if (holder instanceof RightMessageEventHolder) {
+        }  else if (holder instanceof RightMessageEventHolder) {
             RightMessageEventHolder eventHolder = (RightMessageEventHolder) holder;
 
             eventHolder.binding.setMessagemodel(messageModel);
