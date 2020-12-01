@@ -64,17 +64,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderAdapter
 
 
         holder.itemView.setOnClickListener(view -> {
-            if (orderlist.get(position).getOrder_type().equals("family")) {
-                Intent intent = new Intent(context, FamilyOrderStepsActivity.class);
-                intent.putExtra("data", orderlist.get(position));
+
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                intent.putExtra("DATA", orderlist.get(position));
                 context.startActivity(intent);
 
-            } else {
-                Intent intent = new Intent(context, OrderStepsActivity.class);
-                intent.putExtra("data", orderlist.get(position));
-                context.startActivity(intent);
 
-            }
 
         });
 

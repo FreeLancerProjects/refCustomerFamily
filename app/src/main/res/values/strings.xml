@@ -276,5 +276,6 @@
     <string name="add_rate">Add Rate</string>
     <string name="driver">Driver</string>
     <string name="family">Family</string>
+    <string name="market">Market</string>
 
 </resources>

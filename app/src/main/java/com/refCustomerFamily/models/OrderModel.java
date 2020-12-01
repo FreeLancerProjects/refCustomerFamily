@@ -1,5 +1,7 @@
 package com.refCustomerFamily.models;
 
+import com.refCustomerFamily.models.ProductModel;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,34 +30,37 @@ public class OrderModel implements Serializable {
         private String status;
         private String google_place_id;
         private String bill_step;
-        private String payment_online_status;
         private String bill_image;
         private String payment_method;
-        private String from_name;
         private String from_address;
         private String from_latitude;
         private String from_longitude;
+        private String to_latitude;
+        private String to_longitude;
         private String to_address;
         private String to_name;
+        private String delivery_cost_tax;
         private String order_description;
         private String order_nots;
         private String end_shipping_time;
+        private String hour_arrival_time;
         private String currency;
         private String other_phone;
         private String coupon;
         private String cancel_reason;
-        private List<ProductModel.ImageModel> order_images = new ArrayList<>();
+        private List<ProductModel.ImageModel> order_images;
         private User family;
         private User client;
         private User driver;
         private DriverChat driver_chat;
-        private FamilyChat family_chat;
-        public void setId(int id) {
-            this.id = id;
-        }
+        private double delivery_cost;
 
         public int getId() {
             return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
 
         public int getClient_id() {
@@ -86,24 +91,12 @@ public class OrderModel implements Serializable {
             return status;
         }
 
-        public String getFrom_name() {
-            return from_name;
-        }
-
-        public void setFrom_name(String from_name) {
-            this.from_name = from_name;
-        }
-
         public String getGoogle_place_id() {
             return google_place_id;
         }
 
         public String getBill_step() {
             return bill_step;
-        }
-
-        public String getPayment_online_status() {
-            return payment_online_status;
         }
 
         public String getBill_image() {
@@ -126,6 +119,14 @@ public class OrderModel implements Serializable {
             return from_longitude;
         }
 
+        public String getTo_latitude() {
+            return to_latitude;
+        }
+
+        public String getTo_longitude() {
+            return to_longitude;
+        }
+
         public String getTo_address() {
             return to_address;
         }
@@ -144,6 +145,10 @@ public class OrderModel implements Serializable {
 
         public String getEnd_shipping_time() {
             return end_shipping_time;
+        }
+
+        public String getHour_arrival_time() {
+            return hour_arrival_time;
         }
 
         public String getCurrency() {
@@ -182,8 +187,12 @@ public class OrderModel implements Serializable {
             return driver_chat;
         }
 
-        public FamilyChat getFamily_chat() {
-            return family_chat;
+        public double getDelivery_cost() {
+            return delivery_cost;
+        }
+
+        public String getDelivery_cost_tax() {
+            return delivery_cost_tax;
         }
 
         public static class User implements Serializable {
@@ -352,29 +361,6 @@ public class OrderModel implements Serializable {
                 return second_user_id;
             }
         }
-        public class FamilyChat implements Serializable {
-            private int id;
-            private int order_id;
-            private int first_user_id;
-            private int second_user_id;
-
-            public int getId() {
-                return id;
-            }
-
-            public int getOrder_id() {
-                return order_id;
-            }
-
-            public int getFirst_user_id() {
-                return first_user_id;
-            }
-
-            public int getSecond_user_id() {
-                return second_user_id;
-            }
-        }
-
     }
 
 
