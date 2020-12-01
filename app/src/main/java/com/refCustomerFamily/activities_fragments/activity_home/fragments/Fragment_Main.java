@@ -182,11 +182,4 @@ public class Fragment_Main extends Fragment {
         }, 3000, 3000);
     }
 
-//    private void NavigateToAddOfferACtivity() {
-//
-//        Intent intent = new Intent(this.getContext(), AddProductActivity.class);
-//        startActivity(intent);
-//
-//    }
-
 }

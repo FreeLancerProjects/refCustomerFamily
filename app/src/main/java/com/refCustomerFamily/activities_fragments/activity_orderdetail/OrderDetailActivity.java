@@ -120,23 +120,22 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         // Log.e("statussss:", orderModel.getStatus());
 
 
-
         binding.tvfromaddres.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapActivity.class);
-            intent.putExtra("lat",Double.parseDouble(orderModel.getFrom_latitude()));
-            intent.putExtra("lng",Double.parseDouble(orderModel.getFrom_longitude()));
-            intent.putExtra("address",orderModel.getFrom_address());
-            intent.putExtra("type","from");
+            intent.putExtra("lat", Double.parseDouble(orderModel.getFrom_latitude()));
+            intent.putExtra("lng", Double.parseDouble(orderModel.getFrom_longitude()));
+            intent.putExtra("address", orderModel.getFrom_address());
+            intent.putExtra("type", "from");
 
             startActivity(intent);
 
         });
         binding.tvtoaddres.setOnClickListener(v -> {
             Intent intent = new Intent(this, MapActivity.class);
-            intent.putExtra("lat",Double.parseDouble(orderModel.getTo_latitude()));
-            intent.putExtra("lng",Double.parseDouble(orderModel.getTo_longitude()));
-            intent.putExtra("address",orderModel.getTo_address());
-            intent.putExtra("type","to");
+            intent.putExtra("lat", Double.parseDouble(orderModel.getTo_latitude()));
+            intent.putExtra("lng", Double.parseDouble(orderModel.getTo_longitude()));
+            intent.putExtra("address", orderModel.getTo_address());
+            intent.putExtra("type", "to");
 
             startActivity(intent);
 
@@ -206,17 +205,16 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 //        });
 
         binding.viewStatusBtn.setOnClickListener(view -> {
-if(orderModel.getOrder_type().equals("family")){
-    Intent intent = new Intent(OrderDetailActivity.this, FamilyOrderStepsActivity.class);
-    intent.putExtra("data", orderModel);
-    startActivity(intent);
-}
-else {
-    Intent intent = new Intent(OrderDetailActivity.this, OrderStepsActivity.class);
-    intent.putExtra("data", orderModel);
-    startActivity(intent);
+            if (orderModel.getOrder_type().equals("family")) {
+                Intent intent = new Intent(OrderDetailActivity.this, FamilyOrderStepsActivity.class);
+                intent.putExtra("data", orderModel);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(OrderDetailActivity.this, OrderStepsActivity.class);
+                intent.putExtra("data", orderModel);
+                startActivity(intent);
 
-}
+            }
         });
     }
 
@@ -319,15 +317,23 @@ else {
 
     private void updatedata(OrderModel body) {
         this.orderModel = body.getOrder();
-        if(orderModel.getBill_image()==null){
+        if (orderModel.getBill_image() == null) {
             binding.image.setVisibility(View.GONE);
+        }else {
+            binding.image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+orderModel.getBill_image());
+                    imagePopup.viewPopup();
+                }
+            });
         }
         binding.setModel(body.getOrder());
-        if(!orderModel.getOrder_type().equals("family")){
+        if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
         }
-        String ship =String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(  Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
-        String arrivew =String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(   Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()))) / 1000)), getString(R.string.km));
+        String ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
+        String arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()))) / 1000)), getString(R.string.km));
 
         //        float[] results = new float[1];
 //        Location.distanceBetween(user_lat, user_lng,

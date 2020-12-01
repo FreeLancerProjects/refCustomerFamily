@@ -275,7 +275,14 @@
     <string name="comment">Comment</string>
     <string name="add_rate">Add Rate</string>
     <string name="driver">Driver</string>
+
+    <string name="delevery_cost">Delevery Cost</string>
+    <string name="delivary_value">Delivary Value : </string>
     <string name="family">Family</string>
+    <string name="delegete">Delegete</string>
+    <string name="customer">Customer</string>
     <string name="market">Market</string>
+    <string name="delivery_cost_tax">delivery cost tax:</string>
+    <string name="hours_num">Hours Num :</string>
 
 </resources>

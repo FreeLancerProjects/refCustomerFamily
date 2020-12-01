@@ -62,13 +62,18 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.OrderAdapt
         holder.binding.setLang(lang);
         holder.binding.setModel(orderlist.get(position));
 
+
         holder.itemView.setOnClickListener(view -> {
 
-            Intent intent = new Intent(context, OrderStepsActivity.class);
-            intent.putExtra("data", orderlist.get(position));
+            Intent intent = new Intent(context, OrderDetailActivity.class);
+            intent.putExtra("DATA", orderlist.get(position));
             context.startActivity(intent);
 
+
+
         });
+
+
 
 
     }

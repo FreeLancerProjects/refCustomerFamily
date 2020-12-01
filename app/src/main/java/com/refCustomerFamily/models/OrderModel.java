@@ -38,6 +38,8 @@ public class OrderModel implements Serializable {
         private String to_latitude;
         private String to_longitude;
         private String to_address;
+        private String from_name;
+        private String payment_online_status;
         private String to_name;
         private String delivery_cost_tax;
         private String order_description;
@@ -53,8 +55,9 @@ public class OrderModel implements Serializable {
         private User client;
         private User driver;
         private DriverChat driver_chat;
-        private double delivery_cost;
+        private DriverChat family_chat;
 
+        private double delivery_cost;
         public int getId() {
             return id;
         }
@@ -73,6 +76,10 @@ public class OrderModel implements Serializable {
 
         public int getFamily_id() {
             return family_id;
+        }
+
+        public DriverChat getFamily_chat() {
+            return family_chat;
         }
 
         public int getCoupon_id() {
@@ -95,6 +102,10 @@ public class OrderModel implements Serializable {
             return google_place_id;
         }
 
+        public String getFrom_name() {
+            return from_name;
+        }
+
         public String getBill_step() {
             return bill_step;
         }
@@ -109,6 +120,10 @@ public class OrderModel implements Serializable {
 
         public String getFrom_address() {
             return from_address;
+        }
+
+        public String getPayment_online_status() {
+            return payment_online_status;
         }
 
         public String getFrom_latitude() {

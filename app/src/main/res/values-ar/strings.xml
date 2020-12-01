@@ -273,7 +273,14 @@
     <string name="comment">تعليق</string>
     <string name="add_rate">اضافة تقييم</string>
     <string name="driver">سواق</string>
-    <string name="family">اسره منتجه</string>
-    <string name="market">المتجر</string>
+
+    <string name="delevery_cost">سعر التوصيل</string>
+    <string name="delivary_value">قيمة التوصيل : </string>
+    <string name="family">اسرة</string>
+    <string name="delegete">مندوب</string>
+    <string name="customer">عميل</string>
+    <string name="market">متجر</string>
+    <string name="delivery_cost_tax">ضريبة القيمه المضافة : </string>
+    <string name="hours_num">عدد الساعات : </string>
 
 </resources>

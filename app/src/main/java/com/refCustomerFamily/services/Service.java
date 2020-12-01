@@ -5,6 +5,7 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.NearbyModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceDetailsModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.PlaceGeocodeData;
+import com.refCustomerFamily.models.DeleveryCostModel;
 import com.refCustomerFamily.models.FamilyCategoryProductDataModel;
 import com.refCustomerFamily.models.FamilyModel;
 import com.refCustomerFamily.models.MessageDataModel;
@@ -171,10 +172,12 @@ public interface Service {
                                              @Field("order_description") String order_description,
                                              @Field("order_nots") String order_nots,
                                              @Field("payment_method") String payment_method,
-                                             @Field("hour_arrival_time") String hour_arrival_time
+                                             @Field("hour_arrival_time") String hour_arrival_time,
+                                             @Field("delivery_cost") int delivery_cost
 
 
-    );
+
+                                             );
 
     @Multipart
     @POST("api/create-order")
@@ -197,6 +200,7 @@ public interface Service {
                                                       @Part("payment_method") RequestBody payment_method,
                                                       @Part("order_nots") RequestBody order_nots,
                                                       @Part("hour_arrival_time") RequestBody hour_arrival_time,
+                                                      @Part("delivery_cost") RequestBody delivery_cost,
                                                       @Part List<MultipartBody.Part> images
 
     );
@@ -314,4 +318,7 @@ public interface Service {
                               @Field("bill_cost") String bill_cost,
                               @Field("user_id") String user_id,
                               @Field("order_id") String order_id);
+    @GET("api/get-delivery-cost")
+    Call<DeleveryCostModel> getDeleveryCost(@Query("distance") int distance);
+
 }

@@ -142,7 +142,6 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
     private void update(OrderModel body) {
         this.orderModel = body;
-        Log.e("ksksksk",body.getOrder().getPayment_online_status());
         if(chatUserModel.getType().equals("driver")){
         if (body.getOrder().getBill_step().equals("bill_attach") && body.getOrder().getPayment_method().equals("online") && body.getOrder().getPayment_online_status() != null && body.getOrder().getPayment_online_status().equals("unpaid")) {
             binding.llBill.setVisibility(View.VISIBLE);
