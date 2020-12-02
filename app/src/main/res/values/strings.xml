@@ -284,5 +284,6 @@
     <string name="market">Market</string>
     <string name="delivery_cost_tax">delivery cost tax:</string>
     <string name="hours_num">Hours Num :</string>
+    <string name="select_location_on_map1">Select pick up location first</string>
 
 </resources>

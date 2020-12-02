@@ -282,5 +282,6 @@
     <string name="market">متجر</string>
     <string name="delivery_cost_tax">ضريبة القيمه المضافة : </string>
     <string name="hours_num">عدد الساعات : </string>
+    <string name="select_location_on_map1">حدد موقع استلام الشحنة اولا </string>
 
 </resources>

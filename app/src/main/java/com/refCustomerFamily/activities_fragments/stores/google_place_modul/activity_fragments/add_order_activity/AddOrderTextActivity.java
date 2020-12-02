@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_add_order_product.AddOrderProductActivity;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.activities_fragments.activity_package.PackageActivity;
 import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
@@ -39,8 +40,10 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.FavoriteLocationModel;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.NearbyModel;
 import com.refCustomerFamily.databinding.ActivityAddOrderTextBinding;
+import com.refCustomerFamily.databinding.DialogAlertBinding;
 import com.refCustomerFamily.databinding.DialogSelectImage2Binding;
 import com.refCustomerFamily.language.Language_Helper;
+import com.refCustomerFamily.models.DeleveryCostModel;
 import com.refCustomerFamily.models.OrderModel;
 import com.refCustomerFamily.models.SingleOrderDataModel;
 import com.refCustomerFamily.models.UserModel;
@@ -82,8 +85,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
     private AddOrderTextModel addOrderTextModel;
     private Preferences preferences;
     private UserModel userModel;
-
-
+    private int cost;
     @Override
     protected void attachBaseContext(Context newBase) {
         Paper.init(newBase);
@@ -210,7 +212,6 @@ public class AddOrderTextActivity extends AppCompatActivity {
 
             }
         });
-        String distance = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)), getString(R.string.km));
 
     }
 
@@ -229,7 +230,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendTextOrder("Bearer " + userModel.getData().getToken(), addOrderTextModel.getUser_id(), addOrderTextModel.getFamily_id(), addOrderTextModel.getOrder_type(), addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()), addOrderTextModel.getTo_address(), addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude(), addOrderTextModel.getFrom_name(), addOrderTextModel.getFrom_address(), addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude(), addOrderTextModel.getEnd_shipping_time(), addOrderTextModel.getCoupon_id(), addOrderTextModel.getOrder_description(), addOrderTextModel.getOrder_notes(), addOrderTextModel.getPayment_method(), addOrderTextModel.getHour_arrival_time(),15)
+                .sendTextOrder("Bearer " + userModel.getData().getToken(), addOrderTextModel.getUser_id(), addOrderTextModel.getFamily_id(), addOrderTextModel.getOrder_type(), addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()), addOrderTextModel.getTo_address(), addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude(), addOrderTextModel.getFrom_name(), addOrderTextModel.getFrom_address(), addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude(), addOrderTextModel.getEnd_shipping_time(), addOrderTextModel.getCoupon_id(), addOrderTextModel.getOrder_description(), addOrderTextModel.getOrder_notes(), addOrderTextModel.getPayment_method(), addOrderTextModel.getHour_arrival_time(),cost)
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
@@ -249,11 +250,8 @@ public class AddOrderTextActivity extends AppCompatActivity {
                                 Toast.makeText(AddOrderTextActivity.this, getString(R.string.failed), Toast.LENGTH_SHORT).show();
                             }
 
-                            try {
-                                Log.e("error", response.errorBody().string());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                                Log.e("error", response.errorBody().toString());
+
                         }
                     }
 
@@ -302,7 +300,7 @@ public class AddOrderTextActivity extends AppCompatActivity {
         RequestBody notes_part = Common.getRequestBodyText(addOrderTextModel.getOrder_notes());
         RequestBody payment_part = Common.getRequestBodyText(addOrderTextModel.getPayment_method());
         RequestBody hours_part = Common.getRequestBodyText(addOrderTextModel.getHour_arrival_time());
-        RequestBody delevery_cost_part = Common.getRequestBodyText("15");
+        RequestBody delevery_cost_part = Common.getRequestBodyText(cost+"");
 
 
         Api.getService(Tags.base_url)
@@ -499,16 +497,99 @@ public class AddOrderTextActivity extends AppCompatActivity {
             addOrderTextModel.setTo_address(model.getAddress());
             addOrderTextModel.setTo_latitude(model.getLat());
             addOrderTextModel.setTo_longitude(model.getLng());
+           String distance = String.format(Locale.ENGLISH, "%s", String.format(Locale.ENGLISH, "%.0f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)));
+
+            int distance2=Integer.parseInt(distance);
+
+
+            getDelevryCost(distance2);
+
+          /*  if (imagesList.size() > 0) {
+                sendOrderTextWithImage();
+            } else {
+                sendOrderTextWithoutImage();
+            }*/
+        }
+
+
+    }
+    private void getDelevryCost(int distance2)
+    {
+        ProgressDialog progressDialog=Common.createProgressDialog(this,getString(R.string.wait));
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        Api.getService(Tags.base_url)
+                .getDeleveryCost(distance2)
+                .enqueue(new Callback<DeleveryCostModel>() {
+                    @Override
+                    public void onResponse(Call<DeleveryCostModel> call, Response<DeleveryCostModel> response) {
+                        progressDialog.dismiss();
+
+                        if (response.isSuccessful() && response.body() != null) {
+                            cost=response.body().getDelivery_cost();
+                            CreateDialogAlert3(AddOrderTextActivity.this,getString(R.string.delevery_cost)+" = "+cost+" "+getString(R.string.sar));
+
+                            Log.e("ddddddd",response.body().getDelivery_cost()+"");
+                        } else {
+                            progressDialog.dismiss();
+
+                            try {
+                                Log.e("error_code", response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<DeleveryCostModel> call, Throwable t) {
+                        progressDialog.dismiss();
+
+                        try {
+                            Log.e("3", "3");
+
+                            if (t.getMessage() != null) {
+                                Log.e("error", t.getMessage());
+                                if (t.getMessage().toLowerCase().contains("failed to connect") || t.getMessage().toLowerCase().contains("unable to resolve host")) {
+                                    Toast.makeText(AddOrderTextActivity.this, getString(R.string.something), Toast.LENGTH_LONG).show();
+                                } else if (t.getMessage().toLowerCase().contains("socket") || t.getMessage().toLowerCase().contains("canceled")) {
+                                } else {
+                                    Toast.makeText(AddOrderTextActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
+    }
+
+    private void CreateDialogAlert3(Context context,String msg) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .create();
+
+        DialogAlertBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_alert, null, false);
+
+        binding.tvMsg.setText(msg);
+        binding.btnCancel.setText(getString(R.string.send));
+        binding.btnCancel.setOnClickListener(v ->{
             if (imagesList.size() > 0) {
                 sendOrderTextWithImage();
             } else {
                 sendOrderTextWithoutImage();
             }
-        }
+            dialog.dismiss();
+                }
 
-
+        );
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
     }
-
 
     private void cropImage(Uri uri) {
 

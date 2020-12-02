@@ -27,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.SphericalUtil;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_map_delivery_location.MapDeliveryLocationActivity;
+import com.refCustomerFamily.activities_fragments.activity_package.PackageActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.activity_add_coupon.AddCouponActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.adapters.AddOrderImagesAdapter;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.adapters.PlaceCategoryAdapter;
@@ -187,22 +188,34 @@ public class AddOrderProductActivity extends AppCompatActivity {
             }
         });
         getVAT();
-        try {
-            distance = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)), getString(R.string.km));
-            getDelevryCost();
-        }catch (Exception  e){}
 
+            distance = String.format(Locale.ENGLISH, "%s", String.format(Locale.ENGLISH, "%.0f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)));
+
+        int distance2=Integer.parseInt(distance);
+
+
+        getDelevryCost(distance2);
     }
-    private void getDelevryCost() {
+    private void getDelevryCost(int distance2)
+    {
+        ProgressDialog progressDialog=Common.createProgressDialog(this,getString(R.string.wait));
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         Api.getService(Tags.base_url)
-                .getDeleveryCost(3)
+                .getDeleveryCost(distance2)
                 .enqueue(new Callback<DeleveryCostModel>() {
                     @Override
                     public void onResponse(Call<DeleveryCostModel> call, Response<DeleveryCostModel> response) {
+                        progressDialog.dismiss();
+
                         if (response.isSuccessful() && response.body() != null) {
-                         cost=response.body().getDelivery_cost();
-                         binding.tvCost.setText(cost);
+                            cost=response.body().getDelivery_cost();
+                            Common.CreateDialogAlert(AddOrderProductActivity.this,getString(R.string.delevery_cost)+" = "+cost+" "+getString(R.string.sar));
+
+                            Log.e("ddddddd",response.body().getDelivery_cost()+"");
                         } else {
+                            progressDialog.dismiss();
 
                             try {
                                 Log.e("error_code", response.errorBody().string());
@@ -216,6 +229,8 @@ public class AddOrderProductActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<DeleveryCostModel> call, Throwable t) {
+                        progressDialog.dismiss();
+
                         try {
                             Log.e("3", "3");
 

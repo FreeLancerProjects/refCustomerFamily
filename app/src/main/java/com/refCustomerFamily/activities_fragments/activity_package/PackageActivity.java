@@ -52,6 +52,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,6 +84,7 @@ public class PackageActivity extends AppCompatActivity {
     private Preferences preferences;
     String distance;
     int cost;
+    boolean secondLocation=false;
     @Override
     protected void attachBaseContext(Context base) {
         Paper.init(base);
@@ -129,9 +132,14 @@ public class PackageActivity extends AppCompatActivity {
             startActivityForResult(intent, 200);
         });
         binding.llDropOff.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MapSearchActivity.class);
-            intent.putExtra("type", 1);
-            startActivityForResult(intent, 300);
+            if (secondLocation){
+                Intent intent = new Intent(this, MapSearchActivity.class);
+                intent.putExtra("type", 1);
+                startActivityForResult(intent, 300);
+            }else {
+                Toast.makeText(this, getString(R.string.select_location_on_map1), Toast.LENGTH_SHORT).show();
+            }
+
         });
         binding.liDeliveryTime.setOnClickListener(v -> {
             CreateTimeDialog();
@@ -231,18 +239,25 @@ public class PackageActivity extends AppCompatActivity {
 
 
     }
-    private void getDelevryCost() {
+    private void getDelevryCost(int distance2) {
+        ProgressDialog progressDialog=Common.createProgressDialog(this,getString(R.string.wait));
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
         Api.getService(Tags.base_url)
-                .getDeleveryCost(3)
+                .getDeleveryCost(distance2)
                 .enqueue(new Callback<DeleveryCostModel>() {
                     @Override
                     public void onResponse(Call<DeleveryCostModel> call, Response<DeleveryCostModel> response) {
+                        progressDialog.dismiss();
+
                         if (response.isSuccessful() && response.body() != null) {
                             cost=response.body().getDelivery_cost();
-                            binding.tvCost.setText(cost);
-                            Common.CreateDialogAlert(PackageActivity.this,getString(R.string.delevery_cost)+" = "+cost+"");
-                            Log.e("dddd",cost+"");
+                            Common.CreateDialogAlert(PackageActivity.this,getString(R.string.delevery_cost)+" = "+cost+" "+getString(R.string.sar));
+
+                            Log.e("ddddddd",response.body().getDelivery_cost()+"");
                         } else {
+                            progressDialog.dismiss();
 
                             try {
                                 Log.e("error_code", response.errorBody().string());
@@ -256,6 +271,8 @@ public class PackageActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<DeleveryCostModel> call, Throwable t) {
+                        progressDialog.dismiss();
+
                         try {
                             Log.e("3", "3");
 
@@ -280,7 +297,7 @@ public class PackageActivity extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .sendTextOrder("Bearer " + userModel.getData().getToken(), addOrderTextModel.getUser_id(), addOrderTextModel.getFamily_id(), addOrderTextModel.getOrder_type(), addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()), addOrderTextModel.getTo_address(), addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude(), addOrderTextModel.getFrom_name(), addOrderTextModel.getFrom_address(), addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude(), addOrderTextModel.getEnd_shipping_time(), addOrderTextModel.getCoupon_id(), addOrderTextModel.getOrder_description(), addOrderTextModel.getOrder_notes(), addOrderTextModel.getPayment_method(), addOrderTextModel.getHour_arrival_time(),15)
+                .sendTextOrder("Bearer " + userModel.getData().getToken(), addOrderTextModel.getUser_id(), addOrderTextModel.getFamily_id(), addOrderTextModel.getOrder_type(), addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()), addOrderTextModel.getTo_address(), addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude(), addOrderTextModel.getFrom_name(), addOrderTextModel.getFrom_address(), addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude(), addOrderTextModel.getEnd_shipping_time(), addOrderTextModel.getCoupon_id(), addOrderTextModel.getOrder_description(), addOrderTextModel.getOrder_notes(), addOrderTextModel.getPayment_method(), addOrderTextModel.getHour_arrival_time(),cost)
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
@@ -356,7 +373,7 @@ public class PackageActivity extends AppCompatActivity {
         RequestBody notes_part = Common.getRequestBodyText(addOrderTextModel.getOrder_notes());
         RequestBody payment_part = Common.getRequestBodyText(addOrderTextModel.getPayment_method());
         RequestBody hours_part = Common.getRequestBodyText(addOrderTextModel.getHour_arrival_time());
-        RequestBody delevery_cost_part = Common.getRequestBodyText("15");
+        RequestBody delevery_cost_part = Common.getRequestBodyText(cost+"");
 
 
         Api.getService(Tags.base_url)
@@ -621,6 +638,8 @@ public class PackageActivity extends AppCompatActivity {
         } else if (requestCode == 100 && resultCode == Activity.RESULT_OK && data != null) {
             //coupon
         } else if (requestCode == 200 && resultCode == Activity.RESULT_OK && data != null) {
+            secondLocation=true;
+
             FavoriteLocationModel model = (FavoriteLocationModel) data.getSerializableExtra("data");
             addOrderTextModel.setFrom_name(model.getAddress());
             addOrderTextModel.setFrom_address(model.getAddress());
@@ -633,13 +652,14 @@ public class PackageActivity extends AppCompatActivity {
             addOrderTextModel.setTo_latitude(model.getLat());
             addOrderTextModel.setTo_longitude(model.getLng());
             binding.tvAddress2.setText(model.getAddress());
-            distance = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)), getString(R.string.km));
+            distance = String.format(Locale.ENGLISH, "%s", String.format(Locale.ENGLISH, "%.0f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)));
+
+            Log.e("mmmmmmmmm",distance+"");
+
+            int distance2=Integer.parseInt(distance);
 
 
-                Log.e("mmmmmmmmm",distance+"");
-
-
-       getDelevryCost();
+      getDelevryCost(distance2);
 
         }
 
