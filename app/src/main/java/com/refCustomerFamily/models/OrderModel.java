@@ -25,7 +25,7 @@ public class OrderModel implements Serializable {
         private int driver_id;
         private int family_id;
         private int coupon_id;
-        private int bill_cost;
+        private double bill_cost;
         private String order_type;
         private String status;
         private String google_place_id;
@@ -86,7 +86,7 @@ public class OrderModel implements Serializable {
             return coupon_id;
         }
 
-        public int getBill_cost() {
+        public double getBill_cost() {
             return bill_cost;
         }
 
