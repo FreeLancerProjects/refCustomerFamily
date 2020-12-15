@@ -9,8 +9,8 @@ public class ProductModel implements Serializable {
     private int id;
     private int family_id;
     private int sub_category_id;
-    private int price;
-    private int old_price;
+    private double price;
+    private double old_price;
     private int offer_value;
     private float rating_value;
     private String title = "";
@@ -73,11 +73,11 @@ public class ProductModel implements Serializable {
         return sub_category_id;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public int getOld_price() {
+    public double getOld_price() {
         return old_price;
     }
 
