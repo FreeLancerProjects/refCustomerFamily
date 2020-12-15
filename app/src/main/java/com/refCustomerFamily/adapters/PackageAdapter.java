@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
+import com.refCustomerFamily.activities_fragments.activity_home.HomeActivity;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
 import com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity;
 import com.refCustomerFamily.databinding.ItemOrderBinding;
@@ -60,6 +61,11 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.OrderAda
 
             Intent intent = new Intent(context, OrderDetailActivity.class);
             intent.putExtra("DATA", orderlist.get(position));
+            if(context instanceof HomeActivity){
+                HomeActivity activity=(HomeActivity)context;
+                intent.putExtra("lat",activity.user_lat);
+                intent.putExtra("lng",activity.user_lng);
+            }
             context.startActivity(intent);
 
 

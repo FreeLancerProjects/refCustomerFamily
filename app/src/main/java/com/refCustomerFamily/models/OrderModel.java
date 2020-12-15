@@ -56,8 +56,10 @@ public class OrderModel implements Serializable {
         private User driver;
         private DriverChat driver_chat;
         private DriverChat family_chat;
-
+        private Location family_location;
+        private Location driver_location;
         private double delivery_cost;
+
         public int getId() {
             return id;
         }
@@ -80,6 +82,14 @@ public class OrderModel implements Serializable {
 
         public DriverChat getFamily_chat() {
             return family_chat;
+        }
+
+        public Location getFamily_location() {
+            return family_location;
+        }
+
+        public Location getDriver_location() {
+            return driver_location;
         }
 
         public int getCoupon_id() {
@@ -374,6 +384,21 @@ public class OrderModel implements Serializable {
 
             public int getSecond_user_id() {
                 return second_user_id;
+            }
+        }
+
+        public class Location implements Serializable {
+
+
+            private double latitude;
+            private double longitude;
+
+            public double getLatitude() {
+                return latitude;
+            }
+
+            public double getLongitude() {
+                return longitude;
             }
         }
     }

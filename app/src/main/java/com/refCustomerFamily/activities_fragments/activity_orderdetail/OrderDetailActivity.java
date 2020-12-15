@@ -332,8 +332,14 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
         }
-        String ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
-        String arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getTo_latitude()), Double.parseDouble(orderModel.getTo_longitude()))) / 1000)), getString(R.string.km));
+        String ship="0";
+        String arrivew="0";
+        Log.e("jjj",user_lat+"  "+user_lng);
+        if(orderModel.getDriver_location()!=null) {
+             ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude()), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
+             arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude())) / 1000)), getString(R.string.km));
+
+        }
 
         //        float[] results = new float[1];
 //        Location.distanceBetween(user_lat, user_lng,
