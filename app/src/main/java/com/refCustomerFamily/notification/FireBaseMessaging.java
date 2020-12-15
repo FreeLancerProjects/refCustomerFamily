@@ -94,7 +94,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
         String not_type = map.get("notification_type");
 
         if (not_type != null && not_type.equals("chat")) {
-            String file_link = "";
+            try{   String file_link = "";
             ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
             String current_class = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
 
@@ -107,35 +107,45 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             int order_id = Integer.parseInt(map.get("order_id"));
 
             Log.e("llfll", room_id + "");
-            long date = Long.parseLong(map.get("date"));
-            String isRead = map.get("is_read");
 
-            String message = map.get("message");
-            String from_user_name = map.get("fromUserName");
+                long date = Long.parseLong(map.get("date"));
+                String isRead = map.get("is_read");
 
-
-            MessageModel messageModel = new MessageModel(msg_id, to_user_id + "", from_user_id + "", type, message, file_link, room_id + "", isRead + "");
+                String message = map.get("message");
+                String from_user_name = map.get("fromUserName");
 
 
-            Log.e("mkjjj", current_class);
+                MessageModel messageModel = new MessageModel(msg_id, to_user_id + "", from_user_id + "", type, message, file_link, room_id + "", isRead + "");
 
 
-            if (current_class.equals("com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity")) {
+                Log.e("mkjjj", current_class);
 
-                String chat_user_id = getChatUser_id();
 
-                if (chat_user_id.equals(from_user_id + "")) {
-                    EventBus.getDefault().post(messageModel);
+                if (current_class.equals("com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity")) {
+
+                    String chat_user_id = getChatUser_id();
+
+                    if (chat_user_id.equals(from_user_id + "")) {
+                        EventBus.getDefault().post(messageModel);
+                    } else {
+                        try{
+                            LoadChatImage(messageModel,user_type,order_id, from_user_name, sound_Path, 1);
+
+                        }catch (Exception e){
+
+                        }
+                    }
+
+
                 } else {
+
+                    EventBus.getDefault().post(messageModel);
                     LoadChatImage(messageModel,user_type,order_id, from_user_name, sound_Path, 1);
+
+
                 }
 
-
-            } else {
-
-                EventBus.getDefault().post(messageModel);
-                LoadChatImage(messageModel,user_type,order_id, from_user_name, sound_Path, 1);
-
+            }catch (Exception e){
 
             }
 
