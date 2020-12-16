@@ -149,7 +149,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
             }
 
-        } else if (not_type.equals("general_notification")) {
+        }
+        else if (not_type.equals("general_notification")) {
 
             String title = map.get("title");
             String body = map.get("body");
@@ -197,7 +198,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             }
 
 
-        } else if (not_type.equals("order")) {
+        }
+        else if (not_type.equals("order")) {
 
             String title = map.get("title");
             String body = map.get("message");
@@ -205,7 +207,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             String order_type = map.get("order_type");
             ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
             String current_class = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
-            Log.e("mkjjj", current_class);
+           // Log.e("mkjjj", current_class);
 
             if (current_class.equals("com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity") || current_class.equals("com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity")) {
                 if (order_id.equals(getorderid())) {
@@ -215,7 +217,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
                     Loadnworder(title, body, order_id, order_type);
 
                 }
-            } else {
+            }
+            else {
                 Loadnworder(title, body, order_id, order_type);
 
             }
@@ -430,7 +433,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
 
             }
 
-        } else if (not_type.equals("general_notification")) {
+        }
+        else if (not_type.equals("general_notification")) {
 
             String title = map.get("title");
             String body = map.get("body");
@@ -483,7 +487,8 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             }
 
 
-        } else if (not_type.equals("order")) {
+        }
+        else if (not_type.equals("order")) {
 
             String title = map.get("title");
             String body = map.get("message");
