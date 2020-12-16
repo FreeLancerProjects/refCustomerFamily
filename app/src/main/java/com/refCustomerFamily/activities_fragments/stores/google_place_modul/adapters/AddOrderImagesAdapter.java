@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_add_order_product.AddOrderProductActivity;
+import com.refCustomerFamily.activities_fragments.activity_package.PackageActivity;
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.activity_fragments.add_order_activity.AddOrderTextActivity;
 import com.refCustomerFamily.databinding.AddOrderImagesMoreRowBinding;
 import com.refCustomerFamily.databinding.AddOrderImagesRowBinding;
@@ -26,13 +27,12 @@ public class AddOrderImagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private List<Uri> list;
     private Context context;
     private LayoutInflater inflater;
-    private AppCompatActivity activity;
 
     public AddOrderImagesAdapter(List<Uri> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
-        activity = (AppCompatActivity) context;
+        this.context = context;
 
     }
 
@@ -41,10 +41,10 @@ public class AddOrderImagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        if (viewType==DATA){
+        if (viewType == DATA) {
             AddOrderImagesRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.add_order_images_row, parent, false);
             return new MyHolder(binding);
-        }else {
+        } else {
             AddOrderImagesMoreRowBinding binding = DataBindingUtil.inflate(inflater, R.layout.add_order_images_more_row, parent, false);
             return new AddOrderMoreMoreHolder(binding);
         }
@@ -54,29 +54,41 @@ public class AddOrderImagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof MyHolder){
+        if (holder instanceof MyHolder) {
             MyHolder myHolder = (MyHolder) holder;
             Uri uri = list.get(position);
             Picasso.get().load(uri).fit().into(myHolder.binding.image);
             myHolder.binding.cardViewDelete.setOnClickListener(v -> {
-                if (activity instanceof AddOrderTextActivity){
-                    AddOrderTextActivity addOrderTextActivity = (AddOrderTextActivity) activity;
+                if (context instanceof AddOrderTextActivity) {
+                    AddOrderTextActivity addOrderTextActivity = (AddOrderTextActivity) context;
+                    addOrderTextActivity.delete(myHolder.getAdapterPosition());
+
+                } else if (context instanceof AddOrderProductActivity) {
+                    AddOrderProductActivity addOrderTextActivity = (AddOrderProductActivity) context;
+                    addOrderTextActivity.delete(myHolder.getAdapterPosition());
+
+                } else if (context instanceof PackageActivity) {
+                    PackageActivity addOrderTextActivity = (PackageActivity) context;
                     addOrderTextActivity.delete(myHolder.getAdapterPosition());
 
                 }
             });
 
-        }else if (holder instanceof AddOrderMoreMoreHolder){
+
+        } else if (holder instanceof AddOrderMoreMoreHolder) {
             AddOrderMoreMoreHolder addOrderMoreMoreHolder = (AddOrderMoreMoreHolder) holder;
             addOrderMoreMoreHolder.itemView.setOnClickListener(v -> {
 
-                if (activity instanceof AddOrderTextActivity){
-                    AddOrderTextActivity addOrderTextActivity = (AddOrderTextActivity) activity;
+                if (context instanceof AddOrderTextActivity) {
+                    AddOrderTextActivity addOrderTextActivity = (AddOrderTextActivity) context;
                     addOrderTextActivity.createDialogAlert();
 
-                }else if (activity instanceof AddOrderProductActivity){
-                    AddOrderProductActivity addOrderProductActivity = (AddOrderProductActivity) activity;
-                    addOrderProductActivity.delete(holder.getAdapterPosition());
+                } else if (context instanceof AddOrderProductActivity) {
+                    AddOrderProductActivity addOrderProductActivity = (AddOrderProductActivity) context;
+                    addOrderProductActivity.createDialogAlert();
+                } else if (context instanceof PackageActivity) {
+                    PackageActivity packageActivity = (PackageActivity) context;
+                    packageActivity.createDialogAlert();
                 }
 
             });
@@ -115,10 +127,10 @@ public class AddOrderImagesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (list.get(position)==null){
-            Log.e("yy","yy");
+        if (list.get(position) == null) {
+            Log.e("yy", "yy");
             return ADDMORE;
-        }else {
+        } else {
             return DATA;
         }
     }

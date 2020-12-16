@@ -97,7 +97,7 @@ public class UpdateProfileActivity extends AppCompatActivity implements Listener
 
         editProfileModel.setName(userModel.getData().getName());
         editProfileModel.setEmail(userModel.getData().getEmail());
-        Log.e("mmmmmmmm",userModel.getData().getLogo());
+//        Log.e("mmmmmmmm",userModel.getData().getLogo());
         if (userModel.getData().getLogo()!=null)
         {
             Log.e("cccccccccccccc",userModel.getData().getLogo());
