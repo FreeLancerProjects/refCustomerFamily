@@ -80,7 +80,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         userModel = preferences.getUserData(this);
         binding.imgChat.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId(),"family");
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getFamily().getName(), orderModel.getFamily().getLogo(), orderModel.getFamily().getId() + "", orderModel.getFamily_chat().getId(), orderModel.getId(), "family");
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
@@ -109,7 +109,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         });
         binding.imgChatt.setOnClickListener(view -> {
             try {
-                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId(),orderModel.getId(),"driver");
+                ChatUserModel chatUserModel = new ChatUserModel(orderModel.getDriver().getName(), orderModel.getDriver().getLogo(), orderModel.getDriver().getId() + "", orderModel.getFamily_chat().getId(), orderModel.getId(), "driver");
                 Intent intent = new Intent(this, ChatActivity.class);
                 intent.putExtra("chat_user_data", chatUserModel);
                 startActivityForResult(intent, 1000);
@@ -204,10 +204,11 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
         binding.setModel(body.getOrder());
         orderModel = body.getOrder();
         preferences.create_update_orderUserData(this, orderModel.getId() + "");
-   if(body.getOrder().getDriver()!=null&&!body.getOrder().getDriver().getShow_phone_status().equals("show")){
+        Log.e("ldldldl", orderModel.getStatus());
+        if (body.getOrder().getDriver() != null && !body.getOrder().getDriver().getShow_phone_status().equals("show")) {
             binding.imgCalll.setVisibility(View.GONE);
         }
-      if(body.getOrder().getFamily()!=null&&!body.getOrder().getFamily().getShow_phone_status().equals("show")){
+        if (body.getOrder().getFamily() != null && !body.getOrder().getFamily().getShow_phone_status().equals("show")) {
             binding.imgCall.setVisibility(View.GONE);
         }
         if (!body.getOrder().getStatus().equals("new")) {
@@ -329,7 +330,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.llchatt.setVisibility(View.VISIBLE);
 
 
-        } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
+        }
+        else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -350,8 +352,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
-            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
-            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.circle_bg));
 
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.tv2.setTextColor(getResources().getColor(R.color.black));

@@ -36,6 +36,7 @@ import com.refCustomerFamily.activities_fragments.stores.google_place_modul.mode
 import com.refCustomerFamily.activities_fragments.stores.google_place_modul.models.FavoriteLocationModel;
 import com.refCustomerFamily.adapters.CartProductAdapter;
 import com.refCustomerFamily.databinding.ActivityAddOrderProductsBinding;
+import com.refCustomerFamily.databinding.DialogAlertBinding;
 import com.refCustomerFamily.databinding.DialogSelectImage2Binding;
 import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.DeleveryCostModel;
@@ -189,12 +190,7 @@ public class AddOrderProductActivity extends AppCompatActivity {
         });
         getVAT();
 
-            distance = String.format(Locale.ENGLISH, "%s", String.format(Locale.ENGLISH, "%.0f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)));
 
-        int distance2=Integer.parseInt(distance);
-
-
-        getDelevryCost(distance2);
     }
     private void getDelevryCost(int distance2)
     {
@@ -211,7 +207,7 @@ public class AddOrderProductActivity extends AppCompatActivity {
 
                         if (response.isSuccessful() && response.body() != null) {
                             cost=response.body().getDelivery_cost();
-                            Common.CreateDialogAlert(AddOrderProductActivity.this,getString(R.string.delevery_cost)+" = "+cost+" "+getString(R.string.sar));
+                            CreateDialogAlert3(AddOrderProductActivity.this,getString(R.string.delevery_cost)+" = "+cost+" "+getString(R.string.sar));
 
                             Log.e("ddddddd",response.body().getDelivery_cost()+"");
                         } else {
@@ -317,7 +313,7 @@ public class AddOrderProductActivity extends AppCompatActivity {
         addOrderTextModel.setOrder_description(order_text);
         addOrderTextModel.setOrder_notes(notes);
         Api.getService(Tags.base_url)
-                .sendTextOrder("Bearer "+userModel.getData().getToken(),addOrderTextModel.getUser_id(),addOrderTextModel.getFamily_id(),addOrderTextModel.getOrder_type(),addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()),addOrderTextModel.getTo_address(),addOrderTextModel.getTo_latitude(),addOrderTextModel.getTo_longitude(),addOrderTextModel.getFrom_name(),addOrderTextModel.getFrom_address(),addOrderTextModel.getFrom_latitude(),addOrderTextModel.getFrom_longitude(),addOrderTextModel.getEnd_shipping_time(),addOrderTextModel.getCoupon_id(),addOrderTextModel.getOrder_description(),addOrderTextModel.getOrder_notes(),addOrderTextModel.getPayment_method(),addOrderTextModel.getHour_arrival_time(),15)
+                .sendTextOrder("Bearer "+userModel.getData().getToken(),addOrderTextModel.getUser_id(),addOrderTextModel.getFamily_id(),addOrderTextModel.getOrder_type(),addOrderTextModel.getGoogle_place_id(), String.valueOf(addOrderTextModel.getBill_cost()),addOrderTextModel.getTo_address(),addOrderTextModel.getTo_latitude(),addOrderTextModel.getTo_longitude(),addOrderTextModel.getFrom_name(),addOrderTextModel.getFrom_address(),addOrderTextModel.getFrom_latitude(),addOrderTextModel.getFrom_longitude(),addOrderTextModel.getEnd_shipping_time(),addOrderTextModel.getCoupon_id(),addOrderTextModel.getOrder_description(),addOrderTextModel.getOrder_notes(),addOrderTextModel.getPayment_method(),addOrderTextModel.getHour_arrival_time(),cost)
                 .enqueue(new Callback<SingleOrderDataModel>() {
                     @Override
                     public void onResponse(Call<SingleOrderDataModel> call, Response<SingleOrderDataModel> response) {
@@ -399,7 +395,7 @@ public class AddOrderProductActivity extends AppCompatActivity {
         RequestBody notes_part = Common.getRequestBodyText(addOrderTextModel.getOrder_notes());
         RequestBody payment_part = Common.getRequestBodyText(addOrderTextModel.getPayment_method());
         RequestBody hours_part = Common.getRequestBodyText(addOrderTextModel.getHour_arrival_time());
-        RequestBody delevery_cost_part = Common.getRequestBodyText("15");
+        RequestBody delevery_cost_part = Common.getRequestBodyText(cost+"");
 
 
         Api.getService(Tags.base_url)
@@ -628,6 +624,12 @@ public class AddOrderProductActivity extends AppCompatActivity {
             addOrderTextModel.setTo_address(favoriteLocationModel.getAddress());
             addOrderTextModel.setTo_latitude(favoriteLocationModel.getLat());
             addOrderTextModel.setTo_longitude(favoriteLocationModel.getLng());
+            distance = String.format(Locale.ENGLISH, "%s", String.format(Locale.ENGLISH, "%.0f", (SphericalUtil.computeDistanceBetween(new LatLng(addOrderTextModel.getTo_latitude(), addOrderTextModel.getTo_longitude()), new LatLng(addOrderTextModel.getFrom_latitude(), addOrderTextModel.getFrom_longitude())) / 1000)));
+
+            int distance2=Integer.parseInt(distance);
+
+            Log.e("ldldl",distance+"----"+distance2);
+            getDelevryCost(distance2);
             int time = data.getIntExtra("time",1);
             Calendar calendar = Calendar.getInstance();
             switch (time){
@@ -668,14 +670,34 @@ public class AddOrderProductActivity extends AppCompatActivity {
             addOrderTextModel.setEnd_shipping_time(timeArrival);
 
 
+
+        }
+
+    }
+    private void CreateDialogAlert3(Context context,String msg) {
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .create();
+
+        DialogAlertBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.dialog_alert, null, false);
+
+        binding.tvMsg.setText(msg);
+        binding.btnCancel.setText(getString(R.string.send));
+        binding.btnCancel.setOnClickListener(v ->{
             if (imagesList.size()>0){
                 sendOrderTextWithImage();
             }else {
                 sendOrderTextWithoutImage();
             }
-        }
+                    dialog.dismiss();
+                }
 
+        );
+        dialog.getWindow().getAttributes().windowAnimations = R.style.dialog_congratulation_animation;
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setView(binding.getRoot());
+        dialog.show();
     }
+
     private void cropImage(Uri uri)
     {
 
