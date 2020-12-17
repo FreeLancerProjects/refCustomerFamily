@@ -105,9 +105,4 @@ public class FamilyOrderFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getOrders();
-    }
 }

@@ -98,9 +98,5 @@ public class PackageOrderFragment extends Fragment {
 
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        getOrders();
-    }
+
 }

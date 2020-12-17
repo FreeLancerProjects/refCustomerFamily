@@ -224,7 +224,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
-        } else if (body.getOrder().getStatus().equals("family_prepare_order")) {
+        }
+        else if (body.getOrder().getStatus().equals("family_prepare_order")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
             binding.image1.setColorFilter(getResources().getColor(R.color.white));
@@ -237,7 +238,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
 
 
-        } else if (body.getOrder().getStatus().equals("family_end_prepare_order")) {
+        }
+        else if (body.getOrder().getStatus().equals("family_end_prepare_order")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -253,7 +255,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
 
 
-        } else if (body.getOrder().getStatus().equals(" driver_accepted_order")) {
+        }
+        else if (body.getOrder().getStatus().equals("driver_accepted_order")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -274,7 +277,9 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.tv4.setTextColor(getResources().getColor(R.color.black));
             binding.llchatt.setVisibility(View.VISIBLE);
 
-        } else if (body.getOrder().getStatus().equals("family_give_order_to_driver")) {
+        }
+
+        else if (body.getOrder().getStatus().equals("family_give_order_to_driver")||body.getOrder().getStatus().equals("driver_finished_collect_order")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -300,7 +305,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.tv5.setTextColor(getResources().getColor(R.color.black));
             binding.llchatt.setVisibility(View.VISIBLE);
 
-        } else if (body.getOrder().getStatus().equals("driver_in_way")) {
+        }
+        else if (body.getOrder().getStatus().equals("driver_in_way")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -319,7 +325,7 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
-            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
+            binding.image6.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.tv2.setTextColor(getResources().getColor(R.color.black));
@@ -352,8 +358,8 @@ public class FamilyOrderStepsActivity extends AppCompatActivity implements Liste
             binding.image3.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image4.setBackground(getResources().getDrawable(R.drawable.circle_bg));
             binding.image5.setBackground(getResources().getDrawable(R.drawable.circle_bg));
-            binding.image6.setImageDrawable(getResources().getDrawable(R.drawable.circle_bg));
-            binding.image7.setImageDrawable(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image6.setBackground(getResources().getDrawable(R.drawable.circle_bg));
+            binding.image7.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.tv2.setTextColor(getResources().getColor(R.color.black));

@@ -99,9 +99,5 @@ public class GoogleOrderFragment extends Fragment {
 
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        getOrders();
-    }
+
 }

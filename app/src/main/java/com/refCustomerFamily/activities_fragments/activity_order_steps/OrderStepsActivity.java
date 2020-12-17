@@ -221,7 +221,8 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.tv1.setTextColor(getResources().getColor(R.color.black));
             binding.image1.setBackground(getResources().getDrawable(R.drawable.circle_bg));
 
-        } else if (body.getOrder().getStatus().equals("driver_finished_collect_order")) {
+        }
+        else if (body.getOrder().getStatus().equals("driver_finished_collect_order")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 
@@ -234,7 +235,8 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.image2.setColorFilter(getResources().getColor(R.color.white));
 
 
-        } else if (body.getOrder().getStatus().equals("driver_in_way")) {
+        }
+        else if (body.getOrder().getStatus().equals("driver_in_way")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
@@ -251,7 +253,8 @@ public class OrderStepsActivity extends AppCompatActivity implements Listeners.B
             binding.tv3.setTextColor(getResources().getColor(R.color.black));
 
 
-        } else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
+        }
+        else if (body.getOrder().getStatus().equals("driver_give_order_to_client")) {
 //            binding.image1.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image2.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
 //            binding.image3.setImageDrawable(getResources().getDrawable(R.drawable.ic_check));
