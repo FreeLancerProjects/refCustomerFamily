@@ -334,7 +334,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         }
         String ship="0";
         String arrivew="0";
-        Log.e("jjj",user_lat+"  "+user_lng);
+
         if(orderModel.getDriver_location()!=null) {
              ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude()), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
              arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude())) / 1000)), getString(R.string.km));

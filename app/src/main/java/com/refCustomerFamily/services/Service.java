@@ -251,9 +251,10 @@ public interface Service {
     @GET("api/Get-chat-messages-by-roomID")
     Call<MessageDataModel> getRoomMessages(
             @Header("Authorization") String user_token,
+            @Query("pagination_status") String pagination_status,
 
             @Query("room_id") int room_id,
-            @Query("page") int pagination_status
+            @Query("page") int page
     );
 
 

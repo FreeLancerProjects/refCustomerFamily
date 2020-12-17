@@ -142,10 +142,11 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
     private void update(OrderModel body) {
         this.orderModel = body;
-        if(chatUserModel.getType().equals("driver")){
-        if (body.getOrder().getBill_step().equals("bill_attach") && body.getOrder().getPayment_method().equals("online") && body.getOrder().getPayment_online_status() != null && body.getOrder().getPayment_online_status().equals("unpaid")) {
-            binding.llBill.setVisibility(View.VISIBLE);
-        }}
+        if (chatUserModel.getType().equals("driver")) {
+            if (body.getOrder().getBill_step().equals("bill_attach") && body.getOrder().getPayment_method().equals("online") && body.getOrder().getPayment_online_status() != null && body.getOrder().getPayment_online_status().equals("unpaid")) {
+                binding.llBill.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void initView() {
@@ -238,7 +239,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
                     @Override
                     public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
 
-                       // Log.e("datttaa", response.code()+"    "+orderModel.getOrder().getId() + "_" + orderModel.getOrder().getBill_cost() + "_" + userModel.getData().getId());
+                        // Log.e("datttaa", response.code()+"    "+orderModel.getOrder().getId() + "_" + orderModel.getOrder().getBill_cost() + "_" + userModel.getData().getId());
                         dialog.dismiss();
                         if (response.isSuccessful()) {
                             binding.llBill.setVisibility(View.GONE);
@@ -311,8 +312,8 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         messagedatalist.add(messageModel);
         scrollToLastPosition();
 
-        if(chatUserModel.getType().equals("driver")){
-            if(messageModel.getType().equals("text_file")){
+        if (chatUserModel.getType().equals("driver")) {
+            if (messageModel.getType().equals("text_file")) {
                 getOrder();
             }
 
@@ -339,7 +340,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
 
 
             Api.getService(Tags.base_url)
-                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), 1)
+                    .getRoomMessages("Bearer " + userModel.getData().getToken(), "on", chatUserModel.getRoom_id(), 1)
                     .enqueue(new Callback<MessageDataModel>() {
                         @Override
                         public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {
@@ -403,7 +404,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         try {
 
             Api.getService(Tags.base_url)
-                    .getRoomMessages("Bearer " + userModel.getData().getToken(), chatUserModel.getRoom_id(), next_page)
+                    .getRoomMessages("Bearer " + userModel.getData().getToken(), "on", chatUserModel.getRoom_id(), next_page)
                     .enqueue(new Callback<MessageDataModel>() {
                         @Override
                         public void onResponse(Call<MessageDataModel> call, Response<MessageDataModel> response) {
@@ -582,8 +583,7 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
             sendmessageimage();
 
 
-        }
-        else {
+        } else {
             binding.llBill.setVisibility(View.GONE);
             getOrder();
         }
@@ -687,8 +687,9 @@ public class ChatActivity extends AppCompatActivity implements Listeners.BackLis
         }
         return null;
     }
+
     public void showimage(String image) {
-        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+image);
+        imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL + image);
         imagePopup.viewPopup();
 
     }
