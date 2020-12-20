@@ -80,12 +80,14 @@
                 android:layout_height="1dp"
                 android:background="@color/gray4"
                 app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:fillViewport="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/fragment_app_container"
                     android:layout_width="match_parent"
@@ -93,8 +95,7 @@
                     android:layout_marginTop="16dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:padding="16dp"
-                    >
+                    android:padding="16dp">
 
 
                     <androidx.cardview.widget.CardView
@@ -161,7 +162,7 @@
                                 app:layout_constraintBottom_toBottomOf="@id/user_image"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/user_image" />
-<!--                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE ,default=gone}'-->
+                            <!--                            android:visibility='@{model.status.equals("new")?View.GONE:View.VISIBLE ,default=gone}'-->
 
                             <ImageView
                                 android:id="@+id/imgCall"
@@ -169,9 +170,9 @@
                                 android:layout_height="30dp"
                                 android:layout_marginEnd="10dp"
                                 android:padding="4dp"
-                                android:visibility="gone"
                                 android:src="@drawable/ic_phone_1"
                                 android:tint="@color/color_blue"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="@id/user_image"
                                 app:layout_constraintEnd_toStartOf="@id/imgChat"
                                 app:layout_constraintTop_toTopOf="@id/user_image" />
@@ -222,8 +223,8 @@
 
                             <TextView
                                 android:id="@+id/tvfromaddres"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="0dp"
+                                android:layout_height="11dp"
                                 android:layout_marginStart="10dp"
                                 android:text="@{model.from_address}"
                                 android:textColor="@color/gray12"
@@ -293,7 +294,7 @@
                                     android:id="@+id/tv_total"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text='@{model.bill_cost +" "+ @string/sar}'
+                                    android:text='@{(model.bill_cost+model.delivery_cost_tax+model.delivery_cost) +" "+ @string/sar}'
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="14sp" />
 
@@ -319,6 +320,38 @@
                                     android:textSize="14sp" />
 
                             </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linear_value1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:background="@color/white"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="10dp"
+                                android:paddingBottom="10dp"
+                                app:layout_constraintStart_toStartOf="@id/linear_total"
+                                app:layout_constraintTop_toBottomOf="@id/linear_total">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="@string/total_products"
+                                    android:textColor="@color/gray12"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text='@{(model.bill_cost) +" "+ @string/sar}'
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
                             <LinearLayout
                                 android:id="@+id/linearvalue"
                                 android:layout_width="match_parent"
@@ -330,7 +363,7 @@
                                 android:paddingRight="10dp"
                                 android:paddingBottom="10dp"
                                 app:layout_constraintStart_toStartOf="@id/v1"
-                                app:layout_constraintTop_toBottomOf="@id/linear_total">
+                                app:layout_constraintTop_toBottomOf="@id/linear_value1">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -346,6 +379,7 @@
                                     android:text='@{model.delivery_cost +" "+ @string/sar}'
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="14sp" />
+
                                 <View
                                     android:layout_width="0dp"
                                     android:layout_height="1dp"
@@ -362,20 +396,21 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{model.delivery_cost_tax}"
+                                    android:text='@{model.delivery_cost_tax+""}'
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="14sp" />
 
 
                             </LinearLayout>
+
                             <ImageView
                                 android:id="@+id/image"
+                                image="@{model.bill_image}"
                                 android:layout_width="match_parent"
                                 android:layout_height="200dp"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="20dp"
                                 android:padding="4dp"
-                                image="@{model.bill_image}"
                                 android:scaleType="fitXY"
                                 app:layout_constraintTop_toBottomOf="@+id/linearvalue" />
 
@@ -426,11 +461,12 @@
 
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="14sp" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="@string/delegete"
+                                    android:text="@string/customer"
                                     android:textColor="@color/gray12"
                                     android:textSize="14sp" />
 
@@ -441,15 +477,17 @@
 
                                     android:textColor="@color/colorPrimary"
                                     android:textSize="14sp" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="10dp"
-                                    android:text="@string/customer"
+                                    android:text="@string/delegete"
                                     android:textColor="@color/gray12"
                                     android:textSize="14sp" />
 
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -459,8 +497,6 @@
                                 android:paddingTop="10dp"
                                 android:paddingRight="10dp"
                                 android:paddingBottom="10dp">
-
-
 
 
                             </LinearLayout>
@@ -544,22 +580,46 @@
 
                     </LinearLayout>
 
-                    <Button
-                        android:id="@+id/view_status_btn"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="30dp"
-                        android:background="@color/colorPrimary"
-                        android:text="@string/view_status"
-                        android:visibility="gone"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ll"
+                        app:layout_constraintTop_toBottomOf="@+id/ll">
+
+                        <Button
+                            android:id="@+id/view_status_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="30dp"
+                            android:layout_weight="1"
+                            android:background="@color/colorPrimary"
+                            android:text="@string/view_status"
+                            android:visibility="gone"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+
+                            />
+
+                        <Button
+                            android:id="@+id/bt_pay"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginBottom="30dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@color/colorPrimary"
+                            android:text="@string/pay"
+                            android:visibility="gone"
 
 
-                        />
+                            />
+                    </LinearLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

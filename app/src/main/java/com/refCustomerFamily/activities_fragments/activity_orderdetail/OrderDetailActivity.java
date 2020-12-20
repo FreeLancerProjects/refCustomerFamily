@@ -1,5 +1,6 @@
 package com.refCustomerFamily.activities_fragments.activity_orderdetail;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,7 @@ import com.google.maps.android.SphericalUtil;
 import com.refCustomerFamily.R;
 import com.refCustomerFamily.activities_fragments.activity_map.MapActivity;
 import com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity;
+import com.refCustomerFamily.activities_fragments.activity_web_view.WebViewActivity;
 import com.refCustomerFamily.activities_fragments.chat_activity.ChatActivity;
 import com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity;
 import com.refCustomerFamily.adapters.Image_Adapter;
@@ -35,6 +37,7 @@ import com.refCustomerFamily.language.Language_Helper;
 import com.refCustomerFamily.models.ChatUserModel;
 import com.refCustomerFamily.models.NotFireModel;
 import com.refCustomerFamily.models.OrderModel;
+import com.refCustomerFamily.models.PackageResponse;
 import com.refCustomerFamily.models.ProductModel;
 import com.refCustomerFamily.models.UserModel;
 import com.refCustomerFamily.preferences.Preferences;
@@ -46,6 +49,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -216,6 +220,80 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
 
             }
         });
+        binding.btPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pay();
+            }
+        });
+    }
+
+    private void pay() {
+
+        //  Log.e("data",or)
+
+        final ProgressDialog dialog = Common.createProgressDialog(this, getString(R.string.wait));
+        dialog.setCancelable(false);
+        dialog.show();
+        Api.getService(Tags.base_url)
+                .pay("Bearer " + userModel.getData().getToken(), orderModel.getBill_cost() + "", userModel.getData().getId() + "", orderModel.getId() + "")
+                .enqueue(new Callback<PackageResponse>() {
+                    @Override
+                    public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
+
+                        // Log.e("datttaa", response.code()+"    "+orderModel.getOrder().getId() + "_" + orderModel.getOrder().getBill_cost() + "_" + userModel.getData().getId());
+                        dialog.dismiss();
+                        if (response.isSuccessful()) {
+                            binding.btPay.setVisibility(View.GONE);
+                            Intent intent = new Intent(OrderDetailActivity.this, WebViewActivity.class);
+                            intent.putExtra("data", response.body());
+                            startActivityForResult(intent, 100);
+                            // chatUserModel.setBill_step("bill_attach");
+//                            if (chat_adapter == null) {
+//                                messagedatalist.add(response.body());
+//                                chat_adapter = new Chat_Adapter(messagedatalist, userModel.getData().getId(), ChatActivity.this);
+//                                binding.recView.setAdapter(chat_adapter);
+//                                chat_adapter.notifyDataSetChanged();
+//                                new Handler().postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
+//
+//                                    }
+//                                }, 100);
+//                            } else {
+//                                messagedatalist.add(response.body());
+//                                chat_adapter.notifyItemInserted(messagedatalist.size() - 1);
+//
+//                                new Handler().postDelayed(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        binding.recView.scrollToPosition(messagedatalist.size() - 1);
+//
+//                                    }
+//                                }, 100);
+//                            }
+                            getOrderDetials();
+                        } else {
+
+                            try {
+                                Log.e("Error_code", response.code() + "_" + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PackageResponse> call, Throwable t) {
+                        try {
+                            dialog.dismiss();
+                            Log.e("Error", t.getMessage());
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+
     }
 
 
@@ -319,11 +397,11 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         this.orderModel = body.getOrder();
         if (orderModel.getBill_image() == null) {
             binding.image.setVisibility(View.GONE);
-        }else {
+        } else {
             binding.image.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL+orderModel.getBill_image());
+                    imagePopup.initiatePopupWithPicasso(Tags.IMAGE_URL + orderModel.getBill_image());
                     imagePopup.viewPopup();
                 }
             });
@@ -332,12 +410,17 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         if (!orderModel.getOrder_type().equals("family")) {
             binding.tv1.setText(getResources().getString(R.string.market));
         }
-        String ship="0";
-        String arrivew="0";
+        if (user_lng == 0.0) {
+            user_lng = Double.parseDouble(orderModel.getTo_longitude());
+            user_lat = Double.parseDouble(orderModel.getTo_latitude());
 
-        if(orderModel.getDriver_location()!=null) {
-             ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude()), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
-             arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude())) / 1000)), getString(R.string.km));
+        }
+        String ship = "0";
+        String arrivew = "0";
+
+        if (orderModel.getDriver_location() != null) {
+            ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
+            arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude())) / 1000)), getString(R.string.km));
 
         }
 
@@ -361,6 +444,13 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             binding.linearBtn.setVisibility(View.GONE);
             binding.viewStatusBtn.setVisibility(View.VISIBLE);
         }
+       // Log.e("dlldldl",orderModel.getOrder_type()+" "+orderModel.getStatus()+" "+orderModel.getPayment_online_status());
+        if (orderModel.getOrder_type().equals("family") && orderModel.getStatus().equals("family_accepted_order") && orderModel.getPayment_online_status().equals("unpaid")) {
+            binding.btPay.setVisibility(View.VISIBLE);
+        } else {
+            binding.btPay.setVisibility(View.GONE);
+        }
+
         binding.imgChat.setVisibility(View.GONE);
         binding.imgCall.setVisibility(View.GONE);
         binding.linearBtn.setVisibility(View.GONE);
@@ -385,5 +475,13 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             EventBus.getDefault().unregister(this);
         }
         preferences.clearorder(this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            getOrderDetials();
+        }
     }
 }
