@@ -236,7 +236,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
         dialog.setCancelable(false);
         dialog.show();
         Api.getService(Tags.base_url)
-                .pay("Bearer " + userModel.getData().getToken(), orderModel.getBill_cost() + "", userModel.getData().getId() + "", orderModel.getId() + "")
+                .pay("Bearer " + userModel.getData().getToken(), (orderModel.getBill_cost() + orderModel.getDelivery_cost() + orderModel.getDelivery_cost_tax()) + "", userModel.getData().getId() + "", orderModel.getId() + "")
                 .enqueue(new Callback<PackageResponse>() {
                     @Override
                     public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
@@ -415,14 +415,16 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             user_lat = Double.parseDouble(orderModel.getTo_latitude());
 
         }
+        Log.e("dlddk", user_lat + " " + user_lng + " " + orderModel.getFrom_latitude() + " " + orderModel.getFrom_longitude());
         String ship = "0";
         String arrivew = "0";
+        ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
 
         if (orderModel.getDriver_location() != null) {
-            ship = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(Double.parseDouble(orderModel.getFrom_latitude()), Double.parseDouble(orderModel.getFrom_longitude()))) / 1000)), getString(R.string.km));
             arrivew = String.format(Locale.ENGLISH, "%s %s", String.format(Locale.ENGLISH, "%.2f", (SphericalUtil.computeDistanceBetween(new LatLng(user_lat, user_lng), new LatLng(orderModel.getDriver_location().getLatitude(), orderModel.getDriver_location().getLongitude())) / 1000)), getString(R.string.km));
 
         }
+
 
         //        float[] results = new float[1];
 //        Location.distanceBetween(user_lat, user_lng,
@@ -444,7 +446,7 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             binding.linearBtn.setVisibility(View.GONE);
             binding.viewStatusBtn.setVisibility(View.VISIBLE);
         }
-       // Log.e("dlldldl",orderModel.getOrder_type()+" "+orderModel.getStatus()+" "+orderModel.getPayment_online_status());
+        // Log.e("dlldldl",orderModel.getOrder_type()+" "+orderModel.getStatus()+" "+orderModel.getPayment_online_status());
         if (orderModel.getOrder_type().equals("family") && orderModel.getStatus().equals("family_accepted_order") && orderModel.getPayment_online_status().equals("unpaid")) {
             binding.btPay.setVisibility(View.VISIBLE);
         } else {

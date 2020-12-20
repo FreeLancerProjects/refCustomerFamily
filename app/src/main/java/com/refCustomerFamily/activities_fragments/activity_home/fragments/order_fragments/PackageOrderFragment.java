@@ -64,8 +64,9 @@ public class PackageOrderFragment extends Fragment {
         orderAdapter = new PackageAdapter(orderList, getActivity());
         binding.recViewOrders.setAdapter(orderAdapter);
 
-        getOrders();
+        // getOrders();
     }
+
     public void getOrders() {
         orderList.clear();
         orderAdapter.notifyDataSetChanged();
@@ -79,24 +80,29 @@ public class PackageOrderFragment extends Fragment {
                     orderList.addAll(response.body().getData());
                     orderAdapter.notifyDataSetChanged();
 
-                if (orderList.size() == 0){
-                    binding.linearNoData.setVisibility(View.VISIBLE);
-                }else {
-                    binding.linearNoData.setVisibility(View.GONE);
-                }
-                }else {
-                    Log.e("Fragment_Orders: ",response.errorBody().toString());
+                    if (orderList.size() == 0) {
+                        binding.linearNoData.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.linearNoData.setVisibility(View.GONE);
+                    }
+                } else {
+                    Log.e("Fragment_Orders: ", response.errorBody().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<OrderModel> call, Throwable t) {
                 binding.progBarOrders.setVisibility(View.GONE);
-                Log.e("Fragment_Orders: ",t.getMessage());
+                Log.e("Fragment_Orders: ", t.getMessage());
             }
         });
 
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrders();
+    }
 }

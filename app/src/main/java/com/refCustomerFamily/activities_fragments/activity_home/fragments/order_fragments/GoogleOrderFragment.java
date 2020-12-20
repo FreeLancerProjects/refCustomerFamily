@@ -65,7 +65,7 @@ public class GoogleOrderFragment extends Fragment {
         binding.recViewOrders.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
 
-        getOrders();
+     //   getOrders();
     }
     public void getOrders() {
         orderList.clear();
@@ -100,4 +100,9 @@ public class GoogleOrderFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrders();
+    }
 }

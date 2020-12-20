@@ -65,7 +65,7 @@ public class FamilyOrderFragment extends Fragment {
         binding.recViewOrders.setAdapter(orderAdapter);
 
 
-        getOrders();
+      //  getOrders();
     }
 
     public void getOrders() {
@@ -105,4 +105,9 @@ public class FamilyOrderFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getOrders();
+    }
 }
