@@ -209,7 +209,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             String current_class = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
            // Log.e("mkjjj", current_class);
 
-            if (current_class.equals("com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity") || current_class.equals("com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity")) {
+            if (current_class.equals("com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity") || current_class.equals("com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity")||current_class.equals("com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity")) {
                 if (order_id.equals(getorderid())) {
                     EventBus.getDefault().post(new NotFireModel(true));
 
@@ -498,7 +498,7 @@ public class FireBaseMessaging extends FirebaseMessagingService {
             String current_class = activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
             Log.e("mkjjj", current_class);
 
-            if (current_class.equals("com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity") || current_class.equals("com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity")) {
+            if (current_class.equals("com.refCustomerFamily.activities_fragments.activity_order_steps.OrderStepsActivity") || current_class.equals("com.refCustomerFamily.activities_fragments.familyorderstepsactivity.FamilyOrderStepsActivity")||current_class.equals("com.refCustomerFamily.activities_fragments.activity_orderdetail.OrderDetailActivity")) {
                 if (order_id.equals(getorderid())) {
                     EventBus.getDefault().post(new NotFireModel(true));
 

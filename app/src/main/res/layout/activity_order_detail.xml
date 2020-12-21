@@ -398,7 +398,7 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text='@{model.delivery_cost_tax+""}'
+                                        android:text='@{model.delivery_cost_tax+" "+ @string/sar}'
                                         android:textColor="@color/colorPrimary"
                                         android:textSize="14sp" />
 

@@ -486,4 +486,5 @@ public class OrderDetailActivity extends AppCompatActivity implements Listeners.
             getOrderDetials();
         }
     }
+
 }
